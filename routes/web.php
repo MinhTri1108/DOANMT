@@ -6,6 +6,10 @@ use App\Http\Controllers\AdminControllers\AdminAccountsController;
 use App\Http\Controllers\AdminControllers\HomeController;
 use App\Http\Controllers\AdminControllers\LecturersAccountsController;
 use App\Http\Controllers\AdminControllers\DanhSachKhoaController;
+
+use App\Http\Controllers\CollegeStudentControllers\HomeSVController;
+
+use App\Http\Controllers\LecturersControllers\HomeGVController;
 /*
 |--------------------------------------------------------------------------
 |   Web Routes
@@ -23,11 +27,15 @@ Route::get('/', function () {
 // Route::get('/Login','AuthControllers\LoginController@index')->name('login');
 // Route::get('Logout','AuthControllers\LoginController@logout')->name('logout');
 Route::POST('/Login', [LoginController::class, 'login'])->name('login');
+Route::GET('logout',[LoginController::class, 'logout'])->name('logout');
+
 
 // Route::get('/admincp/index', function () {
 //     return view('admincp.index');
 // });
-Route::prefix('admin')->group(function () {
+
+
+Route::middleware(['CheckAccountLogin'])->prefix('admin')->group(function () {
     Route::get('/', [HomeController::class, 'index'])->name('index');
     Route::resource('/AdminAccounts', AdminAccountsController::class);
     // Route::get('/AdminAccounts', [AdminAccountsController::class, 'index'])->name('index');
@@ -36,6 +44,7 @@ Route::prefix('admin')->group(function () {
     Route::resource('/LecturersAccounts', LecturersAccountsController::class);
     Route::prefix("EducationProgram")->group(function(){
         Route::resource('/DanhSachKhoa', DanhSachKhoaController::class);
+        Route::GET('/Khoa/{id}', [DanhSachKhoaController::class, 'khoa'])->name('khoa');
     });
     // Route::get('/employee',[nhanvienController::class, 'index'])->name('listemployee');
     // Route::get('/employee/create',[nhanvienController::class, 'pagecreate'])->name('pageemployee');
@@ -43,5 +52,13 @@ Route::prefix('admin')->group(function () {
     // Route::get('/employee/edit/{id}', [nhanvienController::class, 'pageedit']);
     // Route::put('/employee/update/{id}', [nhanvienController::class, 'update'])->name('update');
     // Route::get('/employee/delete/{id}', [nhanvienController::class, 'destroy']);
+});
+
+Route::middleware(['CheckAccountSVLogin'])->prefix('collegestudent')->group(function () {
+    Route::get('/', [HomeSVController::class, 'index'])->name('index');
+    Route::get('/Messenger', [MessengerController::class, 'messenger'])->name('messenger');
+});
+Route::middleware(['CheckAccountGVLogin'])->prefix('lecturers')->group(function () {
+    Route::get('/', [HomeGVController::class, 'index'])->name('index');
 });
 
