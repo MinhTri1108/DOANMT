@@ -28,4 +28,22 @@
         top: 100%;
         transform: rotateX(0deg);
     }
+    #nabar {
+        background-color: #4723d9;
+    }
+    .navbar-dark .navbar-nav .nav-link {
+        color: #f7f6fb !important;
+    }
+    /* .dropdown-item {
+        color: #147de7 !important;
+        background-color: #6521e5 !important;
+    } */
+    .dropdown-item :hover {
+        color: #e7147e !important;
+        background-color: #21e559 !important;
+    }
+    ul.dropdown-menu li a :hover {
+        color: #e7147e !important;
+        background-color: #21e559 !important;
+    }
 }

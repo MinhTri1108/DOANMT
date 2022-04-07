@@ -1,4 +1,4 @@
-@extends('layouts.sidebargv')
+@extends('layouts.sidebarsv')
 @section('content')
     <section style="background-color: #eee;">
   <div class="container py-5">

@@ -9,10 +9,10 @@
     <div class="col">
     <div class="card shadow">
         <div class="card-header bg-info d-flex justify-content-between align-items-center">
-        <h3 class="text-light">Danh sách các Khoa</h3>
+        <h3 class="text-light">Danh sách lớp</h3>
         <!-- <button class="btn btn-light" data-bs-toggle="modal" data-bs-target="#addAccountModal"><i
-            class="bi-plus-circle me-2"></i>Add Khoa</button> -->
-            <button class="btn btn-light"><a href="{{route('DanhSachKhoa.create')}}">Add Khoa</a></button>
+            class="bi-plus-circle me-2"></i>Add Lop</button> -->
+            <button class="btn btn-light"><a href="">Add Lớp</a></button>
         </div>
         <div class="card-body" id="show_all_adminaccounts">
         <!-- <h1 class="text-center text-secondary my-5">Loading...</h1> -->
@@ -34,32 +34,35 @@
 
                         </div>
                      @endif
-                    <table id="example" class="table table-striped table-bordered data-table" width="100%" data-page-length="25" data-order="[[ 0, &quot;asc&quot; ]]">
+                    <table id="example" class="table table-striped table-bordered data-table" width="100%" data-page-length="25" data-order="[[ 1, &quot;asc&quot; ]]">
                         <thead style="background-color: #3b89d6;">
-                            <th>Tên Khoa</th>
-                            <th>Địa Chỉ Khoa</th>
-                            <th>Số điện thoại</th>
+                            <th>Tên khoa</th>
+                            <th>Tên Lớp</th>
+                            <th>Khóa học</th>
+                            <th>Hệ Đào Tạo</th>
                             <th>Sửa</th>
                             <th>Xóa</th>
                         </thead>
                         <tbody>
-                        @foreach($listkhoas as $listkhoa)
-                            <tr id="row{{ $listkhoa->MaKhoa }}" >
-
+                             @foreach($listlops as $listlop)
+                            <tr id="row{{ $listlop->MaLop }}" >
                                 <td>
-                                    <a href="{{route('khoa', $listkhoa->slug_khoa)}}">{{$listkhoa->TenKhoa}}</a>
+                                    {{$listlop->khoa->TenKhoa}}
                                 </td>
                                 <td>
-                                    {{$listkhoa->DiaChiKhoa}}
+                                    <a href="">{{$listlop->TenLop}}</a>
                                 </td>
                                 <td>
-                                    {{$listkhoa->SDTKhoa}}
+                                    {{$listlop->khoahoc->TenKhoaHoc}}
                                 </td>
                                 <td>
-                                    <a href="{{route('DanhSachKhoa.edit', ['DanhSachKhoa'=>$listkhoa->MaKhoa])}}" class="btn btn-success"><i class="bi-pencil-square h4"></i></a>
+                                    {{$listlop->hedaotao->TenHDT}}
                                 </td>
                                 <td>
-                                   <form action="{{route('DanhSachKhoa.destroy', ['DanhSachKhoa'=>$listkhoa->MaKhoa])}}" method="POST">
+                                    <a href="" class="btn btn-success"><i class="bi-pencil-square h4"></i></a>
+                                </td>
+                                <td>
+                                   <form action="" method="POST">
                                         @method('DELETE')
                                         @csrf
                                         <button onclick = "return confirm('Bạn muốn xóa truyện này không')" class="btn btn-danger"> <i class="bi-trash h4"></i></button>

@@ -3,7 +3,8 @@
 namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
-
+use App\Models\AdminAccounts;
+use App\Models\Permission;
 class AppServiceProvider extends ServiceProvider
 {
     /**
@@ -23,6 +24,9 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
+        view()->composer('*', function ($view) {
+                $Admin=AdminAccounts::where(['MaAdmin'=> session()->get('id_account')])->with('permission')->get();
+            $view->with('data', $Admin);
+        });
     }
 }

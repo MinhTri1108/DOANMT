@@ -20,4 +20,15 @@ class Permission extends Model
     ];
     protected $primaryKey = 'idloaitk';
     protected $table = 'quyen';
+    public function admin(){
+        return $this->hasMany('App\Models\AdminAccounts');
+    }
+    public function giangvien()
+    {
+        return $this->hasMany('App\Models\LecturesAccounts');
+    }
+    public function sinhvien()
+    {
+        return $this->hasMany('App\Models\CollegeStudentAccounts');
+    }
 }

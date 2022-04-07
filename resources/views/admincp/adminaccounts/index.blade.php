@@ -152,10 +152,10 @@ data-bs-backdrop="static" aria-hidden="true">
 {{-- edit employee modal end --}}
 
 <body class="bg-light">
-<div class="container">
-<div class="row my-5">
-    <div class="col">
-    <div class="card shadow">
+<div class="container-fluid w-90 p-3 ">
+<div class="row mt-5">
+    <div class="col-12">
+    <div class="card shadow ml-3">
         <div class="card-header bg-info d-flex justify-content-between align-items-center">
         <h3 class="text-light">Danh sách Account ADMIN</h3>
         <button class="btn btn-light" data-bs-toggle="modal" data-bs-target="#addAccountModal"><i
@@ -317,6 +317,7 @@ $(function() {
             'Account Added Successfully!',
             'success'
             )
+            ajax.reload();
             //  $('#example').DataTable().ajax.reload(null, false);
         }
 

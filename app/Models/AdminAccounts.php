@@ -23,12 +23,11 @@ class AdminAccounts extends Model
         'Email',
         'Status',
         'avatar',
-        'idloaitk'
     ];
     protected $primaryKey = 'MaAdmin';
     protected $table = 'dsadmin';
     public function permission()
     {
-        return $this->hasMany('App\Models\permission');
+        return $this->belongsTo('App\Models\permission', 'idloaitk', 'idloaitk');
     }
 }

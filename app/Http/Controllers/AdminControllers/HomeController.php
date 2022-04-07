@@ -10,7 +10,7 @@ class HomeController extends Controller
     //
     public function index()
     {
-        $thongtin=session()->has('user_id');
+        $thongtin=session()->has('id_admin');
         return view('admincp.index',compact('thongtin'));
     }
 }

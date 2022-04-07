@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class LecturersAccounts extends Model
+class CollegeStudentAccounts extends Model
 {
     use HasFactory;
     public $timestamps = false;
@@ -25,8 +25,8 @@ class LecturersAccounts extends Model
         'avatar',
         'idloaitk'
     ];
-    protected $primaryKey = 'MaGV';
-    protected $table = 'dsgiaovien';
+    protected $primaryKey = 'MaSV';
+    protected $table = 'dssinhvien';
     public function permission()
     {
         return $this->hasMany('App\Models\permission', 'idloaitk', 'idloaitk');
