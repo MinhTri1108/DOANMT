@@ -8,6 +8,7 @@ use App\Http\Controllers\AdminControllers\LecturersAccountsController;
 use App\Http\Controllers\AdminControllers\DanhSachKhoaController;
 
 use App\Http\Controllers\CollegeStudentControllers\HomeSVController;
+use App\Http\Controllers\CollegeStudentControllers\MessengerSVController;
 
 use App\Http\Controllers\LecturersControllers\HomeGVController;
 /*
@@ -56,7 +57,7 @@ Route::middleware(['CheckAccountLogin'])->prefix('admin')->group(function () {
 
 Route::middleware(['CheckAccountSVLogin'])->prefix('collegestudent')->group(function () {
     Route::get('/', [HomeSVController::class, 'index'])->name('index');
-    Route::get('/Messenger', [MessengerController::class, 'messenger'])->name('messenger');
+    Route::get('/Messenger', [MessengerSVController::class, 'index'])->name('messenger');
 });
 Route::middleware(['CheckAccountGVLogin'])->prefix('lecturers')->group(function () {
     Route::get('/', [HomeGVController::class, 'index'])->name('index');

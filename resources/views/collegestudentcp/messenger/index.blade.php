@@ -1,7 +1,8 @@
 @extends('layouts.sidebarsv')
 @section('content')
-    <section style="background-color: #eee;">
-  <div class="container py-5">
+
+<section id="app" style="background-color: #eee;">
+  <div id="app1" class="container py-5">
 
     <div class="row">
 
@@ -180,11 +181,13 @@
           </li>
           <li class="bg-white mb-3">
             <div class="form-outline">
-              <textarea class="form-control" id="textAreaExample2" rows="4"></textarea>
+                <input v-model = "message"  type="text" name="" id="" class="form-control" @keyup.enter>
+              <!-- <textarea v-model = "mesage" @keyup.enter class="form-control" id="textAreaExample2" rows="4"></textarea> -->
               <label class="form-label" for="textAreaExample2">Message</label>
+
             </div>
           </li>
-          <button type="button" class="btn btn-info btn-rounded float-end">Send</button>
+          <button @click="sendMesage()" type="button" class="btn btn-info btn-rounded float-end">Send</button>
         </ul>
 
       </div>
@@ -192,7 +195,32 @@
     </div>
 
   </div>
+
+
 </section>
 
+
+<script>
+  Vue.createApp({
+    data() {
+      return {
+        message: ''
+      }
+    },
+    methods: {
+        sendMesage(){
+            console.log(this.message);
+        }
+    },
+  }).mount('#app')
+</script>
+<!-- <script>
+    var app = new Vue({
+  el: '#app',
+  data: {
+    message: 'Hello Vue!'
+  }
+})
+</script> -->
 
 @endsection

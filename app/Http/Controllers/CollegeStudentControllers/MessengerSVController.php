@@ -8,4 +8,8 @@ use Illuminate\Http\Request;
 class MessengerSVController extends Controller
 {
     //
+    public function index()
+    {
+        return view('collegestudentcp.messenger.index');
+    }
 }
