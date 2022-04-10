@@ -100,13 +100,13 @@ header("Set-Cookie: cross-site-cookie=whatever; SameSite=None; Secure");
       <a href="" class="me-4 text-reset">
         <i class="fab fa-google"></i>
       </a>
-      <a href="" class="me-4 text-reset">
+      <a href="https://www.instagram.com/dmt.1108/" class="me-4 text-reset">
         <i class="fab fa-instagram"></i>
       </a>
       <a href="" class="me-4 text-reset">
         <i class="fab fa-linkedin"></i>
       </a>
-      <a href="" class="me-4 text-reset">
+      <a href="https://github.com/MinhTri1108" class="me-4 text-reset">
         <i class="fab fa-github"></i>
       </a>
     </div>

@@ -223,7 +223,7 @@ body {
     -webkit-box-shadow: 0 5px 20px -3px rgba(0, 0, 0, 0.16);
     box-shadow: 0 5px 20px -3px rgba(0, 0, 0, 0.16);
     border: 0;
-    width: 700px;
+    width: 400px;
 }
 
 @media (min-width: 900px) {
@@ -239,7 +239,7 @@ body {
     content: "";
     position: absolute;
     top: -30px;
-    left: calc(50% - 7px);
+    left: calc(60% - 7px);
     border-top: 15px solid transparent;
     border-right: 15px solid transparent;
     border-bottom: 15px solid #fff;

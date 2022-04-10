@@ -35,3 +35,22 @@ document.addEventListener("DOMContentLoaded", function (event) {
 
     // Your code to run since DOM is loaded and ready
 });
+function myFunction() {
+    document.getElementById("notification-ui_dd").classList.toggle("show");
+}
+
+// Close the dropdown menu if the user clicks outside of it
+window.onclick = function (event) {
+    if (!event.target.matches(".notification-ui_icon")) {
+        var dropdowns = document.getElementsByClassName(
+            "notification-ui_dd-content"
+        );
+        var i;
+        for (i = 0; i < dropdowns.length; i++) {
+            var openDropdown = dropdowns[i];
+            if (openDropdown.classList.contains("show")) {
+                openDropdown.classList.remove("show");
+            }
+        }
+    }
+};

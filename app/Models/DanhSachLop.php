@@ -30,4 +30,8 @@ class DanhSachLop extends Model
     {
         return $this->belongsTo('App\Models\HeDaoTao', 'MaHeDT', 'MaHeDT');
     }
+    public function danhsachsinhvien()
+    {
+        return $this->hasMany('App\Models\CollegeStudentAccounts');
+    }
 }

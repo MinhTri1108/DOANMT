@@ -11,84 +11,140 @@
 <body id="body-pd">
     <header class="header" id="header">
         <div class="header_toggle">
-            <i class='bx bx-menu' id="header-toggle"></i>
-        </div>
-            <nav class="navbar navbar-expand-lg navbar-light bg-light">
-                <div class="container">
-                    <div class="dropdown" id="navbarSupportedContent">
-                        <ul class="navbar-nav ms-auto">
-                            <li class="nav-item dropdown notification-ui">
-                                <a class="nav-link dropdown-toggle notification-ui_icon" href="#" id="dropdownMenuLink"  data-bs-toggle="dropdown" aria-expanded="false">
-                                    <i class="fa fa-bell"></i> Thông báo
-                                    <span class="unread-notification"></span>
-                                </a>
-                                <div class="dropdown-menu notification-ui_dd" aria-labelledby="dropdownMenuLink">
-                                    <div class="notification-ui_dd-header">
-                                        <h3 class="text-center">Notification</h3>
-                                    </div>
-                                    <div class="notification-ui_dd-content">
-                                        <div class="notification-list notification-list--unread">
-                                            <div class="notification-list_img">
-                                                <img src="https://i.imgur.com/zYxDCQT.jpg" alt="user">
-                                            </div>
-                                            <div class="notification-list_detail">
-                                                <p><b>John Doe</b> reacted to your x</p>
-                                                <p><small>10 mins ago</small></p>
-                                            </div>
-                                            <div class="notification-list_feature-img">
-                                                <img src="https://i.imgur.com/AbZqFnR.jpg" alt="Feature image">
-                                            </div>
+                <i class='bx bx-menu' id="header-toggle"></i>
+            </div>
+        <!-- <div class="col-12 col-md-10">
+
+        </div> -->
+
+        <div class="col-12 col-md-2 d-flex">
+            <div class="noti">
+           <nav class="navbar navbar-expand-lg ">
+            <div class="container">
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav ml-auto">
+                        <li class="nav-item dropdown notification-ui ">
+                            <a  onclick="myFunction()" class="nav-link dropdown-toggle notification-ui_icon" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <i class="fa fa-bell"></i> Thông báo
+                                <span class="unread-notification"></span>
+                            </a>
+                            <div id= "notification-ui_dd"  class="dropdown-menu notification-ui_dd " aria-labelledby="navbarDropdown">
+                                <div class="notification-ui_dd-header">
+                                    <h3 class="text-center">Notification</h3>
+                                </div>
+                                <div class="notification-ui_dd-content">
+                                    <div class="notification-list notification-list--unread">
+                                        <div class="notification-list_img">
+                                            <img src="https://i.imgur.com/zYxDCQT.jpg" alt="user">
                                         </div>
-                                        <div class="notification-list notification-list--unread">
-                                            <div class="notification-list_img">
-                                                <img src="https://i.imgur.com/w4Mp4ny.jpg" alt="user">
-                                            </div>
-                                            <div class="notification-list_detail">
-                                                <p><b>Richard Miles</b> reacted to your post</p>
-                                                <p><small>1 day ago</small></p>
-                                            </div>
-                                            <div class="notification-list_feature-img">
-                                                <img src="https://i.imgur.com/AbZqFnR.jpg" alt="Feature image">
-                                            </div>
+                                        <div class="notification-list_detail">
+                                            <p><b>John Doe</b> reacted to your post</p>
+                                            <p><small>10 mins ago</small></p>
                                         </div>
-                                        <div class="notification-list">
-                                            <div class="notification-list_img">
-                                                <img src="https://i.imgur.com/ltXdE4K.jpg" alt="user">
-                                            </div>
-                                            <div class="notification-list_detail">
-                                                <p><b>Brian Cumin</b> reacted to your post</p>
-                                                <p><small>1 day ago</small></p>
-                                            </div>
-                                            <div class="notification-list_feature-img">
-                                                <img src="https://i.imgur.com/bpBpAlH.jpg" alt="Feature image">
-                                            </div>
-                                        </div>
-                                        <div class="notification-list">
-                                            <div class="notification-list_img">
-                                                <img src="https://i.imgur.com/CtAQDCP.jpg" alt="user">
-                                            </div>
-                                            <div class="notification-list_detail">
-                                                <p><b>Lance Bogrol</b> reacted to your post</p>
-                                                <p><small>1 day ago</small></p>
-                                            </div>
-                                            <div class="notification-list_feature-img">
-                                                <img src="https://i.imgur.com/iIhftMJ.jpg" alt="Feature image">
-                                            </div>
+                                        <div class="notification-list_feature-img">
+                                            <img src="https://i.imgur.com/AbZqFnR.jpg" alt="Feature image">
                                         </div>
                                     </div>
-                                    <div class="notification-ui_dd-footer">
-                                        <a href="#!" class="btn btn-success btn-block">View All</a>
+                                    <div class="notification-list notification-list--unread">
+                                        <div class="notification-list_img">
+                                            <img src="https://i.imgur.com/zYxDCQT.jpg" alt="user">
+                                        </div>
+                                        <div class="notification-list_detail">
+                                            <p><b>John Doe</b> reacted to your post</p>
+                                            <p><small>10 mins ago</small></p>
+                                        </div>
+                                        <div class="notification-list_feature-img">
+                                            <img src="https://i.imgur.com/AbZqFnR.jpg" alt="Feature image">
+                                        </div>
+                                    </div>
+                                    <div class="notification-list notification-list--unread">
+                                        <div class="notification-list_img">
+                                            <img src="https://i.imgur.com/zYxDCQT.jpg" alt="user">
+                                        </div>
+                                        <div class="notification-list_detail">
+                                            <p><b>John Doe</b> reacted to your post</p>
+                                            <p><small>10 mins ago</small></p>
+                                        </div>
+                                        <div class="notification-list_feature-img">
+                                            <img src="https://i.imgur.com/AbZqFnR.jpg" alt="Feature image">
+                                        </div>
+                                    </div>
+                                    <div class="notification-list notification-list--unread">
+                                        <div class="notification-list_img">
+                                            <img src="https://i.imgur.com/zYxDCQT.jpg" alt="user">
+                                        </div>
+                                        <div class="notification-list_detail">
+                                            <p><b>John Doe</b> reacted to your post</p>
+                                            <p><small>10 mins ago</small></p>
+                                        </div>
+                                        <div class="notification-list_feature-img">
+                                            <img src="https://i.imgur.com/AbZqFnR.jpg" alt="Feature image">
+                                        </div>
+                                    </div>
+                                    <div class="notification-list notification-list--unread">
+                                        <div class="notification-list_img">
+                                            <img src="https://i.imgur.com/zYxDCQT.jpg" alt="user">
+                                        </div>
+                                        <div class="notification-list_detail">
+                                            <p><b>John Doe</b> reacted to your post</p>
+                                            <p><small>10 mins ago</small></p>
+                                        </div>
+                                        <div class="notification-list_feature-img">
+                                            <img src="https://i.imgur.com/AbZqFnR.jpg" alt="Feature image">
+                                        </div>
+                                    </div>
+                                    <div class="notification-list notification-list--unread">
+                                        <div class="notification-list_img">
+                                            <img src="https://i.imgur.com/w4Mp4ny.jpg" alt="user">
+                                        </div>
+                                        <div class="notification-list_detail">
+                                            <p><b>Richard Miles</b> reacted to your post</p>
+                                            <p><small>1 day ago</small></p>
+                                        </div>
+                                        <div class="notification-list_feature-img">
+                                            <img src="https://i.imgur.com/AbZqFnR.jpg" alt="Feature image">
+                                        </div>
+                                    </div>
+                                    <div class="notification-list">
+                                        <div class="notification-list_img">
+                                            <img src="https://i.imgur.com/ltXdE4K.jpg" alt="user">
+                                        </div>
+                                        <div class="notification-list_detail">
+                                            <p><b>Brian Cumin</b> reacted to your post</p>
+                                            <p><small>1 day ago</small></p>
+                                        </div>
+                                        <div class="notification-list_feature-img">
+                                            <img src="https://i.imgur.com/bpBpAlH.jpg" alt="Feature image">
+                                        </div>
+                                    </div>
+                                    <div class="notification-list">
+                                        <div class="notification-list_img">
+                                            <img src="https://i.imgur.com/CtAQDCP.jpg" alt="user">
+                                        </div>
+                                        <div class="notification-list_detail">
+                                            <p><b>Lance Bogrol</b> reacted to your post</p>
+                                            <p><small>1 day ago</small></p>
+                                        </div>
+                                        <div class="notification-list_feature-img">
+                                            <img src="https://i.imgur.com/iIhftMJ.jpg" alt="Feature image">
+                                        </div>
                                     </div>
                                 </div>
-                            </li>
-
-                        </ul>
-                    </div>
+                                <div class="notification-ui_dd-footer">
+                                    <a href="#!" class="btn btn-success btn-block">View All</a>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
                 </div>
-        </nav>
-        <div class="header_img">
+            </div>
+            </nav>
+        </div>
+        <div class="header_img" style="margin-top : 10px;">
             <img src="https://bizweb.dktcdn.net/100/409/603/files/bao-gia-in-anh-the-lay-ngay.jpg?v=1631007146881" alt="">
         </div>
+        </div>
+
 
     </header>
     <div class="l-navbar" id="nav-bar">

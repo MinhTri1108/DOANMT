@@ -131,12 +131,14 @@ class DanhSachKhoaController extends Controller
         DanhSachKhoa::find($id)->delete();
         return redirect()->back()->with('status', 'Bạn xóa khoa thành công');
     }
-    public function khoa($id)
+    public function khoa($slug)
     {
         // return view('admincp.dslop.index');
-        $listlops = DanhSachLop::with('khoa', 'khoahoc', 'hedaotao')->orderBy('MaLop', 'DESC')->get();
-
+        // $khoa =DanhSachKhoa::find($slug);
+        $khoa_id= DanhSachKhoa::where('slug_khoa', $slug)->first();
+        $listlops = DanhSachLop::with('khoa', 'khoahoc', 'hedaotao')->where('MaKhoa', $khoa_id->MaKhoa)->orderBy('MaLop', 'DESC')->get();
+        // echo $khoa_id->MaKhoa;
         // dd($listlops);
-        return view('admincp.dslop.index')->with(compact('listlops'));
+        return view('admincp.dslop.index')->with(compact('listlops', 'khoa_id'));
     }
 }

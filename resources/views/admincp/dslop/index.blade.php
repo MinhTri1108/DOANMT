@@ -5,6 +5,13 @@
 
 <body class="bg-light">
 <div class="container">
+    <nav style="--bs-breadcrumb-divider: '>'; margin-top: 25px;" aria-label="breadcrumb">
+        <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="{{URL('admin/')}}">Trang chủ</a></li>
+        <li class="breadcrumb-item" aria-current="page"><a href="{{URL('admin/EducationProgram/DanhSachKhoa')}}">Quản lý khoa</a></li>
+        <li class="breadcrumb-item active" aria-current="page">{{$khoa_id->TenKhoa}}</a></li>
+        </ol>
+    </nav>
 <div class="row my-5">
     <div class="col">
     <div class="card shadow">
@@ -12,7 +19,7 @@
         <h3 class="text-light">Danh sách lớp</h3>
         <!-- <button class="btn btn-light" data-bs-toggle="modal" data-bs-target="#addAccountModal"><i
             class="bi-plus-circle me-2"></i>Add Lop</button> -->
-            <button class="btn btn-light"><a href="">Add Lớp</a></button>
+            <button class="btn btn-light"><a href="{{route('DanhSachLop.create')}}">Add Lớp</a></button>
         </div>
         <div class="card-body" id="show_all_adminaccounts">
         <!-- <h1 class="text-center text-secondary my-5">Loading...</h1> -->
@@ -50,7 +57,7 @@
                                     {{$listlop->khoa->TenKhoa}}
                                 </td>
                                 <td>
-                                    <a href="">{{$listlop->TenLop}}</a>
+                                    <a href="{{route('lop', $listlop->slug_lop)}}">{{$listlop->TenLop}}</a>
                                 </td>
                                 <td>
                                     {{$listlop->khoahoc->TenKhoaHoc}}
@@ -59,13 +66,13 @@
                                     {{$listlop->hedaotao->TenHDT}}
                                 </td>
                                 <td>
-                                    <a href="" class="btn btn-success"><i class="bi-pencil-square h4"></i></a>
+                                    <a href="{{route('DanhSachLop.edit', ['DanhSachLop'=>$listlop->MaLop])}}" class="btn btn-success"><i class="bi-pencil-square h4"></i></a>
                                 </td>
                                 <td>
-                                   <form action="" method="POST">
+                                   <form action="{{route('DanhSachLop.destroy', ['DanhSachLop'=>$listlop->MaLop])}}" method="POST">
                                         @method('DELETE')
                                         @csrf
-                                        <button onclick = "return confirm('Bạn muốn xóa truyện này không')" class="btn btn-danger"> <i class="bi-trash h4"></i></button>
+                                        <button onclick = "return confirm('Bạn muốn xóa lớp này không')" class="btn btn-danger"> <i class="bi-trash h4"></i></button>
                                    </form>
                                 </td>
                             </tr>

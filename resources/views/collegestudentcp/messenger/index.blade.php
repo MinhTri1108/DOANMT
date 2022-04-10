@@ -210,17 +210,28 @@
     methods: {
         sendMesage(){
             console.log(this.message);
+            axios.post('/collegestudent/Messenger/store',{message: this.message})
+            this.message = ""
         }
     },
   }).mount('#app')
 </script>
 <!-- <script>
-    var app = new Vue({
-  el: '#app',
-  data: {
-    message: 'Hello Vue!'
-  }
-})
+    export default {
+        el: '#app',
+        data() {
+            return {
+                message: ''
+            }
+        },
+        methods: {
+            async sendMesage(){
+            console.log(this.message);
+            axios.post('/collegestudent/Chat',{message: this.message})
+            this.message = ""
+            }
+        }
+    }
 </script> -->
 
 @endsection

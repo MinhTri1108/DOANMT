@@ -6,6 +6,7 @@ use App\Http\Controllers\AdminControllers\AdminAccountsController;
 use App\Http\Controllers\AdminControllers\HomeController;
 use App\Http\Controllers\AdminControllers\LecturersAccountsController;
 use App\Http\Controllers\AdminControllers\DanhSachKhoaController;
+use App\Http\Controllers\AdminControllers\DanhSachLopController;
 
 use App\Http\Controllers\CollegeStudentControllers\HomeSVController;
 use App\Http\Controllers\CollegeStudentControllers\MessengerSVController;
@@ -45,7 +46,9 @@ Route::middleware(['CheckAccountLogin'])->prefix('admin')->group(function () {
     Route::resource('/LecturersAccounts', LecturersAccountsController::class);
     Route::prefix("EducationProgram")->group(function(){
         Route::resource('/DanhSachKhoa', DanhSachKhoaController::class);
+        Route::resource('/DanhSachLop', DanhSachLopController::class);
         Route::GET('/Khoa/{id}', [DanhSachKhoaController::class, 'khoa'])->name('khoa');
+        Route::GET('/Lop/{id}', [DanhSachLopController::class, 'lop'])->name('lop');
     });
     // Route::get('/employee',[nhanvienController::class, 'index'])->name('listemployee');
     // Route::get('/employee/create',[nhanvienController::class, 'pagecreate'])->name('pageemployee');
@@ -58,6 +61,10 @@ Route::middleware(['CheckAccountLogin'])->prefix('admin')->group(function () {
 Route::middleware(['CheckAccountSVLogin'])->prefix('collegestudent')->group(function () {
     Route::get('/', [HomeSVController::class, 'index'])->name('index');
     Route::get('/Messenger', [MessengerSVController::class, 'index'])->name('messenger');
+    Route::post('/Messenger/store', [MessengerSVController::class, 'store'])->name('sendmessenger');
+    // Route::post('/Chat', function (Request $request){
+    //     return $request->input('message');
+    // });
 });
 Route::middleware(['CheckAccountGVLogin'])->prefix('lecturers')->group(function () {
     Route::get('/', [HomeGVController::class, 'index'])->name('index');

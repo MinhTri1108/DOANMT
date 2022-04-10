@@ -5,6 +5,12 @@
 
 <body class="bg-light">
 <div class="container">
+    <nav style="--bs-breadcrumb-divider: '>'; margin-top: 25px;" aria-label="breadcrumb">
+        <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="{{URL('admin/')}}">Trang chủ</a></li>
+        <li class="breadcrumb-item active" aria-current="page">Quản lý khoa</a></li>
+        </ol>
+    </nav>
 <div class="row my-5">
     <div class="col">
     <div class="card shadow">
@@ -62,7 +68,7 @@
                                    <form action="{{route('DanhSachKhoa.destroy', ['DanhSachKhoa'=>$listkhoa->MaKhoa])}}" method="POST">
                                         @method('DELETE')
                                         @csrf
-                                        <button onclick = "return confirm('Bạn muốn xóa truyện này không')" class="btn btn-danger"> <i class="bi-trash h4"></i></button>
+                                        <button onclick = "return confirm('Bạn muốn xóa khoa này không')" class="btn btn-danger"> <i class="bi-trash h4"></i></button>
                                    </form>
                                 </td>
                             </tr>
@@ -75,7 +81,7 @@
         <!-- end table -->
         <script type="text/javascript" src="{{ asset('./js/jquery-3.3.1.min.js') }}"></script>
         <script type="text/javascript" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
-        <script type="text/javascript" src="{{ asset('./css/bootstrap/js/bootstrap.min.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('./bootstrap/js/bootstrap.min.js') }}"></script>
         <script type="text/javascript" src="{{ asset('./js/script.js') }}"></script>
     </div>
     </div>

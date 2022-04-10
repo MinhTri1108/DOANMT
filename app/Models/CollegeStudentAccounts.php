@@ -31,4 +31,8 @@ class CollegeStudentAccounts extends Model
     {
         return $this->hasMany('App\Models\permission', 'idloaitk', 'idloaitk');
     }
+    public function lop()
+    {
+        return $this->hasMany('App\Models\DanhSachLop', 'MaLop', 'MaLop');
+    }
 }

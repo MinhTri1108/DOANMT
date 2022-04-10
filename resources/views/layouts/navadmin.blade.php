@@ -1,7 +1,7 @@
 <link rel="stylesheet" type="text/css" href="{{ asset('./css/reset.css') }}">
 <link rel="stylesheet" type="text/css" href="{{ asset('./css/header.css') }}">
 <link rel="stylesheet" type="text/css" href="{{ asset('./bootstrap/css/bootstrap.min.css') }}">
-<link rel="stylesheet" href="../font-awesome/css/all.css">
+<link rel="stylesheet" href="{{ asset('./font-awesome/css/all.css') }}">
 <nav class="navbar navbar-expand-lg navbar-dark " id= "nabar">
 <div class="container-fluid">
     <a href="{{URL('admin/')}}" class="navbar-brand">
