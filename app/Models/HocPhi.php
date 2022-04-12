@@ -16,4 +16,8 @@ class HocPhi extends Model
     ];
     protected $primaryKey = 'SoTinChi';
     protected $table = 'hocphi';
+    public function stc()
+    {
+        return $this->hasMany('App\Models\DanhSachMonHoc');
+    }
 }

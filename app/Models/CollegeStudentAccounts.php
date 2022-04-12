@@ -29,10 +29,11 @@ class CollegeStudentAccounts extends Model
     protected $table = 'dssinhvien';
     public function permission()
     {
-        return $this->hasMany('App\Models\permission', 'idloaitk', 'idloaitk');
+        return $this->belongsTo('App\Models\permission', 'idloaitk', 'idloaitk');
     }
     public function lop()
     {
-        return $this->hasMany('App\Models\DanhSachLop', 'MaLop', 'MaLop');
+        return $this->belongsTo('App\Models\DanhSachLop', 'MaLop', 'MaLop');
     }
 }
+

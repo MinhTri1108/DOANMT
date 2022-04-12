@@ -29,7 +29,8 @@
 			<a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">  Quản lý đào tạo  </a>
 		    <ul class="dropdown-menu fade-up">
 			  <li><a class="dropdown-item" href="{{route('DanhSachKhoa.index')}}"> Chương trình đào tạo</a></li>
-			  <li><a class="dropdown-item" href="#"> Tao hoc phan </a></li>
+              <li><a class="dropdown-item" href="{{route('DanhSachMonHoc.index')}}"> Danh sách các môn học </a></li>
+			  <li><a class="dropdown-item" href="#"> Tạo học phần </a></li>
 		    </ul>
 		</li>
 		<li class="nav-item dropdown">

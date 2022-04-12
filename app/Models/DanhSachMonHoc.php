@@ -8,4 +8,22 @@ use Illuminate\Database\Eloquent\Model;
 class DanhSachMonHoc extends Model
 {
     use HasFactory;
+    public $timestamps = false;
+    protected $fillable = [
+        // 'hoten' ,'password','ngaysinh','cccd','gender','diachi','sdt','email'
+        // idadmin
+        'TenMonHoc',
+        'HocKi',
+        'LT',
+        'TH',
+        'TL',
+        'TT'
+
+    ];
+    protected $primaryKey = 'MaMonHoc';
+    protected $table = 'dsmonhoc';
+    public function stc()
+    {
+        return $this->belongsTo('App\Models\HocPhi', 'SoTinChi', 'SoTinChi');
+    }
 }

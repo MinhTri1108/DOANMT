@@ -150,7 +150,7 @@ class DanhSachLopController extends Controller
     }
     public function lop($slug)
     {
-        $lop_id= DanhSachLop::where('slug_lop', $slug)->first();
+        $lop_id= DanhSachLop::where('slug_lop', $slug)->with('khoa')->first();
         // $listlops = DanhSachLop::with('khoa', 'khoahoc', 'hedaotao')->where('MaKhoa', $khoa_id->MaKhoa)->orderBy('MaLop', 'DESC')->get();
         return view('admincp.dssvoflop.index')->with(compact('lop_id'));
     }

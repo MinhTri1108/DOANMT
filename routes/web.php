@@ -7,6 +7,9 @@ use App\Http\Controllers\AdminControllers\HomeController;
 use App\Http\Controllers\AdminControllers\LecturersAccountsController;
 use App\Http\Controllers\AdminControllers\DanhSachKhoaController;
 use App\Http\Controllers\AdminControllers\DanhSachLopController;
+use App\Http\Controllers\AdminControllers\CollegeStudentAccountsController;
+use App\Http\Controllers\AdminControllers\ComponentSVandLopController;
+use App\Http\Controllers\AdminControllers\DanhSachMonHocController;
 
 use App\Http\Controllers\CollegeStudentControllers\HomeSVController;
 use App\Http\Controllers\CollegeStudentControllers\MessengerSVController;
@@ -49,6 +52,13 @@ Route::middleware(['CheckAccountLogin'])->prefix('admin')->group(function () {
         Route::resource('/DanhSachLop', DanhSachLopController::class);
         Route::GET('/Khoa/{id}', [DanhSachKhoaController::class, 'khoa'])->name('khoa');
         Route::GET('/Lop/{id}', [DanhSachLopController::class, 'lop'])->name('lop');
+        Route::resource('/DanhSachSinhVien', CollegeStudentAccountsController::class);
+
+        Route::GET('/DanhSachSinhVien-Lop/{id}', [ComponentSVandLopController::class, 'sinhviencualop'])->name('sinhviencualop');
+        Route::GET('/DanhSachMonHoc-Lop/{id}', [ComponentSVandLopController::class, 'monhoccualop'])->name('monhoccualop');
+        Route::GET('/KhenThuongKyLuat-Lop/{id}', [ComponentSVandLopController::class, 'khenthuongkyluatcualop'])->name('khenthuongkyluatcualop');
+
+        Route::resource('/DanhSachMonHoc', DanhSachMonHocController::class);
     });
     // Route::get('/employee',[nhanvienController::class, 'index'])->name('listemployee');
     // Route::get('/employee/create',[nhanvienController::class, 'pagecreate'])->name('pageemployee');

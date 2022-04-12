@@ -3,44 +3,99 @@
 @include('layouts/navadmin')
 {{-- add new employee modal start --}}
 <style>
-    .item{
-		transform: scale(1);
+    /* #test{
+    border-radius: 15px; text-align: center;
+
+    } */
+    .dssv{
+        width: 80%;
+        height: 180px;
+        transform: scale(1);
 		transition: all 0.5s;
-		width:200px;
 		padding: 10px;
 		box-shadow: rgb(1 140 245) 0px 1px 2px 0px, rgb(0 134 235) 0px 2px 6px 2px;
 		border-radius: 8px;
-		background-color:white;
-		text-align: center;
-	}
-.item:hover {
-transform: scale(1.1);
-box-shadow:20px 20px 50px 10px aqua;
-}
+        text-align : center;
+        margin: 0 auto;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: red;
+        color: white;
+    }
+    .dssv:hover{
+        transform: scale(1.1);
+        box-shadow:20px 20px 50px 10px aqua;
+    }
+    .hplop{
+        width: 80%;
+        height: 180px;
+        transform: scale(1);
+		transition: all 0.5s;
+		padding: 10px;
+		box-shadow: rgb(1 140 245) 0px 1px 2px 0px, rgb(0 134 235) 0px 2px 6px 2px;
+		border-radius: 8px;
+        text-align : center;
+        margin: 0 auto;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: blue;
+        color: white;
+    }
+    .hplop:hover{
+        transform: scale(1.1);
+        box-shadow:20px 20px 50px 10px aqua;
+    }
+    .ghichu{
+        width: 80%;
+        height: 180px;
+        transform: scale(1);
+		transition: all 0.5s;
+		padding: 10px;
+		box-shadow: rgb(1 140 245) 0px 1px 2px 0px, rgb(0 134 235) 0px 2px 6px 2px;
+		border-radius: 8px;
+        text-align : center;
+        margin: 0 auto;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: green;
+        color: white;
+    }
+    .ghichu:hover{
+        transform: scale(1.1);
+        box-shadow:20px 20px 50px 10px aqua;
+    }
 </style>
 <body class="bg-light">
 <div class="container">
-    <nav style="--bs-breadcrumb-divider: '>'; margin-top: 25px;" aria-label="breadcrumb">
+    <div style = "background-color: #A9A9A9; height: 35px; ">
+    <nav style="--bs-breadcrumb-divider: '>'; margin-top: 25px; " aria-label="breadcrumb" >
         <ol class="breadcrumb">
         <li class="breadcrumb-item"><a href="{{URL('admin/')}}">Trang chủ</a></li>
         <li class="breadcrumb-item" aria-current="page"><a href="{{URL('admin/EducationProgram/DanhSachKhoa')}}">Quản lý khoa</a></li>
-        <li class="breadcrumb-item active" aria-current="page"></a></li>
+        <li class="breadcrumb-item" aria-current="page"><a href="{{URL('admin/EducationProgram/Khoa',$lop_id->khoa->slug_khoa)}}">Khoa: {{$lop_id->khoa->TenKhoa}}</a></li>
+        <li class="breadcrumb-item active" aria-current="page">Lớp: {{$lop_id->TenLop}}</li>
         </ol>
     </nav>
+    </div>
+
+
 <div class="row my-5">
     <div class="col">
     <div class="card shadow">
-        <div class="card-header bg-info d-flex justify-content-between align-items-center">
+        <div class="card-header bg-primary d-flex justify-content-between align-items-center">
         <h3 class="text-light">Lựa chọn</h3>
         <!-- <button class="btn btn-light" data-bs-toggle="modal" data-bs-target="#addAccountModal"><i
             class="bi-plus-circle me-2"></i>Add Lop</button> -->
-            <button class="btn btn-light"><a href="">Add Lớp</a></button>
+            <button class="btn btn-light"><a href="">Add</a></button>
         </div>
         <div class="card-body" id="show_all_adminaccounts">
         <!-- <h1 class="text-center text-secondary my-5">Loading...</h1> -->
         <!-- start table -->
-            <div class="row">
-                <div class="col">
+            <div class="container">
+
                     @if ($errors->any())
                     <div class="alert alert-danger">
                         <ul>
@@ -56,68 +111,38 @@ box-shadow:20px 20px 50px 10px aqua;
 
                         </div>
                      @endif
-                    <div class="container">
-                        <div class="row mt-5 "  style="row-gap: 30px;">
-                            <div class="col-12 col-md-3 d-flex justify-content-center">
-                                <div class="item" >
-                                    <div class="item-summary">
-                                        <div class="post-title font-title" id=" ">
-                                            xin chào
-                                            <h5>
-                                                <a style="text-decoration: none;color:red;font-weight:bold;">
-                                            </h5>
-                                        </div>
-                                        <div class="tacgia">
-                                            <span class="glyphicon glyphicon-user"></span><br>
-                                        </div>
-                                        <div class="theloai">
-                                            <span class="glyphicon glyphicon-list"></span> <br>
-                                        </div>
+                        <div class="row" >
+                            <div class="col" style = "" id = "test">
+                                <a href="{{route('sinhviencualop', $lop_id->slug_lop)}}">
+                                    <div class="dssv">
+                                        <h3>Danh sách sinh viên</h3>
                                     </div>
-                                </div>
-                                <div class="item" >
-                                    <div class="item-summary">
-                                        <div class="post-title font-title" id=" ">
-                                            xin chào
-                                            <h5>
-                                                <a style="text-decoration: none;color:red;font-weight:bold;">
-                                            </h5>
-                                        </div>
-                                        <div class="tacgia">
-                                            <span class="glyphicon glyphicon-user"></span><br>
-                                        </div>
-                                        <div class="theloai">
-                                            <span class="glyphicon glyphicon-list"></span> <br>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="item" >
-                                    <div class="item-summary">
-                                        <div class="post-title font-title" id=" ">
-                                            xin chào
-                                            <h5>
-                                                <a style="text-decoration: none;color:red;font-weight:bold;">
-                                            </h5>
-                                        </div>
-                                        <div class="tacgia">
-                                            <span class="glyphicon glyphicon-user"></span><br>
-                                        </div>
-                                        <div class="theloai">
-                                            <span class="glyphicon glyphicon-list"></span> <br>
-                                        </div>
-                                    </div>
-                                </div>
+                                </a>
                             </div>
-                        </div>
-                    </div>
+                            <div class="col" style = "" id = "test">
+                                <a href="{{route('monhoccualop', $lop_id->slug_lop)}}">
+                                    <div class="hplop">
+                                        <h3>Danh sách môn học</h3>
+                                    </div>
+                                </a>
+                            </div>
+                            <div class="col" style = "" id = "test">
+                                <a href="{{route('khenthuongkyluatcualop', $lop_id->slug_lop)}}">
+                                    <div class="ghichu">
+                                        <h3>Khen thưởng - Kỷ luật</h3>
 
-                </div>
+                                    </div>
+                                </a>
+                            </div>
+
+                        </div>
+
             </div>
         </div>
         <!-- end table -->
         <script type="text/javascript" src="{{ asset('./js/jquery-3.3.1.min.js') }}"></script>
         <script type="text/javascript" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
-        <script type="text/javascript" src="{{ asset('./css/bootstrap/js/bootstrap.min.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('./bootstrap/js/bootstrap.min.js') }}"></script>
         <script type="text/javascript" src="{{ asset('./js/script.js') }}"></script>
     </div>
     </div>
