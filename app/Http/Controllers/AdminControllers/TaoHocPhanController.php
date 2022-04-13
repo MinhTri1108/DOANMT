@@ -4,8 +4,11 @@ namespace App\Http\Controllers\AdminControllers;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-
-class TaoHocPhan extends Controller
+use App\Models\LichHoc;
+use App\Models\HocPhan;
+use App\Models\DanhSachMonHoc;
+use App\Models\LecturersAccounts;
+class TaoHocPhanController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,6 +18,12 @@ class TaoHocPhan extends Controller
     public function index()
     {
         //
+        $listlichhocs= LichHoc::with('hocphan', 'thu', 'tiethoc', 'phong')->orderBy('idlichhoc', 'ASC')->get();
+        $hocphans= HocPhan::with('magv', 'monhoc')->get();
+        $hps = HocPhan::join('dsgiaovien', 'dsgiaovien.MaGV', '=', 'mahocphan.MaGV')
+        ->join('quyen', 'quyen.idloaitk', '=', 'dsgiaovien.idloaitk')
+        ->join('dsmonhoc', 'dsmonhoc.MaMonHoc', '=', 'mahocphan.MaMonHoc')->get();
+        return view('admincp.createhp.index')->with(compact('hocphans', 'listlichhocs','hps'));
     }
 
     /**
@@ -25,6 +34,9 @@ class TaoHocPhan extends Controller
     public function create()
     {
         //
+        $gvs= LecturersAccounts::with('permission')->get();
+        $mhs= DanhSachMonHoc::all();
+        return view('admincp.createhp.create')->with(compact('gvs', 'mhs'));
     }
 
     /**
@@ -36,6 +48,20 @@ class TaoHocPhan extends Controller
     public function store(Request $request)
     {
         //
+        $data= $request->validate([
+            'MaGV' => 'required|max:255',
+            'MaMonHoc' => 'required|max:255',
+        ],
+        [
+            'MaGV.unique' => 'Tên Khoa đã có vui lòng đặt tên khác. Cảm ơn!!!',
+            'MaMonHoc.required' => 'Teen khoa trong',
+        ]
+    );
+    $dshp = new HocPhan();
+    $dshp->MaGV = $data['MaGV'];
+    $dshp->MaMonHoc = $data['MaMonHoc'];
+    $dshp->save();
+    return redirect()->back()->with('status', 'Thêm học phần thành công');
     }
 
     /**
@@ -81,5 +107,7 @@ class TaoHocPhan extends Controller
     public function destroy($id)
     {
         //
+        HocPhan::find($id)->delete();
+        return redirect()->back()->with('status', 'Bạn xóa Học phần thành công');
     }
 }

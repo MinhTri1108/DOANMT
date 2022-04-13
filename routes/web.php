@@ -10,6 +10,8 @@ use App\Http\Controllers\AdminControllers\DanhSachLopController;
 use App\Http\Controllers\AdminControllers\CollegeStudentAccountsController;
 use App\Http\Controllers\AdminControllers\ComponentSVandLopController;
 use App\Http\Controllers\AdminControllers\DanhSachMonHocController;
+use App\Http\Controllers\AdminControllers\TaoHocPhanController;
+use App\Http\Controllers\AdminControllers\CreateLichHocController;
 
 use App\Http\Controllers\CollegeStudentControllers\HomeSVController;
 use App\Http\Controllers\CollegeStudentControllers\MessengerSVController;
@@ -59,13 +61,10 @@ Route::middleware(['CheckAccountLogin'])->prefix('admin')->group(function () {
         Route::GET('/KhenThuongKyLuat-Lop/{id}', [ComponentSVandLopController::class, 'khenthuongkyluatcualop'])->name('khenthuongkyluatcualop');
 
         Route::resource('/DanhSachMonHoc', DanhSachMonHocController::class);
+        Route::resource('/CreateHocPhan', TaoHocPhanController::class);
+        Route::resource('/CreateLichHoc', CreateLichHocController::class);
     });
-    // Route::get('/employee',[nhanvienController::class, 'index'])->name('listemployee');
-    // Route::get('/employee/create',[nhanvienController::class, 'pagecreate'])->name('pageemployee');
-    // Route::post('/employee/store',[nhanvienController::class, 'store'])->name('create');
-    // Route::get('/employee/edit/{id}', [nhanvienController::class, 'pageedit']);
-    // Route::put('/employee/update/{id}', [nhanvienController::class, 'update'])->name('update');
-    // Route::get('/employee/delete/{id}', [nhanvienController::class, 'destroy']);
+
 });
 
 Route::middleware(['CheckAccountSVLogin'])->prefix('collegestudent')->group(function () {

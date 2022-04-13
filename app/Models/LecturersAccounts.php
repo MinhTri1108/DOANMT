@@ -29,6 +29,6 @@ class LecturersAccounts extends Model
     protected $table = 'dsgiaovien';
     public function permission()
     {
-        return $this->hasMany('App\Models\permission', 'idloaitk', 'idloaitk');
+        return $this->belongsTo('App\Models\permission', 'idloaitk', 'idloaitk');
     }
 }

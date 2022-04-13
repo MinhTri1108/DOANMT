@@ -18,4 +18,8 @@ class DanhSachTietHoc extends Model
     ];
     protected $primaryKey = 'idtiethoc';
     protected $table = 'dstiethoc';
+    public function phonghoc()
+    {
+        return $this->hasMany('App\Models\LichHoc');
+    }
 }

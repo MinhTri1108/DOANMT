@@ -16,4 +16,8 @@ class ThuNgay extends Model
     ];
     protected $primaryKey = 'idthu';
     protected $table = 'thungay';
+    public function thu()
+    {
+        return $this->hasMany('App\Models\LichHoc');
+    }
 }

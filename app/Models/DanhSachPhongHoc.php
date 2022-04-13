@@ -16,4 +16,8 @@ class DanhSachPhongHoc extends Model
     ];
     protected $primaryKey = 'idphong';
     protected $table = 'dsphonghoc';
+    public function phong()
+    {
+        return $this->hasMany('App\Models\LichHoc');
+    }
 }

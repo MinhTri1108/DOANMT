@@ -1,7 +1,7 @@
 <link rel="stylesheet" type="text/css" href="{{ asset('./css/reset.css') }}">
 <link rel="stylesheet" type="text/css" href="{{ asset('./css/header.css') }}">
 <link rel="stylesheet" type="text/css" href="{{ asset('./bootstrap/css/bootstrap.min.css') }}">
-<link rel="stylesheet" href="{{ asset('./font-awesome/css/all.css') }}">
+<link rel="stylesheet" type="text/css" href="{{ asset('./font-awesome/css/all.css') }}">
 <nav class="navbar navbar-expand-lg navbar-dark " id= "nabar">
 <div class="container-fluid">
     <a href="{{URL('admin/')}}" class="navbar-brand">
@@ -30,7 +30,7 @@
 		    <ul class="dropdown-menu fade-up">
 			  <li><a class="dropdown-item" href="{{route('DanhSachKhoa.index')}}"> Chương trình đào tạo</a></li>
               <li><a class="dropdown-item" href="{{route('DanhSachMonHoc.index')}}"> Danh sách các môn học </a></li>
-			  <li><a class="dropdown-item" href="#"> Tạo học phần </a></li>
+			  <li><a class="dropdown-item" href="{{route('CreateHocPhan.index')}}"> Tạo học phần </a></li>
 		    </ul>
 		</li>
 		<li class="nav-item dropdown">
