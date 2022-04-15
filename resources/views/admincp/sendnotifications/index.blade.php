@@ -52,10 +52,10 @@
                                 <td>{{$tbsv->noidung}}</td>
                                 <td>{{$tbsv->ThoiGian}}</td>
                                 <td>
-                                   <form action="{{route('SendNotification.destroy', [$tbsv->id])}}" method="POST">
+                                   <form action="" method="POST">
                                         @method('DELETE')
                                         @csrf
-                                        <button value="{{$tbsv->id}}" name="tbsv" onclick = "return confirm('Bạn muốn xóa thông báo này không')" class="btn btn-danger"> <i class="bi-trash h4"></i></button>
+                                        <button onclick = "return confirm('Bạn muốn xóa thông báo này không')" class="btn btn-danger"> <i class="bi-trash h4"></i></button>
                                    </form>
                                 </td>
                             </tr>
@@ -80,10 +80,10 @@
                                 <td>{{$tbgv->noidung}}</td>
                                 <td>{{$tbgv->ThoiGian}}</td>
                                 <td>
-                                   <form action="{{route('SendNotification.destroy', [$tbgv->id])}}" method="POST">
+                                   <form action="" method="POST">
                                         @method('DELETE')
                                         @csrf
-                                        <button value="{{$tbgv->id}}" name="tbgv" onclick = "return confirm('Bạn muốn xóa thông báo này không')" class="btn btn-danger"> <i class="bi-trash h4"></i></button>
+                                        <button onclick = "return confirm('Bạn muốn xóa thông báo này không')" class="btn btn-danger"> <i class="bi-trash h4"></i></button>
                                    </form>
                                 </td>
                             </tr>

@@ -132,18 +132,18 @@ class SendNotificationController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Request $request,$id)
+    public function destroy($id)
     {
-        if($request->tbsv != NULL)
-        {
-            ThongBaoSV::find($id)->delete();
-            return redirect()->back()->with('status', 'Bạn xóa thông báo thành công');
-        }
-        else if($request->tbgv != NULL)
-        {
-            ThongBaoGV::find($id)->delete();
-            return redirect()->back()->with('status', 'Bạn xóa thông báo thành công');
-        }
+        // if($request->tbsv != NULL)
+        // {
+        //     ThongBaoSV::find($id)->delete();
+        //     return redirect()->back()->with('status', 'Bạn xóa thông báo thành công');
+        // }
+        // else if($request->tbgv != NULL)
+        // {
+        //     ThongBaoGV::find($id)->delete();
+        //     return redirect()->back()->with('status', 'Bạn xóa thông báo thành công');
+        // }
 
     }
 }
