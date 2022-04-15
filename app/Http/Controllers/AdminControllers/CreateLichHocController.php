@@ -87,6 +87,14 @@ class CreateLichHocController extends Controller
     public function edit($id)
     {
         //
+        $thus=ThuNgay::all();
+        $phongs=DanhSachPhongHoc::all();
+        $tiethocs=DanhSachTietHoc::all();
+        $hocphans=HocPhan::all();
+        // $lichhoc =LichHoc::find($id)->join('thungay', 'thungay.idthu', '=', 'lichhoc.idthu')
+        // ->join('dstiethoc', 'dstiethoc.idtiethoc', '=', 'lichhoc');
+        $lichhoc =LichHoc::with('thu', 'tiethoc', 'phong')->find($id);
+        return view('admincp.createhp.editlh')->with(compact('thus','phongs','tiethocs','hocphans','lichhoc'));
     }
 
     /**
@@ -99,6 +107,26 @@ class CreateLichHocController extends Controller
     public function update(Request $request, $id)
     {
         //
+        $data= $request->validate([
+            'idhocphan' => 'required|max:255',
+            'idthu' => 'required|max:255',
+            'idtiethoc' => 'required|max:255',
+            'idphong' => 'required|max:255',
+        ],
+        [
+            'idhocphan.unique' => 'id lich hoc đã có vui lòng đặt tên khác. Cảm ơn!!!',
+            'idthu.required' => 'id thu trong',
+            'idtiethoc.unique' => 'id tiethoc đã có vui lòng đặt tên khác. Cảm ơn!!!',
+            'idphong.required' => 'idphong trong',
+        ]
+    );
+    $dslichhoc = LichHoc::find($id);
+    $dslichhoc->idhocphan = $data['idhocphan'];
+    $dslichhoc->idthu = $data['idthu'];
+    $dslichhoc->idtiethoc = $data['idtiethoc'];
+    $dslichhoc->idphong = $data['idphong'];
+    $dslichhoc->save();
+    return redirect()->back()->with('status', 'Cập nhật lịch học thành công');
     }
 
     /**

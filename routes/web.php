@@ -12,6 +12,8 @@ use App\Http\Controllers\AdminControllers\ComponentSVandLopController;
 use App\Http\Controllers\AdminControllers\DanhSachMonHocController;
 use App\Http\Controllers\AdminControllers\TaoHocPhanController;
 use App\Http\Controllers\AdminControllers\CreateLichHocController;
+use App\Http\Controllers\AdminControllers\SukienHoatDongController;
+use App\Http\Controllers\AdminControllers\SendNotificationController;
 
 use App\Http\Controllers\CollegeStudentControllers\HomeSVController;
 use App\Http\Controllers\CollegeStudentControllers\MessengerSVController;
@@ -55,9 +57,18 @@ Route::middleware(['CheckAccountLogin'])->prefix('admin')->group(function () {
         Route::GET('/Khoa/{id}', [DanhSachKhoaController::class, 'khoa'])->name('khoa');
         Route::GET('/Lop/{id}', [DanhSachLopController::class, 'lop'])->name('lop');
         Route::resource('/DanhSachSinhVien', CollegeStudentAccountsController::class);
+        Route::resource('/SuKien-HoatDong', SukienHoatDongController::class);
+        Route::resource('/SendNotification', SendNotificationController::class);
 
         Route::GET('/DanhSachSinhVien-Lop/{id}', [ComponentSVandLopController::class, 'sinhviencualop'])->name('sinhviencualop');
+
         Route::GET('/DanhSachMonHoc-Lop/{id}', [ComponentSVandLopController::class, 'monhoccualop'])->name('monhoccualop');
+        Route::GET('/DanhSachMonHoc-Lop/create/{id}', [ComponentSVandLopController::class, 'createmonhoccualop'])->name('createmonhoccualop');
+        // Route::GET('/DanhSachMonHoc-Lop/edit/{id}', [ComponentSVandLopController::class, 'editmonhoccualop'])->name('editmonhoccualop');
+        Route::POST('/DanhSachMonHoc-Lop/store', [ComponentSVandLopController::class, 'storemonhoccualop'])->name('storemonhoccualop');
+        // Route::PUT('/DanhSachMonHoc-Lop/update/{id}', [ComponentSVandLopController::class, 'updatemonhoccualop'])->name('updatemonhoccualop');
+        Route::DELETE('/DanhSachMonHoc-Lop/delete/{id}', [ComponentSVandLopController::class, 'destroymonhoccualop'])->name('destroymonhoccualop');
+
         Route::GET('/KhenThuongKyLuat-Lop/{id}', [ComponentSVandLopController::class, 'khenthuongkyluatcualop'])->name('khenthuongkyluatcualop');
 
         Route::resource('/DanhSachMonHoc', DanhSachMonHocController::class);

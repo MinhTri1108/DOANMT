@@ -26,4 +26,8 @@ class DanhSachMonHoc extends Model
     {
         return $this->belongsTo('App\Models\HocPhi', 'SoTinChi', 'SoTinChi');
     }
+    public function monhoccualop()
+    {
+        return $this->hasMany('App\Models\DanhSachMonHocCuaLop');
+    }
 }

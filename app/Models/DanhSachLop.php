@@ -34,4 +34,8 @@ class DanhSachLop extends Model
     {
         return $this->hasMany('App\Models\CollegeStudentAccounts');
     }
+    public function monhoc()
+    {
+        return $this->hasMany('App\Models\DanhSachMonHocCuaLop');
+    }
 }

@@ -12,6 +12,8 @@ class LichLamViec extends Model
     protected $fillable = [
         // 'hoten' ,'password','ngaysinh','cccd','gender','diachi','sdt','email'
         // idadmin
+        'images',
+        'link',
         'NoiDung',
         'DiaDiem',
         'Ngay',
@@ -21,4 +23,8 @@ class LichLamViec extends Model
     ];
     protected $primaryKey = 'id';
     protected $table = 'lichlamviec';
+    public function admin()
+    {
+        return $this->belongsTo('App\Models\AdminAccounts', 'MaAdmin', 'MaAdmin');
+    }
 }

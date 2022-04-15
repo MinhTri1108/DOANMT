@@ -30,4 +30,8 @@ class AdminAccounts extends Model
     {
         return $this->belongsTo('App\Models\permission', 'idloaitk', 'idloaitk');
     }
+    public function lich()
+    {
+        return $this->hasMany('App\Models\LichLamViec');
+    }
 }

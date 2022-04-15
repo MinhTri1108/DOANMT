@@ -2,6 +2,7 @@
 <link rel="stylesheet" type="text/css" href="{{ asset('./css/header.css') }}">
 <link rel="stylesheet" type="text/css" href="{{ asset('./bootstrap/css/bootstrap.min.css') }}">
 <link rel="stylesheet" type="text/css" href="{{ asset('./font-awesome/css/all.css') }}">
+<?php date_default_timezone_set('Asia/Ho_Chi_Minh');?>
 <nav class="navbar navbar-expand-lg navbar-dark " id= "nabar">
 <div class="container-fluid">
     <a href="{{URL('admin/')}}" class="navbar-brand">
@@ -36,12 +37,12 @@
 		<li class="nav-item dropdown">
 			<a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">  Quản lý chung  </a>
 		    <ul class="dropdown-menu fade-up">
-			  <li><a class="dropdown-item" href="#"> Sự kiện </a></li>
+			  <li><a class="dropdown-item" href="{{route('SuKien-HoatDong.index')}}"> Sự kiện-Hoạt động </a></li>
 			  <li><a class="dropdown-item" href="#"> Abc </a></li>
 			  <li><a class="dropdown-item" href="#"> Submenu item 3 </a></li>
 		    </ul>
 		</li>
-        <li class="nav-item"><a class="nav-link" href="#"> Gửi thông báo </a></li>
+        <li class="nav-item"><a class="nav-link" href="{{route('SendNotification.create')}}"> Gửi thông báo </a></li>
 
 	</ul>
 

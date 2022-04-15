@@ -49,7 +49,7 @@ class TaoHocPhanController extends Controller
     {
         //
         $data= $request->validate([
-            'MaGV' => 'required|max:255',
+            'MaGV' => 'required|unique:mahocphan|max:255',
             'MaMonHoc' => 'required|max:255',
         ],
         [
@@ -73,6 +73,7 @@ class TaoHocPhanController extends Controller
     public function show($id)
     {
         //
+
     }
 
     /**
@@ -84,6 +85,13 @@ class TaoHocPhanController extends Controller
     public function edit($id)
     {
         //
+        $gvs= LecturersAccounts::with('permission')->get();
+        $mhs= DanhSachMonHoc::all();
+        $hocphan = HocPhan::join('dsgiaovien', 'dsgiaovien.MaGV', '=', 'mahocphan.MaGV')
+        ->join('quyen', 'quyen.idloaitk', '=', 'dsgiaovien.idloaitk')
+        ->join('dsmonhoc', 'dsmonhoc.MaMonHoc', '=', 'mahocphan.MaMonHoc')->find($id);
+        // $hocphan = HocPhan::with('monhoc', 'magv')->find($id);
+        return view('admincp.createhp.edit')->with(compact('gvs', 'mhs', 'hocphan'));
     }
 
     /**
@@ -96,6 +104,20 @@ class TaoHocPhanController extends Controller
     public function update(Request $request, $id)
     {
         //
+        $data= $request->validate([
+            'MaGV' => 'required|max:255',
+            'MaMonHoc' => 'required|max:255',
+        ],
+        [
+            'MaGV.unique' => 'trog đã có vui lòng đặt tên khác. Cảm ơn!!!',
+            'MaMonHoc.required' => 'Teen khoa trong',
+        ]
+    );
+    $dshp = HocPhan::find($id);
+    $dshp->MaGV = $data['MaGV'];
+    $dshp->MaMonHoc = $data['MaMonHoc'];
+    $dshp->save();
+    return redirect()->back()->with('status', 'Cập nhật học phần thành công');
     }
 
     /**
