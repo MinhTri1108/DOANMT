@@ -10,7 +10,7 @@ class HomeSVController extends Controller
     //
     public function index()
     {
-        $thongtin=session()->has('id_sv');
-        return view('collegestudentcp.index',compact('thongtin'));
+
+        return view('collegestudentcp.index');
     }
 }
