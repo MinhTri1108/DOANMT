@@ -18,71 +18,88 @@
     <header class="header" id="header">
         <div class="header_toggle">
                 <i class='bx bx-menu' id="header-toggle"></i>
-            </div>
+        </div>
         <!-- <div class="col-12 col-md-10">
 
         </div> -->
-
-        <div class="col-12 col-md-2 d-flex">
             <div class="noti">
-           <nav class="navbar navbar-expand-lg ">
-            <div class="container">
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <ul class="navbar-nav ml-auto">
-                        <li class="nav-item dropdown notification-ui ">
-                            <a  onclick="myFunction()" class="nav-link dropdown-toggle notification-ui_icon" href="#" style ="display :flex;margin-left:-50px;" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <i style="margin-top: 5px;" class="fa fa-bell"> </i><p style="color:red;">{{$counttb}}</p> &nbsp; Thông báo
-                                <span class="unread-notification"></span>
-                            </a>
-                            <div id= "notification-ui_dd"  class="dropdown-menu notification-ui_dd " aria-labelledby="navbarDropdown">
-                                <div class="notification-ui_dd-header">
-                                    <h3 class="text-center"><p style="color:red;">{{$counttb}}-Notification</p></h3>
-                                </div>
-                                <div class="notification-ui_dd-content">
-                                    @foreach($tbgvs as $tbgv)
-                                    <div class="notification-list notification-list--unread">
-                                        <div class="notification-list_img">
-                                            <img src="https://i.imgur.com/zYxDCQT.jpg" alt="user">
+                <nav class="navbar navbar-expand-lg ">
+                    <div class="container">
+                        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+
+                            <ul class = "navbar-nav ms-auto mb-2 mb-lg-0">
+                                <li class="nav-item dropdown notification-ui ">
+                                    <div class="notifition">
+                                    <a  onclick="myFunction()" class="nav-link dropdown-toggle notification-ui_icon" href="#" style ="display :flex;margin-left:-50px;" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        <i style="margin-top: 5px;" class="fa fa-bell"> </i><p style="color:red;">{{$counttb}}</p> &nbsp; Thông báo
+                                        @if($counttb>0)
+                                        <span class="unread-notification"></span>
+                                        @endif
+                                    </a>
+                                    <div id= "notification-ui_dd"  class="dropdown-menu notification-ui_dd " aria-labelledby="navbarDropdown">
+                                        <div class="notification-ui_dd-header">
+                                            <h3 class="text-center"><p style="color:red;">{{$counttb}}-Notification</p></h3>
                                         </div>
-                                        <a href=""><div class="notification-list_detail">
-                                            <?php
-                                                $s = sprintf('%05d',$tbgv->MaAdmin);
-                                            ?>
+                                        <div class="notification-ui_dd-content">
+                                            @foreach($notificationgv as $tbgv)
+                                            <div class="notification-list notification-list--unread">
+                                                <div class="notification-list_img">
+                                                    <img src="https://i.imgur.com/zYxDCQT.jpg" alt="user">
+                                                </div>
+                                                <a href=""><div class="notification-list_detail">
+                                                    <?php
+                                                        $s = sprintf('%05d',$tbgv->MaAdmin);
+                                                    ?>
 
-                                            <div
-                                            @if($tbgv->status == 1)
-                                            style="font-weight:bold;"
-                                            @endif
+                                                    <div
+                                                    @if($tbgv->status == 1)
+                                                    style="font-weight:bold;"
+                                                    @endif
 
-                                            >
-                                                <p>{{$tbgv->matk}}<?php echo $s;?> reacted to your post</p>
-                                                <p><small>{{$tbgv->ThoiGian}}</small></p>
+                                                    >
+                                                        <p>{{$tbgv->matk}}<?php echo $s;?> reacted to your post</p>
+                                                        <p><small>{{$tbgv->ThoiGian}}</small></p>
+                                                    </div>
+
+                                                </div></a>
+                                                <div class="notification-list_feature-img">
+                                                    <img src="https://cdn-icons-png.flaticon.com/512/526/526172.png" alt="Feature image">
+                                                </div>
                                             </div>
-
-                                        </div></a>
-                                        <div class="notification-list_feature-img">
-                                            <img src="https://cdn-icons-png.flaticon.com/512/526/526172.png" alt="Feature image">
+                                            @endforeach
+                                        </div>
+                                        <div class="notification-ui_dd-footer">
+                                            <a href="#!" class="btn btn-success btn-block ">View All</a>
                                         </div>
                                     </div>
-                                    @endforeach
+                                    </div>
+                                </li>
+                                <li>
+<div class="header_img" >
+                                    <img src="https://bizweb.dktcdn.net/100/409/603/files/bao-gia-in-anh-the-lay-ngay.jpg?v=1631007146881" alt="">
                                 </div>
-                                <div class="notification-ui_dd-footer">
-                                    <a href="#!" class="btn btn-success btn-block ">View All</a>
+                                </li>
+                                <li>
+ <div class = "username">
+                                    <p id="ten">@foreach($data as $account)
+                                    <?php
+                                        $s = sprintf('%05d',$account->MaGV);
+                                    ?>
+                                        {{$account->fname}} {{$account->lname}}-[{{$account->permission->matk}}<?php echo $s ?>]
+
+                                    @endforeach</p>
                                 </div>
-                            </div>
-                        </li>
-                    </ul>
-                </div>
+                                </li>
+
+
+
+                            </ul>
+
+                        </div>
+                    </div>
+
+                </nav>
             </div>
-            </nav>
-        </div>
-        <div class="header_img" style="margin-top : 10px;display:flex;">
-            <img src="https://bizweb.dktcdn.net/100/409/603/files/bao-gia-in-anh-the-lay-ngay.jpg?v=1631007146881" alt="">
-        </div>
-        <p id="ten">1234565678-doan minh tri</p>
-        </div>
-
-
     </header>
     <div class="l-navbar" id="nav-bar">
         <nav class="nav">
@@ -90,7 +107,7 @@
                 <div class="nav_list">
                     <a href="{{URL('lecturers/')}}" class="nav_link active"> <i class='bx bx-grid-alt nav_icon'></i> <span class="nav_name">Trang chủ</span> </a>
                     <a href="#" class="nav_link"> <i class='bx bx-user nav_icon'></i> <span class="nav_name">Thời khóa biểu</span> </a>
-                    <a href="#" class="nav_link"> <i class='bx bx-message-square-detail nav_icon'></i> <span class="nav_name">Group Lớp</span> </a>
+                    <a href="{{route('GroupLop.index')}}" class="nav_link"> <i class='bx bx-message-square-detail nav_icon'></i> <span class="nav_name">Group Lớp</span> </a>
                     <a href="#" class="nav_link"> <i class='bx bx-bookmark nav_icon'></i> <span class="nav_name">Tài liệu</span> </a>
                     <!-- <a href="#" class="nav_link"> <i class='bx bx-folder nav_icon'></i> <span class="nav_name"></span> </a>
                     <a href="#" class="nav_link"> <i class='bx bx-bar-chart-alt-2 nav_icon'></i> <span class="nav_name">Stats</span> </a> -->

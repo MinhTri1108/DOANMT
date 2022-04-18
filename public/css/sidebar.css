@@ -58,12 +58,15 @@ a {
     justify-content: center;
     border-radius: 50%;
     overflow: hidden;
+    margin-top: 8px;
 }
 
 .header_img img {
     width: 40px;
 }
-
+.notifition {
+    margin-top: 8px;
+}
 .l-navbar {
     position: fixed;
     top: 0;

@@ -49,9 +49,12 @@
 	<ul class="navbar-nav ms-auto">
 		<!-- <li class="nav-item"><a class="nav-link" href="#"> Menu item </a></li>
 		<li class="nav-item"><a class="nav-link" href="#"> Menu item </a></li> -->
-		<li class="nav-item dropdown">
+		<li class="nav-item dropdown d-flex">
+             <div class="header_img" >
+                <img src="https://bizweb.dktcdn.net/100/409/603/files/bao-gia-in-anh-the-lay-ngay.jpg?v=1631007146881" alt="">
+            </div>
 			<a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">
-            @foreach($data as $account)
+            @foreach($dataad as $account)
             <?php
                 $s = sprintf('%05d',$account->MaAdmin);
             ?>

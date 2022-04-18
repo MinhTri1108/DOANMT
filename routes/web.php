@@ -19,6 +19,7 @@ use App\Http\Controllers\CollegeStudentControllers\HomeSVController;
 use App\Http\Controllers\CollegeStudentControllers\MessengerSVController;
 
 use App\Http\Controllers\LecturersControllers\HomeGVController;
+use App\Http\Controllers\LecturersControllers\GroupLopController;
 /*
 |--------------------------------------------------------------------------
 |   Web Routes
@@ -88,5 +89,6 @@ Route::middleware(['CheckAccountSVLogin'])->prefix('collegestudent')->group(func
 });
 Route::middleware(['CheckAccountGVLogin'])->prefix('lecturers')->group(function () {
     Route::get('/', [HomeGVController::class, 'index'])->name('index');
+    Route::resource('/GroupLop', GroupLopController::class);
 });
 
