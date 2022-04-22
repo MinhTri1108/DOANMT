@@ -18,4 +18,12 @@ class FileTaiLieu extends Model
     ];
     protected $primaryKey = 'id';
     protected $table = 'tailieu';
+    public function magv()
+    {
+        return $this->belongsTo('App\Models\LecturersAccounts', 'MaGV', 'MaGV');
+    }
+    public function hocphan()
+    {
+        return $this->belongsTo('App\Models\HocPhan', 'idhocphan', 'idhocphan');
+    }
 }

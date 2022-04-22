@@ -30,4 +30,8 @@ class HocPhan extends Model
     {
         return $this->hasMany('App\Models\DangKyHocPhan');
     }
+    public function file()
+    {
+        return $this->hasMany('App\Models\FileTaiLieu');
+    }
 }

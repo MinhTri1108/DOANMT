@@ -17,7 +17,7 @@ class DangKyHocPhan extends Model
     protected $table = 'dangkymonhoc';
     public function hocphan()
     {
-        return $this->belongsTo('App\Models\HocPhan');
+        return $this->belongsTo('App\Models\HocPhan', 'idhocphan','idhocphan');
     }
     public function masv()
     {
@@ -26,5 +26,9 @@ class DangKyHocPhan extends Model
     public function diem()
     {
         return $this->hasMany('App\Models\DanhSachDiem');
+    }
+    public function diemdanhsv()
+    {
+        return $this->hasMany('App\Models\DiemDanhSV');
     }
 }

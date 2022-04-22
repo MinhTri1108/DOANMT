@@ -10,14 +10,16 @@ class DanhSachDiem extends Model
     use HasFactory;
     public $timestamps = false;
     protected $fillable = [
-        // 'hoten' ,'password','ngaysinh','cccd','gender','diachi','sdt','email'
-        // idadmin
+        // 'MaDK',
         'DiemCC',
         'DiemGK',
         'DiemThi',
         'DiemTBMon',
-        'Diem4',
     ];
     protected $primaryKey = 'iddiem';
     protected $table = 'dsdiem';
+    public function diem()
+    {
+        return $this->belongsTo('App\Models\DangKyHocPhan', 'MaDK', 'MaDK');
+    }
 }

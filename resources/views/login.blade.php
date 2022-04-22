@@ -8,11 +8,11 @@
 
 				<div class="form-group">
 					<i class="fas fa-user"></i>
-					<input type = "text" name="MaTK" placeholder = "Mã sinh viên" class="form-input">
+					<input type = "text" name="MaTK" placeholder = "Mã sinh viên" required class="form-input">
 				</div>
 				<div class="form-group">
 					<i class="fas fa-key"></i>
-					<input type = "password" name="password" placeholder = "Mật khẩu" class="form-input">
+					<input type = "password" name="password" placeholder = "Mật khẩu" required class="form-input">
 					<div id="eye">
 					<i class="fas fa-eye"></i>
 					</div>

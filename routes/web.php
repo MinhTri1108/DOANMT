@@ -20,6 +20,11 @@ use App\Http\Controllers\CollegeStudentControllers\MessengerSVController;
 
 use App\Http\Controllers\LecturersControllers\HomeGVController;
 use App\Http\Controllers\LecturersControllers\GroupLopController;
+use App\Http\Controllers\LecturersControllers\DiemDanhController;
+use App\Http\Controllers\LecturersControllers\UploadDiemSVController;
+use App\Http\Controllers\LecturersControllers\UploadFileTaiLieuController;
+use App\Http\Controllers\LecturersControllers\ComponentGVandLopHocController;
+use App\Http\Controllers\LecturersControllers\ThoiKhoaBieuGVController;
 /*
 |--------------------------------------------------------------------------
 |   Web Routes
@@ -89,6 +94,22 @@ Route::middleware(['CheckAccountSVLogin'])->prefix('collegestudent')->group(func
 });
 Route::middleware(['CheckAccountGVLogin'])->prefix('lecturers')->group(function () {
     Route::get('/', [HomeGVController::class, 'index'])->name('index');
-    Route::resource('/GroupLop', GroupLopController::class);
+    Route::PUT('/UpdateProFile/{id}', [HomeGVController::class, 'updateprofile'])->name('updateprofile');
+    Route::PUT('/UpdateChangePass/{id}', [HomeGVController::class, 'updatechangepass'])->name('updatechangepass');
+    Route::prefix("GroupLop")->group(function(){
+        Route::resource('/Lop', GroupLopController::class);
+        Route::get('/DiemDanh/{id}', [DiemDanhController::class, 'indexdiemdanh'])->name('indexdiemdanh');
+        Route::POST('/DiemDanh/store', [DiemDanhController::class, 'storediemdanh'])->name('storediemdanh');
+        Route::get('/UploadDiem/Lop/{id}', [UploadDiemSVController::class, 'uploaddiem'])->name('uploaddiem');
+        Route::POST('/UploadDiem/Lop/store', [UploadDiemSVController::class, 'storeuploaddiem'])->name('storeuploaddiem');
+        Route::GET('/UploadDiem/Lop/edit/{id}', [UploadDiemSVController::class, 'edituploaddiem'])->name('edituploaddiem');
+        Route::DELETE('/UploadDiem/Lop/delete/{id}', [UploadDiemSVController::class, 'deleteuploaddiem'])->name('deleteuploaddiem');
+        Route::PUT('/UploadDiem/Lop/update/{id}', [UploadDiemSVController::class, 'updateuploaddiem'])->name('updateuploaddiem');
+        Route::resource('/UploadFileTaiLieu', UploadFileTaiLieuController::class);
+        Route::get('/MonHoc-HocPhan/{id}', [ComponentGVandLopHocController::class, 'indexcomponentmonhoc'])->name('indexcomponentmonhoc');
+        Route::get('/ThoiKhoaBieuGiangVien', [ThoiKhoaBieuGVController::class, 'indextkbgv'])->name('indextkbgv');
+        Route::get('/ThoiKhoaBieuGiangVien/HocKi/{id}', [ThoiKhoaBieuGVController::class, 'viewtkb'])->name('viewtkb');
+    });
+
 });
 

@@ -30,7 +30,7 @@
                         @csrf
                         <div class="col-md-6">
                             <label for="MaAdmin" class="form-label">Người gửi</label>
-                             @foreach($data as $account)
+                             @foreach($dataad as $account)
                             <input type="text" name="MaAdmin" class="form-control"  placeholder="MaAdmin" value = "{{$account->MaAdmin}}">
                             @endforeach
                         </div>

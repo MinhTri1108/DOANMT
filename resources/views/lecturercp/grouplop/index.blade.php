@@ -18,7 +18,7 @@
         display: flex;
         justify-content: center;
         align-items: center;
-        background-color: red;
+        background-color: #4723d9;
         color: white;
     }
     .dssv:hover{
@@ -66,11 +66,16 @@
         box-shadow:20px 20px 50px 10px aqua;
     }
 </style>
+<style>
+    .bg-info {
+    background-color: #4723d9!important;
+    }
+</style>
 <div class="row my-5">
     <div class="col">
     <div class="card shadow">
-        <div class="card-header bg-primary d-flex justify-content-between align-items-center">
-        <h3 class="text-light">Lựa chọn</h3>
+        <div class="card-header bg-info d-flex justify-content-between align-items-center">
+        <h3 class="text-light">Các lớp học của bạn</h3>
         <!-- <button class="btn btn-light" data-bs-toggle="modal" data-bs-target="#addAccountModal"><i
             class="bi-plus-circle me-2"></i>Add Lop</button> -->
             <button class="btn btn-light"><a href="">Add</a></button>
@@ -79,7 +84,6 @@
         <!-- <h1 class="text-center text-secondary my-5">Loading...</h1> -->
         <!-- start table -->
             <div class="container">
-
                     @if ($errors->any())
                     <div class="alert alert-danger">
                         <ul>
@@ -95,32 +99,17 @@
 
                         </div>
                      @endif
-                        <div class="row" >
-                            <div class="col" style = "" id = "test">
-                                <a href="">
-                                    <div class="dssv">
-                                        <h3>Danh sách sinh viên{{$a}}</h3>
-                                    </div>
-                                </a>
-                            </div>
-                            <div class="col" style = "" id = "test">
-                                <a href="">
-                                    <div class="hplop">
-                                        <h3>Danh sách môn học</h3>
-                                    </div>
-                                </a>
-                            </div>
-                            <div class="col" style = "" id = "test">
-                                <a href="">
-                                    <div class="ghichu">
-                                        <h3>Khen thưởng - Kỷ luật</h3>
-
-                                    </div>
-                                </a>
-                            </div>
-
+                    <div class="row" style = "row-gap :20px">
+                        @foreach($lophoc as $lop)
+                        <div class="col-3"  id = "test">
+                            <a href="{{route('indexcomponentmonhoc',$lop->idhocphan)}}">
+                                <div class="dssv">
+                                    <h3>Môn: {{$lop->monhoc->TenMonHoc}}</h3>
+                                </div>
+                            </a>
                         </div>
-
+                        @endforeach
+                    </div>
             </div>
         </div>
         <!-- end table -->

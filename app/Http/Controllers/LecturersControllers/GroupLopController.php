@@ -17,10 +17,13 @@ class GroupLopController extends Controller
     public function index(Request $request)
     {
         //
-        // $lophoc = HocPhan::where();
-        $a = $request->session()->get('MaGV');
-        dd($a);
-        // return view('lecturercp.grouplop.index')->with(compact('a'));
+
+        // $data = $request->session()->all();
+        $idgv = $request->session()->get('id_gv');
+        // dd($data);
+        $lophoc = HocPhan::where('MaGV', $idgv)->with('magv', 'monhoc')->get();
+        // dd($lophoc);
+        return view('lecturercp.grouplop.index')->with(compact('lophoc'));
     }
 
     /**

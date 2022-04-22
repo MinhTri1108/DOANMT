@@ -31,4 +31,12 @@ class LecturersAccounts extends Model
     {
         return $this->belongsTo('App\Models\permission', 'idloaitk', 'idloaitk');
     }
+    public function tailieu()
+    {
+        return $this->hasMany('App\Models\FileTaiLieu');
+    }
+    public function hocphan()
+    {
+        return $this->hasMany('App\Models\HocPhan');
+    }
 }
