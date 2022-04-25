@@ -43,7 +43,7 @@ class AppServiceProvider extends ServiceProvider
          view()->composer('*', function ($view) {
                 $sinhvien=CollegeStudentAccounts::where(['MaSV'=> session()->get('id_sv')])->with('permission')->get();
                 $notificationsv=ThongBaoSV::join('dsadmin', 'dsadmin.MaAdmin', '=', 'thongbaosv.MaAdmin')
-        ->join('quyen', 'quyen.idloaitk', '=', 'dsadmin.idloaitk')->where(['MaSV'=> session()->get('id_gv')])->get();
+        ->join('quyen', 'quyen.idloaitk', '=', 'dsadmin.idloaitk')->where(['MaSV'=> session()->get('id_sv')])->get();
         $counttb= ThongBaoSV::where(['MaSV'=> session()->get('id_sv')])->sum('status');
             $view->with('datasv', $sinhvien)->with('notificationsv', $notificationsv)->with('counttb', $counttb);
         });

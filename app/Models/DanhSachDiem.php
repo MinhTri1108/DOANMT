@@ -15,6 +15,8 @@ class DanhSachDiem extends Model
         'DiemGK',
         'DiemThi',
         'DiemTBMon',
+        'Diem4',
+        'DiemChu'
     ];
     protected $primaryKey = 'iddiem';
     protected $table = 'dsdiem';

@@ -86,6 +86,7 @@
                             @endforeach
                         </tbody>
                         @endfor
+
                     </table>
                 </div>
             </div>

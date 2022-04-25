@@ -73,7 +73,7 @@ class LoginController extends Controller
      $request->session()->forget('id_account');
      $request->session()->forget('id_gv');
      $request->session()->forget('id_sv');
-     $idgv = $request->session()->get('id_gv');
+    //  $idgv = $request->session()->get('id_gv');
         // $request->session()->flush();
        return redirect('/');
     }

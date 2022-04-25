@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+// admin
 use App\Http\Controllers\AuthControllers\LoginController;
 use App\Http\Controllers\AdminControllers\AdminAccountsController;
 use App\Http\Controllers\AdminControllers\HomeController;
@@ -14,10 +15,16 @@ use App\Http\Controllers\AdminControllers\TaoHocPhanController;
 use App\Http\Controllers\AdminControllers\CreateLichHocController;
 use App\Http\Controllers\AdminControllers\SukienHoatDongController;
 use App\Http\Controllers\AdminControllers\SendNotificationController;
-
+// end admin
+// sinhvien
 use App\Http\Controllers\CollegeStudentControllers\HomeSVController;
 use App\Http\Controllers\CollegeStudentControllers\MessengerSVController;
-
+use App\Http\Controllers\CollegeStudentControllers\ChuongTrinhDaoTaoController;
+use App\Http\Controllers\CollegeStudentControllers\HocPhiController;
+use App\Http\Controllers\CollegeStudentControllers\BangDiemSVController;
+use App\Http\Controllers\CollegeStudentControllers\DangKyHocPhanController;
+// end sinhvien
+// giangvien
 use App\Http\Controllers\LecturersControllers\HomeGVController;
 use App\Http\Controllers\LecturersControllers\GroupLopController;
 use App\Http\Controllers\LecturersControllers\DiemDanhController;
@@ -25,6 +32,7 @@ use App\Http\Controllers\LecturersControllers\UploadDiemSVController;
 use App\Http\Controllers\LecturersControllers\UploadFileTaiLieuController;
 use App\Http\Controllers\LecturersControllers\ComponentGVandLopHocController;
 use App\Http\Controllers\LecturersControllers\ThoiKhoaBieuGVController;
+// end giangvien
 /*
 |--------------------------------------------------------------------------
 |   Web Routes
@@ -88,6 +96,10 @@ Route::middleware(['CheckAccountSVLogin'])->prefix('collegestudent')->group(func
     Route::get('/', [HomeSVController::class, 'index'])->name('index');
     Route::get('/Messenger', [MessengerSVController::class, 'index'])->name('messenger');
     Route::post('/Messenger/store', [MessengerSVController::class, 'store'])->name('sendmessenger');
+    Route::resource('/ChuongTrinhDaoTao', ChuongTrinhDaoTaoController::class);
+    Route::resource('/HocPhi', HocPhiController::class);
+    Route::resource('/Marks', BangDiemSVController::class);
+    Route::resource('/DangKyHocPhan', DangKyHocPhanController::class);
     // Route::post('/Chat', function (Request $request){
     //     return $request->input('message');
     // });

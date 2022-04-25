@@ -202,7 +202,7 @@
         </script>
         <!-- endmodalsprofile -->
         <!-- modalschangepass -->
-        <div class="modal fade" id="changepass" tabindex="-1" aria-labelledby="changepassLabel" aria-hidden="true">
+        <!-- <div class="modal fade" id="changepass" tabindex="-1" aria-labelledby="changepassLabel" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
                 <div class="modal-header">
@@ -234,7 +234,7 @@
                 </div>
                 @endforeach
             </div>
-            </div>
+            </div> -->
         <!-- endchangepass -->
         <!-- menu -->
     <div class="l-navbar" id="nav-bar">

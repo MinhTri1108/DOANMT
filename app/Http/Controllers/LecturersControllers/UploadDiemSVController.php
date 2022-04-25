@@ -26,13 +26,17 @@ class UploadDiemSVController extends Controller
             'DiemGK' => 'required|max:11',
             'DiemThi' => 'required|max:11',
             'DiemTBMon' => 'required|max:11',
+            'Diem4' => 'required|max:11',
+            'DiemChu' => 'required|max:11',
         ],
         [
             'MaDK.unique' => 'MaDk null',
             'DiemCC.required' => 'DiemCC trong',
             'DiemGK.required' => 'DiemGK trong',
             'DiemThi.required' => 'DiemThi trong',
-            'MaHeDT.required' => 'MaHeDT trong',
+            'DiemTBMon.required' => 'DiemTBMon trong',
+            'Diem4.required' => 'Diem4 trong',
+            'DiemChu.required' => 'DiemChu trong',
         ]
     );
     // print_r($data);
@@ -42,6 +46,8 @@ class UploadDiemSVController extends Controller
     $danhsachdiem->DiemGK = $data['DiemGK'];
     $danhsachdiem->DiemThi = $data['DiemThi'];
     $danhsachdiem->DiemTBMon = $data['DiemTBMon'];
+    $danhsachdiem->Diem4 = $data['Diem4'];
+    $danhsachdiem->DiemChu = $data['DiemChu'];
     // print_r($danhsachdiem);
     $danhsachdiem->save();
     return redirect()->back()->with('status', 'Nhận điểm thành công');

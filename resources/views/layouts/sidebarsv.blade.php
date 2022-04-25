@@ -241,13 +241,13 @@
         <nav class="nav">
             <div> <a href="{{URL('collegestudent/')}}" class="nav_logo"> <i class='bx bx-layer nav_logo-icon'></i> <span class="nav_logo-name">QNUSSS</span> </a>
                 <div class="nav_list">
-                    <!-- <a href="{{URL('collegestudent/')}}" class="nav_link active"> <i class='bx bx-grid-alt nav_icon'></i> <span class="nav_name">Trang chủ</span> </a> -->
+                    <a href="{{URL('collegestudent/')}}" class="nav_link active"> <i class='bx bx-grid-alt nav_icon'></i> <span class="nav_name">Trang chủ</span> </a>
                     <a href="{{route('messenger')}}" class="nav_link"> <i class='bx bx-message-rounded-dots nav_icon'></i> <span class="nav_name">Messager</span> </a>
                     <a href="#" class="nav_link"> <i class='bx bx-calendar nav_icon'></i> <span class="nav_name">Thời khóa biểu</span> </a>
-                    <a href="#" class="nav_link"> <i class='bx bx-notepad nav_icon'></i> <span class="nav_name">Chương trình đào tạo</span> </a>
-                    <a href="#" class="nav_link"> <i class='bx bx-registered nav_icon'></i> <span class="nav_name">Đăng kí học phần</span> </a>
-                    <a href="#" class="nav_link"> <i class='bx bx-bookmark nav_icon'></i> <span class="nav_name">Bảng điểm</span> </a>
-                    <a href="#" class="nav_link"> <i class='bx bx-donate-blood nav_icon'></i> <span class="nav_name">Chi tiết học phí</span> </a>
+                    <a href="{{route('ChuongTrinhDaoTao.index')}}" class="nav_link"> <i class='bx bx-notepad nav_icon'></i> <span class="nav_name">Chương trình đào tạo</span> </a>
+                    <a href="{{route('DangKyHocPhan.index')}}" class="nav_link"> <i class='bx bx-registered nav_icon'></i> <span class="nav_name">Đăng kí học phần</span> </a>
+                    <a href="{{route('Marks.index')}}" class="nav_link"> <i class='bx bx-bookmark nav_icon'></i> <span class="nav_name">Bảng điểm</span> </a>
+                    <a href="{{route('HocPhi.index')}}" class="nav_link"> <i class='bx bx-donate-blood nav_icon'></i> <span class="nav_name">Chi tiết học phí</span> </a>
                     <a href="#" class="nav_link"> <i class='bx bxl-tux nav_icon'></i> <span class="nav_name">Group Lớp</span> </a>
                     <a href="#" class="nav_link"> <i class='bx bx-file nav_icon'></i> <span class="nav_name">Tài liệu</span> </a>
                     <!-- <a href="#" class="nav_link"> <i class='bx bx-folder nav_icon'></i> <span class="nav_name"></span> </a>

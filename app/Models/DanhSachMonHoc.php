@@ -13,7 +13,6 @@ class DanhSachMonHoc extends Model
         // 'hoten' ,'password','ngaysinh','cccd','gender','diachi','sdt','email'
         // idadmin
         'TenMonHoc',
-        'HocKi',
         'LT',
         'TH',
         'TL',

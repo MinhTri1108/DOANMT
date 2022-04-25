@@ -113,6 +113,14 @@
                             <label for="DiemTB" class="form-label">Điểm trung bình</label>
                             <input type="text" id= "diemtb" name="DiemTBMon" class="form-control" readonly>
                         </div>
+                        <div class="col-md-12">
+                            <label for="Diem4" class="form-label">Điểm 4</label>
+                            <input type="text" id= "diem4" name="Diem4" class="form-control" readonly>
+                        </div>
+                        <div class="col-md-12">
+                            <label for="DiemChu" class="form-label">Điểm Chữ</label>
+                            <input type="text" id= "diemchu" name="DiemChu" class="form-control" readonly>
+                        </div>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -140,12 +148,61 @@
 
             var diemtb = ((diemcc * hesocc) + (diemgk * hesogk) + (diemthi * hesothi))/(hesocc+hesogk+hesothi);
             // $('#diemtb').val(diemtb);
+            if(diemtb >= 9)
+            {
+                var diem4= 4.0;
+                var diemchu= 'A+';
+            }
+            else if(diemtb >= 8.5 && diemtb <= 8.9)
+            {
+                var diem4= 4.0;
+                var diemchu= 'A';
+            }
+            else if(diemtb >= 8.0 && diemtb <= 8.4)
+            {
+                var diem4= 3.5;
+                var diemchu= 'B+';
+            }
+            else if(diemtb >= 7.0 && diemtb <= 7.9)
+            {
+                var diem4= 3.0;
+                var diemchu= 'B';
+            }
+            else if(diemtb >= 6.5 && diemtb <= 6.9)
+            {
+                var diem4= 2.5;
+                var diemchu= 'C+';
+            }
+            else if(diemtb >= 5.5 && diemtb <= 6.4)
+            {
+                var diem4= 2.0;
+                var diemchu= 'C';
+            }
+            else if(diemtb >= 5.0 && diemtb <= 5.4)
+            {
+                var diem4= 1.5;
+                var diemchu= 'D+';
+            }
+            else if(diemtb >= 4.0 && diemtb <= 4.9)
+            {
+                var diem4= 1.0;
+                var diemchu= 'D';
+            }
+            else
+            {
+                var diem4= 0;
+                var diemchu= 'F';
+            }
             if(hesocc+hesogk+hesothi == 10)
             {
                  $('#diemtb').val(diemtb);
+                 $('#diem4').val(diem4);
+                 $('#diemchu').val(diemchu);
             }
             else{
                 $('#diemtb').val('Hệ số của bạn không bằng 10');
+                $('#diem4').val('Hệ số của bạn không bằng 10');
+                $('#diemchu').val('Hệ số của bạn không bằng 10');
             }
             // console.log(hesocc)
         });
@@ -255,7 +312,7 @@
 
                         </div>
                     @endif
-                    <table id="example" class="table table-striped table-bordered data-table" width="100%" data-page-length="25" data-order="[[ 1, &quot;asc&quot; ]]">
+                    <table id="example" class="table table-striped table-bordered data-table" width="100%" data-page-length="25" data-order="[[ 1, &quot;asc&quot; ]]" style="border: 3px solid black;">
                         <thead style="background-color: #3b89d6;">
                             <tr style="background-color: #4723d9; color: white;">
                             <th>Avatar</th>
@@ -266,7 +323,10 @@
                             <th>Giới tính</th>
                             <th>Điểm CC</th>
                             <th>Điểm GK</th>
-                            <th>Điểm cuối kì</th>
+                            <th>Điểm Thi</th>
+                            <th>Điểm TB</th>
+                            <th>Điểm 4</th>
+                            <th>Điểm chữ</th>
                             <th>Sửa</th>
                             <th>Xóa</th>
                         </tr>
@@ -300,6 +360,15 @@
                                 </td>
                                 <td>
                                     {{$sv->DiemThi}}
+                                </td>
+                                <td>
+                                    {{$sv->DiemTBMon}}
+                                </td>
+                                <td>
+                                    {{$sv->Diem4}}
+                                </td>
+                                <td>
+                                    {{$sv->DiemChu}}
                                 </td>
                                 <td>
                                     <a href="" class="btn btn-success"><i class="bi-pencil-square h4"></i></a>
