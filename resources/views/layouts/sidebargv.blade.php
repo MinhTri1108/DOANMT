@@ -38,14 +38,13 @@
                                     <div class="notifition">
                                     <a  onclick="myFunction()" class="nav-link dropdown-toggle notification-ui_icon" href="#" style ="display :flex;margin-left:-50px;" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                         <i style="margin-top: 5px;" class="fa fa-bell"> </i>&nbsp; Thông báo
-                                        <!-- <p style="color:red;">{{$counttb}}</p>  -->
-                                        @if($counttb>0)
+                                        @if($counttbsgv>0)
                                         <span class="unread-notification"></span>
                                         @endif
                                     </a>
                                     <div id= "notification-ui_dd"  class="dropdown-menu notification-ui_dd " aria-labelledby="navbarDropdown">
                                         <div class="notification-ui_dd-header">
-                                            <h3 class="text-center"><p style="color:red;">{{$counttb}}-Notification</p></h3>
+                                            <h3 class="text-center"><p style="color:red;">{{$counttbsgv}}-Notification</p></h3>
                                         </div>
                                         <div class="notification-ui_dd-content">
                                             @foreach($notificationgv as $tbgv)
@@ -62,7 +61,6 @@
                                                     @if($tbgv->status == 1)
                                                     style="font-weight:bold;"
                                                     @endif
-
                                                     >
                                                         <p>{{$tbgv->matk}}<?php echo $s;?> đã gửi thông báo đến cho bạn</p>
                                                         <p><small>{{$tbgv->ThoiGian}}</small></p>

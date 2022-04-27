@@ -22,7 +22,8 @@ use App\Http\Controllers\CollegeStudentControllers\MessengerSVController;
 use App\Http\Controllers\CollegeStudentControllers\ChuongTrinhDaoTaoController;
 use App\Http\Controllers\CollegeStudentControllers\HocPhiController;
 use App\Http\Controllers\CollegeStudentControllers\BangDiemSVController;
-use App\Http\Controllers\CollegeStudentControllers\DangKyHocPhanController;
+use App\Http\Controllers\CollegeStudentControllers\SVDangKyHocPhanController;
+use App\Http\Controllers\CollegeStudentControllers\ThongBaoSinhVienController;
 // end sinhvien
 // giangvien
 use App\Http\Controllers\LecturersControllers\HomeGVController;
@@ -32,6 +33,7 @@ use App\Http\Controllers\LecturersControllers\UploadDiemSVController;
 use App\Http\Controllers\LecturersControllers\UploadFileTaiLieuController;
 use App\Http\Controllers\LecturersControllers\ComponentGVandLopHocController;
 use App\Http\Controllers\LecturersControllers\ThoiKhoaBieuGVController;
+use App\Http\Controllers\LecturersControllers\ThongBaoGiangVienController;
 // end giangvien
 /*
 |--------------------------------------------------------------------------
@@ -43,7 +45,9 @@ use App\Http\Controllers\LecturersControllers\ThoiKhoaBieuGVController;
 | contains the "web" middleware group. Now create something great!
 |
 */
-
+// Route::any('{query}',
+//     function() { return redirect('/welcome'); })
+//     ->where('query', '.*');
 Route::get('/', function () {
     return view('login');
 });
@@ -89,7 +93,9 @@ Route::middleware(['CheckAccountLogin'])->prefix('admin')->group(function () {
         Route::resource('/CreateHocPhan', TaoHocPhanController::class);
         Route::resource('/CreateLichHoc', CreateLichHocController::class);
     });
-
+    Route::any('{query}',
+    function() { return redirect('admin/'); })
+    ->where('query', '.*');
 });
 
 Route::middleware(['CheckAccountSVLogin'])->prefix('collegestudent')->group(function () {
@@ -99,12 +105,25 @@ Route::middleware(['CheckAccountSVLogin'])->prefix('collegestudent')->group(func
     Route::resource('/ChuongTrinhDaoTao', ChuongTrinhDaoTaoController::class);
     Route::resource('/HocPhi', HocPhiController::class);
     Route::resource('/Marks', BangDiemSVController::class);
-    Route::resource('/DangKyHocPhan', DangKyHocPhanController::class);
+    // Route::resource('/DangKyHocPhan', DangKyHocPhanController::class);
+    // Route::group(['middleware' => ['SettingTimeDKHP']], function () {
+    Route::get('/DangKyHocPhan', [SVDangKyHocPhanController::class, 'indexdangkyhocphan'])->name('dangkyhocphan');
+    Route::delete('/DangKyHocPhan/delete', [SVDangKyHocPhanController::class, 'deletehocphan'])->name('deletehocphan');
+    Route::get('/ThongBaoSinhVien', [ThongBaoSinhVienController::class, 'thongbaosv'])->name('thongbaosv');
+
+    // });
+
     // Route::post('/Chat', function (Request $request){
     //     return $request->input('message');
     // });
+    // Route::any('{query}',
+    // function() { return redirect('collegestudent/'); })
+    // ->where('query', '.*');
 });
 Route::middleware(['CheckAccountGVLogin'])->prefix('lecturers')->group(function () {
+    //  Route::any('{query}',
+    // function() { return redirect('lecturers/'); })
+    // ->where('query', '.*');
     Route::get('/', [HomeGVController::class, 'index'])->name('index');
     Route::PUT('/UpdateProFile/{id}', [HomeGVController::class, 'updateprofile'])->name('updateprofile');
     Route::PUT('/UpdateChangePass/{id}', [HomeGVController::class, 'updatechangepass'])->name('updatechangepass');

@@ -44,18 +44,29 @@
                                     <td>{{$ddsv->fname}} {{$ddsv->lname}}</td>
                                     <td>
                                         <input type="checkbox" name="DiemDanh[]" id="mycheck" value ='1' onclick="myFunction1()">
-                                        <label for="DiemDanh[]">Có</label>
+                                        <label for="mycheck">Có</label>
                                         <br>
                                         <input type="checkbox" name="DiemDanh[]" id="mycheck2" value ='0' onclick="myFunction1()">
-                                        <label for="DiemDanh[]">Không</label>
+                                        <label for="mycheck2">Không</label>
                                     </td>
                                 </tr>
                                 @endforeach
-                                <!-- <script>
+                                <script>
                                     function myFunction1() {
-                                    document.getElementById("myCheck").disabled = true;
+                                    // document.getElementById("myCheck").disabled = true;
+                                    var checkBox = document.getElementById("myCheck");
+                                    var checkBox2 = document.getElementById("myCheck2");
+                                    if (checkBox.checked == true){
+                                            checkBox.style.display= 'none';
+                                            checkBox2.style.display= 'none';
+                                        }
+                                        else
+                                        {
+                                            checkBox.style.display= 'none';
+                                            checkBox2.style.display= 'none';
+                                        }
                                 }
-                                </script> -->
+                                </script>
                             </tbody>
                         </table>
                     </div>

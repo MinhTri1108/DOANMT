@@ -15,7 +15,10 @@ class ThoiKhoaBieuGVController extends Controller
     {
 
         $idgv = $request->session()->get('id_gv');
-        $hocki = HocPhan::where('MaGV', $idgv)->distinct()->select('HocKi')->orderBy('HocKi','ASC')->get();
+        $hocki = HocPhan::join('dsmonhoc','dsmonhoc.MaMonHoc', '=', 'mahocphan.MaMonHoc')
+        ->join('monhoccualop', 'monhoccualop.MaMonHoc', '=', 'dsmonhoc.MaMonHoc')
+        ->where('mahocphan.MaGV', $idgv)
+        ->distinct()->select('monhoccualop.HocKi')->orderBy('HocKi','ASC')->get();
         // $phonghoc= LichHoc::join('thungay', 'thungay.idthu', '=', 'lichhoc.idthu')
         // ->join('dstiethoc', 'dstiethoc.idtiethoc', '=', 'lichhoc.idtiethoc')
         // ->join('dsphonghoc', 'dsphonghoc.idphong', '=', 'lichhoc.idphong')
@@ -36,21 +39,30 @@ class ThoiKhoaBieuGVController extends Controller
     public function viewtkb($id, Request $request)
     {
         $idgv = $request->session()->get('id_gv');
-        $hocki = HocPhan::where('MaGV', $idgv)->distinct()->select('HocKi')->orderBy('HocKi','ASC')->get();
-        $hockiht = HocPhan::where('MaGV', $idgv)->where('HocKi', $id)
-         ->join('lichhoc', 'lichhoc.idhocphan', '=', 'mahocphan.idhocphan')->distinct()->select('HocKi')->get();
-        $phonghoc= LichHoc::join('thungay', 'thungay.idthu', '=', 'lichhoc.idthu')
-        ->join('dstiethoc', 'dstiethoc.idtiethoc', '=', 'lichhoc.idtiethoc')
-        ->join('dsphonghoc', 'dsphonghoc.idphong', '=', 'lichhoc.idphong')
+        $hocki = HocPhan::join('dsmonhoc','dsmonhoc.MaMonHoc', '=', 'mahocphan.MaMonHoc')
+        ->join('monhoccualop', 'monhoccualop.MaMonHoc', '=', 'dsmonhoc.MaMonHoc')
+        ->where('mahocphan.MaGV', $idgv)
+        ->distinct()->select('monhoccualop.HocKi')->orderBy('HocKi','ASC')->get();
+        // $hockiht = HocPhan::join('dsmonhoc','dsmonhoc.MaMonHoc', '=', 'mahocphan.MaMonHoc')
+        // ->join('monhoccualop', 'monhoccualop.MaMonHoc', '=', 'dsmonhoc.MaMonHoc')
+        // ->join('lichhoc', 'lichhocc.idhocphan', '=', 'mahocphan.idhocphan')
+        // ->where('MaGV', $idgv)->where('HocKi', $id)
+        // ->distinct()->select('monhoccualop.HocKi')
+        // ->get();
+        $hockiht =$request->id;
+        $phonghoc= LichHoc::join('dsphonghoc', 'dsphonghoc.idphong', '=', 'lichhoc.idphong')
         ->join('mahocphan', 'mahocphan.idhocphan', '=', 'lichhoc.idhocphan')
         ->join('dsmonhoc', 'mahocphan.MaMonHoc', '=', 'dsmonhoc.MaMonHoc')
-        ->where('MaGV', $idgv)->where('mahocphan.HocKi', $id)->orderBy('lichhoc.idphong','ASC')->get();
+        ->join('monhoccualop', 'monhoccualop.MaMonHoc', '=', 'dsmonhoc.MaMonHoc')
+        ->where('mahocphan.MaGV', $idgv)->where('monhoccualop.HocKi', $id)->orderBy('lichhoc.idphong','ASC')->get();
+
         $check=LichHoc::join('thungay', 'thungay.idthu', '=', 'lichhoc.idthu')
         ->join('dstiethoc', 'dstiethoc.idtiethoc', '=', 'lichhoc.idtiethoc')
         ->join('dsphonghoc', 'dsphonghoc.idphong', '=', 'lichhoc.idphong')
         ->join('mahocphan', 'mahocphan.idhocphan', '=', 'lichhoc.idhocphan')
         ->join('dsmonhoc', 'mahocphan.MaMonHoc', '=', 'dsmonhoc.MaMonHoc')
-        ->where('MaGV', $idgv)->where('mahocphan.HocKi', $id)->distinct('lichhoc.idphong')->get();
+        ->join('monhoccualop', 'monhoccualop.MaMonHoc', '=', 'dsmonhoc.MaMonHoc')
+        ->where('MaGV', $idgv)->where('monhoccualop.HocKi', $id)->distinct('lichhoc.idphong')->get();
         $week_days = array(1,2,3,4,5,6,7);
         $classes = array();
         return view('lecturercp.tkb.viewtkb')->with(compact('phonghoc', 'check', 'week_days', 'classes', 'hocki', 'hockiht'));

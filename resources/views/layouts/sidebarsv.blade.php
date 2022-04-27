@@ -65,7 +65,15 @@
 
                                                     >
                                                         <p>{{$tbsv->matk}}<?php echo $s;?> đã gửi thông báo đến cho bạn</p>
-                                                        <p><small>{{$tbsv->ThoiGian}}</small></p>
+                                                        <p><small>
+                                                            <?php
+                                                            \Carbon\Carbon::setLocale('vi'); // hiển thị ngôn ngữ tiếng việt.
+                                                            $date = \Carbon\Carbon::parse($tbsv->ThoiGian);
+                                                            $elapsed = $date->diffForHumans(\Carbon\Carbon::now());
+                                                            echo $elapsed;
+                                                            ?>
+
+                                                        </small></p>
                                                     </div>
 
                                                 </div></a>
@@ -76,7 +84,7 @@
                                             @endforeach
                                         </div>
                                         <div class="notification-ui_dd-footer" style="text-align: center;">
-                                            <a href="#!" class="btn btn-success btn-block">View All</a>
+                                            <a href="{{route('thongbaosv')}}" class="btn btn-success btn-block">View All</a>
                                         </div>
                                     </div>
                                     </div>
@@ -245,7 +253,7 @@
                     <a href="{{route('messenger')}}" class="nav_link"> <i class='bx bx-message-rounded-dots nav_icon'></i> <span class="nav_name">Messager</span> </a>
                     <a href="#" class="nav_link"> <i class='bx bx-calendar nav_icon'></i> <span class="nav_name">Thời khóa biểu</span> </a>
                     <a href="{{route('ChuongTrinhDaoTao.index')}}" class="nav_link"> <i class='bx bx-notepad nav_icon'></i> <span class="nav_name">Chương trình đào tạo</span> </a>
-                    <a href="{{route('DangKyHocPhan.index')}}" class="nav_link"> <i class='bx bx-registered nav_icon'></i> <span class="nav_name">Đăng kí học phần</span> </a>
+                    <a href="{{route('dangkyhocphan')}}" class="nav_link"> <i class='bx bx-registered nav_icon'></i> <span class="nav_name">Đăng kí học phần</span> </a>
                     <a href="{{route('Marks.index')}}" class="nav_link"> <i class='bx bx-bookmark nav_icon'></i> <span class="nav_name">Bảng điểm</span> </a>
                     <a href="{{route('HocPhi.index')}}" class="nav_link"> <i class='bx bx-donate-blood nav_icon'></i> <span class="nav_name">Chi tiết học phí</span> </a>
                     <a href="#" class="nav_link"> <i class='bx bxl-tux nav_icon'></i> <span class="nav_name">Group Lớp</span> </a>

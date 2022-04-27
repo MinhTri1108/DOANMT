@@ -34,4 +34,8 @@ class AdminAccounts extends Model
     {
         return $this->hasMany('App\Models\LichLamViec');
     }
+    public function time()
+    {
+        return $this->hasMany('App\Models\SettingTimeDKHP');
+    }
 }

@@ -18,7 +18,9 @@ class DiemDanhController extends Controller
         ->join('mahocphan', 'mahocphan.idhocphan', '=', 'dangkymonhoc.idhocphan')
 
         ->where('dangkymonhoc.idhocphan', $lophocphan->idhocphan)->orderBy('diemdanh.Ngay', 'ASC')->get();
-        $ngay = DiemDanhSV::distinct()->select('Ngay')->orderBy('Ngay', 'ASC')->get();
+        $ngay = DiemDanhSV::join('dangkymonhoc', 'dangkymonhoc.MaDK', '=', 'diemdanh.MaDK')
+        ->where('idhocphan', $lophocphan->idhocphan)
+        ->distinct()->select('Ngay')->orderBy('Ngay', 'ASC')->get();
         // $sinhviencuahocphan=DangKyHocPhan::groupBy('dangkymonhoc.MaDK')->join('dssinhvien','dssinhvien.MaSV','=','dangkymonhoc.MaSV')
         // ->leftJoin('diemdanh', 'dangkymonhoc.MaDK', '=', 'diemdanh.MaDK')
         // ->where('idhocphan', $lophocphan->idhocphan)->get();

@@ -4,6 +4,10 @@
 <style>
     .bg-info {
     background-color: #4723d9!important;
+    color: white;
+    }
+    .bg-danger{
+
     }
 </style>
 <body class="bg-light">
@@ -35,7 +39,21 @@
 
                         </div>
                     @endif
-                        <table class="table table-bordered" style="border: 3px solid black;">
+                    <!-- @if(Cookie::has('check'))
+                        <h2 style="text-align: center;">{{Cookie::get('check')}}</h2>
+                    @else -->
+                    <div class="container">
+                            <div class="row ">
+                                <select id="mySelect" class="form-control" name = "hocki" onchange="location = this.value;">
+                                    <option class="text-center" value="" disabled selected>---Học kì---</option>
+                                </select>
+                                    <!-- <div class="col-md-6">
+                                        <button type="submit" class="btn btn-primary" name = "xem">Xem Thời Khóa Biểu</button>
+                                    </div> -->
+                            </div>
+                        </div>
+                    </div>
+                        <table class="table table-bordered" style="border: 3px solid black;" >
                         <thead style="background-color: #4723d9; color: white;vertical-align : middle;text-align: center;">
                             <tr style="">
                                 <th rowspan="2" >STT</th>
@@ -56,16 +74,17 @@
                             @foreach($dangkyhocphan as $dkhp)
                             @php($dem= \App\Models\LichHoc::where('idhocphan', $dkhp->idhocphan)->count('idhocphan'))
                                 @foreach($lichhoc->where('idhocphan', '=', $dkhp->idhocphan) as $lh)
-                                <tr>
+                                <form action="" method="post">
+                                    <tr>
                                     @if ($loop->first)
                                         <td rowspan="{{$dem}}" style=" vertical-align : middle; text-align: center;">{{$i++}}</td>
                                     @endif
                                     @if ($loop->first)
                                         <td rowspan="{{$dem}}" style=" vertical-align : middle; text-align: center;">
-                                        <?php
+                                        <input type="text" value="<?php
                                         $s = sprintf('%05d',$dkhp->idhocphan);
                                         echo $s;
-                                    ?>
+                                    ?>" size = "2px" style="border:none;" readonly>
                                         </td>
                                     @endif
                                     @if ($loop->first)
@@ -89,18 +108,30 @@
                                         <td rowspan="{{$dem}}" style="text-align: center;vertical-align : middle;">{{$dkhp->fname}} {{$dkhp->lname}}</td>
                                     @endif
                                     @if ($loop->first)
-                                        <td rowspan="{{$dem}}"style="text-align: center;vertical-align : middle;" ><a href="">Đăng ký</a></td>
+                                        @foreach($checkdangky as $check)
+                                            @if($check->idhocphan != $dkhp->idhocphan)
+                                            <td rowspan="{{$dem}}"style="text-align: center;vertical-align : middle;" >
+                                                <button id="{{$dkhp->idhocphan}} " class="btn bg-info dangky" data_id="">Đăng ký</button>
+                                            </td>
+                                            @else
+                                            <td rowspan="{{$dem}}"style="text-align: center;vertical-align : middle;" >
+                                            <button id="{{$dkhp->idhocphan}} " class="btn bg-danger huydangky">Hủy đăng ký
+                                        </button></td>
+                                            @endif
+                                        @endforeach
                                     @endif
                                 </tr>
+                                </form>
                                 @endforeach
                             @endforeach
                         </tbody>
                     </table>
-
+                    @endif
                 </div>
             </div>
         </div>
         <!-- end table -->
+
         <script type="text/javascript" src="{{ asset('./js/jquery-3.3.1.min.js') }}"></script>
         <script type="text/javascript" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
         <script type="text/javascript" src="{{ asset('./bootstrap/js/bootstrap.min.js') }}"></script>
@@ -113,5 +144,54 @@
 <script src='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.0.2/js/bootstrap.bundle.min.js'></script>
 <script type="text/javascript" src="https://cdn.datatables.net/v/bs5/dt-1.10.25/datatables.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script>
+            $.ajaxSetup({
+            headers:
+            { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') }
+        });
+        $(document).on('click', '.dangky', function(e) {
+            e.preventDefault();
+            $(".dangky").text('Đang đăng ký...');
+            let id = $(this).attr('id');
+            console.log(id);
 
+        })
+             $(document).on('click', '.huydangky', function(e) {
+        e.preventDefault();
+        let id = $(this).attr('id');
+        let csrf = '{{ csrf_token() }}';
+        // console.log(id);
+        Swal.fire({
+          title: 'Are you sure?',
+          text: "You won't be able to revert this!",
+          icon: 'warning',
+          showCancelButton: true,
+          confirmButtonColor: '#3085d6',
+          cancelButtonColor: '#d33',
+          confirmButtonText: 'Yes, delete it!'
+
+        }).then((result) => {
+          if (result.isConfirmed) {
+            $.ajax({
+              url: '{{route("deletehocphan")}}',
+              method: 'delete',
+              data: {
+                id: id,
+                _token: csrf
+              },
+              success: function(response) {
+                console.log(response);
+                console.log(id);
+                Swal.fire(
+                  'Deleted!',
+                  'Your file has been deleted.',
+                  'success'
+                )
+
+              }
+            });
+          }
+        })
+      });
+        </script>
 @endsection

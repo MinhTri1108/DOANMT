@@ -36,10 +36,11 @@ class HocPhiController extends Controller
         ->join('dsmonhoc','dsmonhoc.MaMonHoc', '=', 'mahocphan.MaMonHoc')
         ->join('hocphi', 'dsmonhoc.SoTinChi', '=', 'hocphi.SoTinChi')
         ->join('dssinhvien', 'dssinhvien.MaSV', '=', 'dangkymonhoc.MaSV')
+        ->join('monhoccualop', 'monhoccualop.MaMonHoc', '=', 'dsmonhoc.MaMonHoc')
         ->where('dssinhvien.MaLop', $profilesv->MaLop)
         ->where('dangkymonhoc.MaSV', $profilesv->MaSV)
         ->get();
-
+        //  dd($hocphis);
         // dd($profilesv->MaSV);
         return view('collegestudentcp.hocphi.index')->with(compact('hocphis', 'profilesv', 'counthk'));
     }

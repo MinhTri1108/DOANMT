@@ -6,7 +6,7 @@
         <div class="row justify-content-center"><h1 class="text-center">Thời Khóa Biểu</h1></div>
             <div class="row ">
                 <select id="mySelect" class="form-control" name = "hocki" onchange="location = this.value;">
-                    <option class="text-center" value="" disabled selected>{{$hockiht}}</option>
+                    <option class="text-center" value="" disabled selected>Học kì{{$hockiht}}</option>
                     @foreach($hocki as $hk)
                     <option class="text-center" value="{{route('viewtkb', $hk->HocKi)}}"><a href="">Học kì: {{$hk->HocKi}}</a></option>
                     @endforeach
@@ -33,8 +33,9 @@
                 </thead>
                 <tbody>
                     @foreach($phonghoc as $ph)
+                     @php($dem= \App\Models\LichHoc::where('idhocphan', $ph->idhocphan)->count('idhocphan'))
                     <tr class="text-center">
-                        <td>{{$ph->SoPhong}}</td>
+                        <td rowspan="{{$dem}}" >{{$ph->SoPhong}}</td>
                         @foreach($check->where('idphong', '=', $ph->idphong) as $ck)
                             <!-- {{$classes[$ck->idthu]=$ck;}} -->
                             @foreach($week_days as $day)
