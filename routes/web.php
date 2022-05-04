@@ -30,6 +30,7 @@ use App\Http\Controllers\LecturersControllers\HomeGVController;
 use App\Http\Controllers\LecturersControllers\GroupLopController;
 use App\Http\Controllers\LecturersControllers\DiemDanhController;
 use App\Http\Controllers\LecturersControllers\UploadDiemSVController;
+use App\Http\Controllers\LecturersControllers\UploadFileToS3AWSController;
 use App\Http\Controllers\LecturersControllers\UploadFileTaiLieuController;
 use App\Http\Controllers\LecturersControllers\ComponentGVandLopHocController;
 use App\Http\Controllers\LecturersControllers\ThoiKhoaBieuGVController;
@@ -137,8 +138,15 @@ Route::middleware(['CheckAccountGVLogin'])->prefix('lecturers')->group(function 
         Route::DELETE('/UploadDiem/Lop/delete/{id}', [UploadDiemSVController::class, 'deleteuploaddiem'])->name('deleteuploaddiem');
         Route::PUT('/UploadDiem/Lop/update/{id}', [UploadDiemSVController::class, 'updateuploaddiem'])->name('updateuploaddiem');
         Route::resource('/UploadFileTaiLieu', UploadFileTaiLieuController::class);
+
+        Route::GET('/ListFileCuaHocPhan/{id}', [UploadFileToS3AWSController::class, 'listfiletoaws'])->name('listfiletoaws');
+        Route::GET('/DownloadFileToAWS/{id}', [UploadFileToS3AWSController::class, 'downloadfiletoaws'])->name('downloadfiletoaws');
+        Route::Delete('/DeleteFileToAWS/{id}', [UploadFileToS3AWSController::class, 'deletefiletoaws'])->name('deletefiletoaws');
+        Route::GET('/UploadFileToAWS', [UploadFileToS3AWSController::class, 'indexfiletoaws'])->name('indexfiletoaws');
+        Route::POST('/UploadFileToAWS/store', [UploadFileToS3AWSController::class, 'storefiletoaws'])->name('storefiletoaws');
         Route::get('/MonHoc-HocPhan/{id}', [ComponentGVandLopHocController::class, 'indexcomponentmonhoc'])->name('indexcomponentmonhoc');
         Route::get('/ThoiKhoaBieuGiangVien', [ThoiKhoaBieuGVController::class, 'indextkbgv'])->name('indextkbgv');
+        Route::get('/ThoiKhoaBieuGiangVien/NamHoc/{id}', [ThoiKhoaBieuGVController::class, 'namhoctkb'])->name('namhoctkb');
         Route::get('/ThoiKhoaBieuGiangVien/HocKi/{id}', [ThoiKhoaBieuGVController::class, 'viewtkb'])->name('viewtkb');
     });
 

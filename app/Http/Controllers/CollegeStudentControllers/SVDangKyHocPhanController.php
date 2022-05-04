@@ -21,14 +21,41 @@ class SVDangKyHocPhanController extends Controller
         date_default_timezone_set('Asia/Ho_Chi_Minh');
         // $date =Carbon::now()->format('d/m') >= (27/04);
         // dd($date);
-        $date = date('Y-m-d');
+        // $date = date('Y-m-d H:i:s');
+        $timestamp = time();
+        $date = date ("Y-m-d H:i:s", $timestamp);
         // dd($date);
         $idsv = $request->session()->get('id_sv');
         $profilesv = CollegeStudentAccounts::where('MaSV', $idsv)->with('lop')->first();
-        $checkngay = SettingTimeDKHP::where('start', '>=', $date)->orderBy('start', 'ASC')->first();
-
-        // dd($checkngay);
-        if(Carbon::now()->format('Y-m-d') >= $checkngay->start && Carbon::now()->format('Y-m-d') <= $checkngay->end)
+        $checkngay = SettingTimeDKHP::where('end', '>=', $date)->orderBy('start', 'ASC')->first();
+        $hientai = Carbon::now('Asia/Ho_Chi_Minh');
+        $date1 = Carbon::createFromFormat('Y-m-d H:i:s', $checkngay->start);
+        $date2 = Carbon::createFromFormat('Y-m-d H:i:s', $checkngay->end);
+        // // lon hon hoac bang
+        // echo $date;
+        // echo '<br>';
+        // echo $hientai;
+        // echo '<br>';
+        // echo $date1;
+        // echo '<br>';
+        // echo $date2;
+        // echo '<br>';
+        // var_dump($hientai->gte($date1));
+        // // echo '<br>';
+        // // // // // be hon hoac bang
+        // var_dump($hientai->lte($date2));
+        // // echo $hientai->lte($date1) ;
+        // // echo $hientai->gte($date2) ;
+        // if($hientai->gte($date1) && $hientai->lte($date2))
+        // {
+        //     echo 'hi';
+        // }
+        // else
+        // {
+        //     echo "error";
+        // }
+        // if(Carbon::now()->format('Y-m-d') >= $checkngay->start && Carbon::now()->format('Y-m-d') <= $checkngay->end)
+        if($hientai->gte($date1) && $hientai->lte($date2))
         {
 
         // DangKyHocPhan::join('mahocphan', 'mahocphan.idhocphan', '=', 'dangkymonhoc.idhocphan')

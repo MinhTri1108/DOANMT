@@ -243,6 +243,7 @@
                     <a href="{{route('indextkbgv')}}" class="nav_link"> <i class='bx bx-spreadsheet nav_icon' ></i> <span class="nav_name">Thời khóa biểu</span> </a>
                     <a href="{{route('Lop.index')}}" class="nav_link"> <i class='bx bx-group nav_icon' ></i> <span class="nav_name">Group Lớp</span> </a>
                     <a href="{{route('UploadFileTaiLieu.create')}}" class="nav_link"> <i class='bx bx-folder nav_icon'></i> <span class="nav_name">Tài liệu</span> </a>
+                    <a href="{{route('indexfiletoaws')}}" class="nav_link"> <i class='bx bx-folder nav_icon'></i> <span class="nav_name">Tài liệu To AWS</span> </a>
                     <!-- <a href="#" class="nav_link"> <i class='bx bx-folder nav_icon'></i> <span class="nav_name"></span> </a>
                     <a href="#" class="nav_link"> <i class='bx bx-bar-chart-alt-2 nav_icon'></i> <span class="nav_name">Stats</span> </a> -->
                 </div>

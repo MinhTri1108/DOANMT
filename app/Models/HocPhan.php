@@ -34,4 +34,8 @@ class HocPhan extends Model
     {
         return $this->hasMany('App\Models\FileTaiLieu');
     }
+    public function hocki()
+    {
+        return $this->belongsTo('App\Models\HocKi', 'idhocki', 'idhocki');
+    }
 }

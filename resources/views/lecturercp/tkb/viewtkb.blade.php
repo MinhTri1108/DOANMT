@@ -5,12 +5,22 @@
     <div class="container">
         <div class="row justify-content-center"><h1 class="text-center">Thời Khóa Biểu</h1></div>
             <div class="row ">
-                <select id="mySelect" class="form-control" name = "hocki" onchange="location = this.value;">
-                    <option class="text-center" value="" disabled selected>Học kì{{$hockiht}}</option>
-                    @foreach($hocki as $hk)
-                    <option class="text-center" value="{{route('viewtkb', $hk->HocKi)}}"><a href="">Học kì: {{$hk->HocKi}}</a></option>
+                <div class="col-md-6">
+                <select id="mySelect" class="form-control" name = "namhoc" onchange="location = this.value;">
+                    <option class="text-center" value="" disabled selected>Năm học: {{$hockiht->namhoc->namhoc}}</option>
+                    @foreach($namhoc as $nh)
+                    <option class="text-center" value="{{route('namhoctkb', $nh->idnamhoc)}}"><a href="">Năm Học: {{$nh->namhoc}}</a></option>
                     @endforeach
                 </select>
+                </div>
+                <div class="col-md-6">
+                    <select id="mySelect1" class="form-control" name = "hocki" onchange="location = this.value;">
+                    <option class="text-center" value="" disabled selected>Học kì: {{$hockiht->HocKi}}</option>
+                    @foreach($hocki as $hk)
+                    <option class="text-center" value=""><a href="{{route('viewtkb', $hk->idhocki)}}">Học kì: {{$hk->HocKi}}</a></option>
+                    @endforeach
+                </select>
+                </div>
             </div>
         </div>
     </div>
@@ -33,9 +43,9 @@
                 </thead>
                 <tbody>
                     @foreach($phonghoc as $ph)
-                     @php($dem= \App\Models\LichHoc::where('idhocphan', $ph->idhocphan)->count('idhocphan'))
+                    @php($dem= \App\Models\LichHoc::where('idhocphan', $ph->idhocphan)->count('idhocphan'))
                     <tr class="text-center">
-                        <td rowspan="{{$dem}}" >{{$ph->SoPhong}}</td>
+                        <td >{{$ph->SoPhong}}</td>
                         @foreach($check->where('idphong', '=', $ph->idphong) as $ck)
                             <!-- {{$classes[$ck->idthu]=$ck;}} -->
                             @foreach($week_days as $day)

@@ -120,7 +120,7 @@
                                 </a>
                             </div>
                             <div class="col" style = "" id = "test">
-                                <a href="">
+                                <a href="{{route('listfiletoaws',$lophocphan->idhocphan)}}">
                                     <div class="ghichu">
                                         <h3>Tài liệu của lớp học</h3>
 
