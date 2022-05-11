@@ -81,7 +81,7 @@
                                     @endif
                                     @if ($loop->first)
                                         <td rowspan="{{$dem}}" style=" vertical-align : middle; text-align: center;">
-                                        <input type="text" value="<?php
+                                        <input type="text" name="idhp" value="<?php
                                         $s = sprintf('%05d',$dkhp->idhocphan);
                                         echo $s;
                                     ?>" size = "2px" style="border:none;" readonly>
@@ -108,17 +108,23 @@
                                         <td rowspan="{{$dem}}" style="text-align: center;vertical-align : middle;">{{$dkhp->fname}} {{$dkhp->lname}}</td>
                                     @endif
                                     @if ($loop->first)
-                                        @foreach($checkdangky as $check)
-                                            @if($check->idhocphan != $dkhp->idhocphan)
-                                            <td rowspan="{{$dem}}"style="text-align: center;vertical-align : middle;" >
-                                                <button id="{{$dkhp->idhocphan}} " class="btn bg-info dangky" data_id="">Đăng ký</button>
-                                            </td>
-                                            @else
-                                            <td rowspan="{{$dem}}"style="text-align: center;vertical-align : middle;" >
-                                            <button id="{{$dkhp->idhocphan}} " class="btn bg-danger huydangky">Hủy đăng ký
-                                        </button></td>
-                                            @endif
+                                    <td rowspan="{{$dem}}"style="text-align: center;vertical-align : middle;" >
+                                        @php($checkdangky= \App\Models\DangKyHocPhan::where('MaSV', $profilesv->MaSV)->orderBy('idhocphan', 'asc')->get())
+                                        @php($checkdk = [])
+                                        @foreach($checkdangky->where('idhocphan', $dkhp->idhocphan) as $check)
+                                            @php($checkdk[]=$check)
+                                            <button id="{{$dkhp->idhocphan}} " class="btn bg-danger huydangky {{$dkhp->idhocphan}}">
+                                                    Hủy đăng ký
+                                            </button>
+                                            @break
                                         @endforeach
+                                        @if(sizeof($checkdk) < 1)
+                                            <button id="{{$dkhp->idhocphan}} " class="btn bg-info dangky {{$dkhp->idhocphan}}">
+                                                Đăng ký
+                                            </button>
+                                        @endif
+
+                                    </td>
                                     @endif
                                 </tr>
                                 </form>
@@ -144,8 +150,11 @@
 <script src='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.0.2/js/bootstrap.bundle.min.js'></script>
 <script type="text/javascript" src="https://cdn.datatables.net/v/bs5/dt-1.10.25/datatables.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-<script>
-            $.ajaxSetup({
+
+<script type="text/javascript">
+
+$(document).ready(function () {
+        $.ajaxSetup({
             headers:
             { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') }
         });
@@ -155,43 +164,56 @@
             let id = $(this).attr('id');
             console.log(id);
 
-        })
-             $(document).on('click', '.huydangky', function(e) {
-        e.preventDefault();
-        let id = $(this).attr('id');
-        let csrf = '{{ csrf_token() }}';
-        // console.log(id);
-        Swal.fire({
-          title: 'Are you sure?',
-          text: "You won't be able to revert this!",
-          icon: 'warning',
-          showCancelButton: true,
-          confirmButtonColor: '#3085d6',
-          cancelButtonColor: '#d33',
-          confirmButtonText: 'Yes, delete it!'
-
-        }).then((result) => {
-          if (result.isConfirmed) {
             $.ajax({
-              url: '{{route("deletehocphan")}}',
-              method: 'delete',
-              data: {
-                id: id,
-                _token: csrf
-              },
-              success: function(response) {
-                console.log(response);
-                console.log(id);
+            url: "{{ URL('/collegestudent/DangKyHocPhan/dangky')}}"+'/'+id,
+            id: id,
+            method: 'get',
+            success: function(response) {
                 Swal.fire(
-                  'Deleted!',
-                  'Your file has been deleted.',
-                  'success'
-                )
+            'Added!',
+            'Account Added Successfully!',
+            'success'
+            )
+            location.reload();
+            }
+        });
+        });
+// delete hp
+        $(document).on('click', '.huydangky', function(e) {
+                e.preventDefault();
+                let id = $(this).attr('id');
 
-              }
+                console.log(id);
+                Swal.fire({
+                    title: 'Are you sure?',
+                    text: "You won't be able to revert this!",
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Yes, delete it!'
+                    }).then((result) => {
+                    if (result.isConfirmed) {
+                        $.ajax({
+                        url: "{{ URL('/collegestudent/DangKyHocPhan/delete')}}"+'/'+id,
+                        method: 'get',
+                        id: id,
+                        success: function(response) {
+                            console.log(response);
+                            console.log(id);
+                            Swal.fire(
+                            'Deleted!',
+                            'Your file has been deleted.',
+                            'success'
+                            )
+                        location.reload();
+                        }
+                        });
+                    }
+                    })
             });
-          }
-        })
-      });
-        </script>
+});
+
+
+</script>
 @endsection

@@ -24,6 +24,7 @@ use App\Http\Controllers\CollegeStudentControllers\HocPhiController;
 use App\Http\Controllers\CollegeStudentControllers\BangDiemSVController;
 use App\Http\Controllers\CollegeStudentControllers\SVDangKyHocPhanController;
 use App\Http\Controllers\CollegeStudentControllers\ThongBaoSinhVienController;
+use App\Http\Controllers\CollegeStudentControllers\BoxChatController;
 // end sinhvien
 // giangvien
 use App\Http\Controllers\LecturersControllers\HomeGVController;
@@ -101,25 +102,26 @@ Route::middleware(['CheckAccountLogin'])->prefix('admin')->group(function () {
 
 Route::middleware(['CheckAccountSVLogin'])->prefix('collegestudent')->group(function () {
     Route::get('/', [HomeSVController::class, 'index'])->name('index');
+
     Route::get('/Messenger', [MessengerSVController::class, 'index'])->name('messenger');
-    Route::post('/Messenger/store', [MessengerSVController::class, 'store'])->name('sendmessenger');
+    Route::get('/Messenger/datafriend', [MessengerSVController::class, 'datafriend'])->name('datafriend');
+    Route::get('/Messenger/getchat/{incoming_id}', [MessengerSVController::class, 'getchat'])->name('getchat');
+    Route::post('/Messenger/postchat', [MessengerSVController::class, 'postchat'])->name('postchat');
+    // Route::post('/Messenger/ChatBox/insertchat', [MessengerSVController::class, 'insertchat'])->name('insertchat');
+    // Route::get('/Messenger/searchfriend/', [MessengerSVController::class, 'searchfriend'])->name('searchfriend');
+    Route::get('/Messenger/ChatBox/{id}', [MessengerSVController::class, 'chatbox'])->name('chatbox');
+    // Route::post('/Messenger/store', [MessengerSVController::class, 'store'])->name('sendmessenger');
     Route::resource('/ChuongTrinhDaoTao', ChuongTrinhDaoTaoController::class);
+    Route::resource('/BoxChat', BoxChatController::class);
     Route::resource('/HocPhi', HocPhiController::class);
     Route::resource('/Marks', BangDiemSVController::class);
     // Route::resource('/DangKyHocPhan', DangKyHocPhanController::class);
     // Route::group(['middleware' => ['SettingTimeDKHP']], function () {
     Route::get('/DangKyHocPhan', [SVDangKyHocPhanController::class, 'indexdangkyhocphan'])->name('dangkyhocphan');
-    Route::delete('/DangKyHocPhan/delete', [SVDangKyHocPhanController::class, 'deletehocphan'])->name('deletehocphan');
+    Route::get('/DangKyHocPhan/dangky/{id}', [SVDangKyHocPhanController::class, 'storedangkyhocphan'])->name('storedangkyhocphan');
+    Route::get('/DangKyHocPhan/delete/{id}', [SVDangKyHocPhanController::class, 'deletehocphan'])->name('deletehocphan');
     Route::get('/ThongBaoSinhVien', [ThongBaoSinhVienController::class, 'thongbaosv'])->name('thongbaosv');
 
-    // });
-
-    // Route::post('/Chat', function (Request $request){
-    //     return $request->input('message');
-    // });
-    // Route::any('{query}',
-    // function() { return redirect('collegestudent/'); })
-    // ->where('query', '.*');
 });
 Route::middleware(['CheckAccountGVLogin'])->prefix('lecturers')->group(function () {
     //  Route::any('{query}',

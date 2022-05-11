@@ -5,20 +5,19 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Messages extends Model
+class GroupChat extends Model
 {
     use HasFactory;
     public $timestamps = false;
     protected $fillable = [
-        'incoming_msg_id',
-        'outgoing_msg_id',
+        // 'iduser',
         'msg',
-        'ThoiGian'
+        'time',
     ];
     protected $primaryKey = 'id';
-    protected $table = 'messages';
-    public function ntsv()
+    protected $table = 'boxchat';
+    public function iduser()
     {
-        return $this->belongsTo('App\Models\CollegeStudentAccounts', 'MaSV','outgoing_msg_id' );
+        return $this->belongsTo('App\Models\CollegeStudentAccounts', 'iduser', 'MaSV');
     }
 }

@@ -64,23 +64,21 @@ class SVDangKyHocPhanController extends Controller
         ->join('dsgiaovien', 'dsgiaovien.MaGV', '=', 'mahocphan.MaGV')
         ->join('monhoccualop', 'monhoccualop.MaMonHoc', '=', 'dsmonhoc.MaMonHoc')
         ->where('monhoccualop.MaLop', $profilesv->MaLop)
-        ->orderBy('idhocphan')
+        ->orderBy('idhocphan', 'asc')
         ->get();
 
         $hocki= DanhSachMonHocCuaLop::join('dsmonhoc', 'dsmonhoc.MaMonHoc', '=', 'monhoccualop.MaMonHoc')
         ->join('mahocphan', 'mahocphan.MaMonHoc', '=', 'dsmonhoc.MaMonHoc')
         ->join('dangkymonhoc', 'dangkymonhoc.idhocphan', '=', 'mahocphan.idhocphan')
         ->where('dangkymonhoc.MaSV', $profilesv->MaSV)->distinct('monhoccualop.HocKi')->count('HocKi');
-        // $i=3;
         $lichhoc= LichHoc::join('thungay', 'thungay.idthu', '=', 'lichhoc.idthu')
         ->join('dstiethoc', 'dstiethoc.idtiethoc', '=', 'lichhoc.idtiethoc')
         ->join('dsphonghoc', 'dsphonghoc.idphong', '=', 'lichhoc.idphong')->orderBy('idhocphan')->get();
-        // $dem=LichHoc::where('idhocphan', $i)->count('idhocphan');
-        // dd($dem);
+
         $dem=LichHoc::count('idhocphan');
-        $request->cookie('check');
-        // request()->cookie('check');
-        $checkdangky= DangKyHocPhan::where('MaSV', $profilesv->MaSV)->get();
+        $checkdangky= DangKyHocPhan::where('MaSV', $profilesv->MaSV)->orderBy('idhocphan')->get();
+        //  dd($checkdangky);
+        // dd($profilesv->MaSV);
         return view('collegestudentcp.dangkyhocphan.index')->with(compact('profilesv', 'dangkyhocphan', 'hocki', 'lichhoc','dem', 'checkdangky'));
         // join('mahocphan', 'lichhoc.idhocphan', '=', 'mahocphan.idhocphan')
         // ->
@@ -91,12 +89,36 @@ class SVDangKyHocPhanController extends Controller
             return view('collegestudentcp.dangkyhocphan.error')->with(compact('profilesv'));
         }
     }
-    public function deletehocphan(Request $request)
+    public function deletehocphan($id, Request $request)
     {
         $id = $request->id;
-        DangKyHocPhan::find($id)->delete();
+        $ktraid= DangKyHocPhan::where('idhocphan', $id)->first();
+        // dd($ktraid->MaDK);
+        DangKyHocPhan::find($ktraid->MaDK)->delete();
         return response()->json([
         'success' => 'Record deleted successfully!'
     ]);
+    }
+    public function storedangkyhocphan($id, Request $request)
+    {
+        $idsv = $request->session()->get('id_sv');
+        $id = $request->id;
+        $checkhp= HocPhan::join('dsmonhoc', 'dsmonhoc.MaMonHoc', '=', 'mahocphan.MaMonHoc')
+        ->join('hocphi','hocphi.SoTinChi', '=', 'dsmonhoc.SoTinChi')
+        ->where('mahocphan.idhocphan', $id)->get();
+        // dd($checkhp->first()->GiaTien);
+        $giatien = $checkhp->first()->GiaTien;
+        $timestamp = time();
+        $thoigian = date ("Y-m-d H:i:s", $timestamp);
+
+        $dangkyhp = new DangKyHocPhan();
+        $dangkyhp->MaSV = $idsv;
+        $dangkyhp->idhocphan = $id;
+        $dangkyhp->HocPhi = $giatien;
+        $dangkyhp->NgayDangKy = $thoigian;
+
+        $dangkyhp->save();
+        // dd($dangkyhp);
+
     }
 }

@@ -45,7 +45,8 @@ class DangKyHocPhanController extends Controller
 
         //  Cookie::queue('check','nooo' ,30);
         $checkdangky= DangKyHocPhan::where('MaSV', $profilesv->MaSV)->get();
-        return view('collegestudentcp.dangkyhocphan.index')->with(compact('profilesv', 'dangkyhocphan', 'hocki', 'lichhoc','dem', 'checkdangky'));
+        dd($checkdangky);
+        // return view('collegestudentcp.dangkyhocphan.index')->with(compact('profilesv', 'dangkyhocphan', 'hocki', 'lichhoc','dem', 'checkdangky'));
         // echo Cookie::get('check');
         // join('mahocphan', 'lichhoc.idhocphan', '=', 'mahocphan.idhocphan')
         // ->

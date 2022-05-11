@@ -35,5 +35,9 @@ class CollegeStudentAccounts extends Model
     {
         return $this->belongsTo('App\Models\DanhSachLop', 'MaLop', 'MaLop');
     }
+    // public function mess()
+    // {
+    //     return $this->hasMany('App\Models\Messages');
+    // }
 }
 
