@@ -4,7 +4,7 @@ namespace App\Http\Controllers\CollegeStudentControllers;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Models\GroupChat;
+use App\Models\ChatForum;
 use App\Events\MessageSent;
 use Illuminate\Support\Facades\DB;
 class BoxChatController extends Controller
@@ -17,7 +17,7 @@ class BoxChatController extends Controller
     public function index()
     {
         //
-        $chat = GroupChat::with('iduser')->get();
+        $chat = ChatForum::all();
         return view('collegestudentcp.boxchat.index')->with(compact('chat'));
     }
 
@@ -39,36 +39,14 @@ class BoxChatController extends Controller
      */
     public function store(Request $request)
     {
-        //
-        $idsv = $request->session()->get('id_sv');
-        $timestamp = time();
-        $thoigian = date ("Y-m-d H:i:s", $timestamp);
-        $data= $request->validate([
-            'msg' => 'required|max:255',
-
-        ],
-        [
-            'msg.unique' => 'Tên  đã có vui lòng đặt tên khác. Cảm ơn!!!',
-        ]
-    );
-    $message = new GroupChat();
-    $message->iduser = $idsv;
-    $message->msg = $data['msg'];
-    $message->time = $thoigian;
-    $message->save();
-    // $data['iduser'] = $idsv;
-
-    // dd($data);
-    //  $data = $request->all();
-    // $data['iduser'] =  $idsv;
-    // $data['time'] = $thoigian;
-    // dd($data);
-    // GroupChat::create($data);
-    event(
-        $e = new MessageSent($message)
-    );
-    // dd($e);
-    return redirect()->back();
+        $data = $request->all();
+        // dd($data);
+        $message= ChatForum::create($data);
+        event(
+            $e = new MessageSent($message)
+        );
+        // dd($e);
+        return redirect()->back();
     }
 
     /**

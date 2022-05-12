@@ -4,13 +4,10 @@ io.on("error", function (socket) {
     console.log("no conncect");
 });
 io.on("connection", function (socket) {
-    console.log("co nguoi vua ket noi");
+    console.log("co nguoi vua ket noi", +socket.id);
 });
 var Redis = require("ioredis");
 var redis = new Redis(1000);
-// redis.on("connection", function (socket) {
-//     console.log("co nguoi vua ket noi redis");
-// });
 redis.psubscribe("*", function (error, count) {});
 redis.on("pmessage", function (partner, channel, message) {
     console.log(channel);
