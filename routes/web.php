@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\WelcomeController;
 // admin
 use App\Http\Controllers\AuthControllers\LoginController;
 use App\Http\Controllers\AdminControllers\AdminAccountsController;
@@ -50,7 +51,12 @@ use App\Http\Controllers\LecturersControllers\ThongBaoGiangVienController;
 // Route::any('{query}',
 //     function() { return redirect('/welcome'); })
 //     ->where('query', '.*');
-Route::get('/', function () {
+// Route::get('/', function () {
+//     return view('welcome');
+// });
+Route::GET('/',[WelcomeController::class, 'welcome'])->name('welcome');
+Route::POST('/PostChatNoAcc',[WelcomeController::class, 'postchatnoacc'])->name('postchatnoacc');
+Route::get('/login', function () {
     return view('login');
 });
 // Route::get('/Login','AuthControllers\LoginController@index')->name('login');

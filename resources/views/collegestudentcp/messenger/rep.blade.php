@@ -48,7 +48,6 @@
 <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js'></script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script type="text/javascript">
-
 $(document).ready(function () {
         $.ajaxSetup({
             headers:
@@ -89,7 +88,7 @@ $(document).ready(function () {
     setInterval(
             function(){
                 getchat();
-            }, 500);
+            }, 1000);
 
       function getchat() {
         var incoming_id = $('input[name=incoming_id]').val();
@@ -99,6 +98,7 @@ $(document).ready(function () {
           method: 'get',
           success: function(response) {
             $(".chat-box").html(response);
+            $('.chat-box').scrollTop($('.chat-box')[0].scrollHeight);
           }
         });
       }
