@@ -39,21 +39,8 @@
 
                         </div>
                     @endif
-                    <!-- @if(Cookie::has('check'))
-                        <h2 style="text-align: center;">{{Cookie::get('check')}}</h2>
-                    @else -->
-                    <div class="container">
-                            <div class="row ">
-                                <select id="mySelect" class="form-control" name = "hocki" onchange="location = this.value;">
-                                    <option class="text-center" value="" disabled selected>---Học kì---</option>
-                                </select>
-                                    <!-- <div class="col-md-6">
-                                        <button type="submit" class="btn btn-primary" name = "xem">Xem Thời Khóa Biểu</button>
-                                    </div> -->
-                            </div>
-                        </div>
-                    </div>
-                        <table class="table table-bordered" style="border: 3px solid black;" >
+
+                    <table class="table table-bordered" style="border: 3px solid black;" >
                         <thead style="background-color: #4723d9; color: white;vertical-align : middle;text-align: center;">
                             <tr style="">
                                 <th rowspan="2" >STT</th>
@@ -132,7 +119,6 @@
                             @endforeach
                         </tbody>
                     </table>
-                    @endif
                 </div>
             </div>
         </div>

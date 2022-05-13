@@ -19,6 +19,15 @@
     .bg-info {
     background-color: #4723d9!important;
     }
+    .toast{
+    position: absolute;
+    right: 0;
+    top: 0;
+    margin-left: 200px;
+    background:  #4723d9;
+    color: white;
+    }
+
 </style>
 <body id="body-pd">
     <header class="header" id="header">
@@ -46,13 +55,14 @@
                                         <div class="notification-ui_dd-header">
                                             <h3 class="text-center"><p style="color:red;">{{$counttbsgv}}-Notification</p></h3>
                                         </div>
-                                        <div class="notification-ui_dd-content">
+                                       <div class="notification-ui_dd-content">
                                             @foreach($notificationgv as $tbgv)
-                                            <div class="notification-list notification-list--unread">
+                                            <div class="notification-list notification-list--unread" id="showtoast-{{$tbgv->idgv}}" >
                                                 <div class="notification-list_img">
-                                                    <img src="https://i.imgur.com/zYxDCQT.jpg" alt="user">
+                                                    <img src="https://www.publicdomainpictures.net/pictures/50000/nahled/bell-silhouette.jpg" alt="user">
                                                 </div>
-                                                <a href=""><div class="notification-list_detail">
+                                                <!-- <a href=""> -->
+                                                    <div class="notification-list_detail">
                                                     <?php
                                                         $s = sprintf('%05d',$tbgv->MaAdmin);
                                                     ?>
@@ -61,20 +71,50 @@
                                                     @if($tbgv->status == 1)
                                                     style="font-weight:bold;"
                                                     @endif
+
                                                     >
                                                         <p>{{$tbgv->matk}}<?php echo $s;?> đã gửi thông báo đến cho bạn</p>
-                                                        <p><small>{{$tbgv->ThoiGian}}</small></p>
-                                                    </div>
+                                                        <p><small>
+                                                            <?php
+                                                            \Carbon\Carbon::setLocale('vi'); // hiển thị ngôn ngữ tiếng việt.
+                                                            $date = \Carbon\Carbon::parse($tbgv->ThoiGian);
+                                                            $elapsed = $date->diffForHumans(\Carbon\Carbon::now());
+                                                            echo $elapsed;
+                                                            ?>
 
-                                                </div></a>
+                                                            </small></p>
+                                                        </div>
+
+                                                    </div>
+                                                <!-- </a> -->
                                                 <div class="notification-list_feature-img">
                                                     <img src="https://cdn-icons-png.flaticon.com/512/526/526172.png" alt="Feature image">
                                                 </div>
                                             </div>
+                                                     <div class="toast" id="thongbaotoast-{{$tbgv->idgv}}" data-bs-autohide="false">
+                                                <div class="toast-header">
+                                                    <!-- ('D, d M \'y, H:i') -->
+                                                    <strong class="me-auto"><i class="bi-gift-fill"></i> Thông báo của bạn!!!</strong>
+                                                    <small>{{\Carbon\Carbon::parse($tbgv->ThoiGian)->format('H:i:s d:m:Y')}}</small>
+                                                    <button type="button" class="btn-close" data-bs-dismiss="toast"></button>
+                                                </div>
+                                                <div class="toast-body">
+                                                    {{$tbgv->noidung}}
+                                                </div>
+                                            </div>
+
+                                            <script>
+                                                $(document).ready(function(){
+                                                        $("#showtoast-{{$tbgv->idgv}}").click(function(){
+                                                            $("#thongbaotoast-{{$tbgv->idgv}}").toast("show");
+                                                            // console.log('{{$tbgv->id}}')
+                                                        });
+                                                    });
+                                            </script>
                                             @endforeach
                                         </div>
                                         <div class="notification-ui_dd-footer" style="text-align: center;">
-                                            <a href="#!" class="btn btn-success btn-block">View All</a>
+                                            <a href="{{route('thongbaogv')}}" class="btn btn-success btn-block">View All</a>
                                         </div>
                                     </div>
                                     </div>
@@ -85,15 +125,20 @@
                                     </div>
                                     </li>
                                 <li>
-                                <div class = "username" data-bs-toggle="modal" data-bs-target="#profile">
-                                    <p id="ten">@foreach($data as $account)
-                                    <?php
-                                        $s = sprintf('%05d',$account->MaGV);
-                                    ?>
-                                        {{$account->fname}} {{$account->lname}}-[{{$account->permission->matk}}<?php echo $s ?>]
+                                <div class = "username">
+                                    @foreach($data as $account)
+                                   <a style= "text-decoration:none;"href="{{route('profilegv', [$account->MaGV])}}">
+                                        <p id="ten">
+                                            <?php
+                                            $s = sprintf('%05d',$account->MaGV);
+                                            ?>
+                                            {{$account->fname}} {{$account->lname}}-[{{$account->permission->matk}}<?php echo $s ?>]
 
-                                    @endforeach
-                                </p>
+                                        </p>
+                                    </a>
+
+                                 @endforeach
+
                                 </div>
                                 <!-- Modal -->
                                 </li>
@@ -103,137 +148,6 @@
                 </nav>
             </div>
     </header>
-    <div class="modal fade" id="profile" tabindex="-1" aria-labelledby="profileLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="profileLabel">Thông tin cá nhân</h5>
-                <button style="color: white; margin-left: 20px;" class="btn bg-info" data-bs-toggle="modal" data-bs-target="#changepass">Đổi mật Khẩu</button>
-                <button style="color: white; margin-left: 20px;" class="btn bg-info" onclick="editprofile()">Edit</button>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            @foreach($data as $account)
-            <form action="{{route('updateprofile', [$account->MaGV])}}" method="post">
-                @method("PUT")
-            @csrf
-            <div class="modal-body">
-
-                <?php
-                    $s = sprintf('%05d',$account->MaGV);
-                ?>
-                <div class="row" >
-                    <div class="col-md-6">
-                        <label for="fname">Avatar</label>
-                        <img class="header_img" src="https://scontent.fdad3-1.fna.fbcdn.net/v/t1.6435-9/118675616_451215635838425_7444536993265624310_n.jpg?_nc_cat=103&ccb=1-5&_nc_sid=174925&_nc_ohc=OdL2TjHE1vYAX-sFMzh&_nc_ht=scontent.fdad3-1.fna&oh=00_AT9S-ErDYBTVtOJRSkOQDYuIHKPkJtFBpArewqDLZEIz_Q&oe=62875687" alt="">
-                        <input name="avatar" id="avatar" type="file" value="{{$account->avatar}}" id="" class="form-control" disabled>
-                    </div>
-                    <div class="col-md-6">
-                        <label for="MaGV">Mã giảng viên</label>
-                        <input name="MaGV" id="MaGV" type="text" class="form-control" value="{{$account->permission->matk}}<?php echo $s?>" disabled>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-6">
-                        <label for="fname">Họ</label>
-                        <input name="fname" id="fname" type="text" class="form-control" value="{{$account->fname}}"disabled>
-                    </div>
-                    <div class="col-md-6">
-                        <label for="lname">Tên</label>
-                        <input name="lname" id="lname" type="text" class="form-control" value="{{$account->lname}}"disabled>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-6">
-                        <label for="fname">Ngày sinh</label>
-                        <input name="NgaySinh" id="NgaySinh" type="date" class="form-control" value="{{$account->NgaySinh}}"disabled>
-                    </div>
-                    <div class="col-md-6">
-                        <label for="fname">CCCD</label>
-                        <input name="cccd" id="cccd" type="text" class="form-control" value="{{$account->cccd}}"disabled>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-6">
-                        <label for="fname">Giới tính</label>
-                        <input name="GioiTinh" id="GioiTinh" type="text" class="form-control" value="{{$account->GioiTinh}}"disabled>
-                    </div>
-                    <div class="col-md-6">
-                        <label for="fname">Email</label>
-                        <input name="Email" id="Email" type="text" class="form-control" value="{{$account->Email}}"disabled>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-6">
-                        <label for="fname">Địa chỉ</label>
-                        <input name="DiaChi" id="DiaChi" type="text" class="form-control" value="{{$account->DiaChi}}"disabled>
-                    </div>
-                    <div class="col-md-6">
-                        <label for="fname">Số điện thoại</label>
-                        <input name="SDT" id="SDT" type="text" class="form-control" value="{{$account->SDT}}"disabled>
-                    </div>
-                </div>
-
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <button type="submit" class="btn btn-primary">Save changes</button>
-            </div>
-            </div>
-            </form>
-            @endforeach
-        </div>
-        </div>
-        <script>
-            function editprofile()
-            {
-                 document.getElementById("avatar").disabled = false;
-                 document.getElementById("MaGV").disabled = false;
-                 document.getElementById("fname").disabled = false;
-                 document.getElementById("lname").disabled = false;
-                 document.getElementById("NgaySinh").disabled = false;
-                 document.getElementById("cccd").disabled = false;
-                 document.getElementById("GioiTinh").disabled = false;
-                 document.getElementById("Email").disabled = false;
-                 document.getElementById("DiaChi").disabled = false;
-                 document.getElementById("SDT").disabled = false;
-            }
-        </script>
-        <!-- endmodalsprofile -->
-        <!-- modalschangepass -->
-        <!-- <div class="modal fade" id="changepass" tabindex="-1" aria-labelledby="changepassLabel" aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="changepassLabel">Đổi mật khẩu</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                @foreach($data as $account)
-                <form action="{{route('updatechangepass', [$account->MaGV])}}" method="post">
-                    @method("PUT")
-                @csrf
-                <div class="modal-body">
-                    <div class="col-md-12">
-                        <label for="fname">Mã giảng viên</label>
-                        <input type="text" class="form-control" value="{{$account->permission->matk}}<?php echo $s?>" disabled>
-                    </div><div class="col-md-12">
-                        <label for="fname">Password_Old</label>
-                        <input type="password" name="passold" class="form-control" >
-                    </div><div class="col-md-12">
-                        <label for="fname">Password_NEW</label>
-                        <input type="password" name="passnew" class="form-control">
-                    </div>
-
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="submit" class="btn btn-primary">Save changes</button>
-                </div>
-
-                </div>
-                @endforeach
-            </div>
-            </div> -->
-        <!-- endchangepass -->
         <!-- menu -->
     <div class="l-navbar" id="nav-bar">
         <nav class="nav">

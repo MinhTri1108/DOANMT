@@ -50,7 +50,7 @@
                                 <label for="name" class="col-sm-3 col-form-label">Name: </label>
                                 <div class="col-sm-9">
                                     @foreach($datasv as $account)
-                                    <input type="text" name="name" class="form-control" id="" readonly value="{{$account->fname}} {{$account->lname}}" required>
+                                    <input type="text" name="name" class="form-control" id="" readonly value="SV: {{$account->fname}} {{$account->lname}}" required>
 
                                     @endforeach
                                 </div>

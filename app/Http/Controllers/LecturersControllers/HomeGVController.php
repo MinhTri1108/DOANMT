@@ -5,19 +5,25 @@ namespace App\Http\Controllers\LecturersControllers;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\ThongBaoGV;
+use App\Models\ChatForum;
+use App\Models\LichLamViec;
 use App\Models\LecturersAccounts;
 class HomeGVController extends Controller
 {
     //
     public function index()
     {
-        // $tbgvs= ThongBaoGV::join('dsadmin', 'dsadmin.MaAdmin', '=', 'thongbaogv.MaAdmin')
-        // ->join('quyen', 'quyen.idloaitk', '=', 'dsadmin.idloaitk')->get();
-        // $counttb= ThongBaoGV::sum('status');;
-        // return view('lecturercp.index')->with(compact('tbgvs','counttb'));
-        return view('lecturercp.index');
+        $chat = ChatForum::all();
+        $lichs=LichLamViec::with('admin')->get();
+        return view('lecturercp.index')->with(compact('lichs', 'chat'));
     }
-    public function updateprofile($id, Request $request)
+    public function profilegv($id, Request $request)
+    {
+        $profilegv= LecturersAccounts::where('MaGV', $id)->with('permission')->first();
+        return view('lecturercp.profile.index')->with(compact('profilegv'));
+        // dd($thongtinkhoahoc);
+    }
+    public function updateprofilegv($id, Request $request)
     {
         $data= $request->validate([
             'avatar' =>'required|max:255',
@@ -58,9 +64,9 @@ class HomeGVController extends Controller
         // $thongtingv->Email = $data['SDT'];
 
     }
-    public function updatechangepass($id, Request $request)
+    public function updatechangepassgv($id, Request $request)
     {
-        $idgv = $request->session()->get('id_gv');
+        // $idgv = $request->session()->get('id_gv');
         $data= $request->validate([
             'passold' =>'required|max:255',
             'passnew' => 'required|max:255',
@@ -71,11 +77,11 @@ class HomeGVController extends Controller
             'passnew.required' => ' passnew trong',
         ]);
         // print_r($data);
-        $profilegv= LecturersAccounts::where('MaGV', $idgv)->first();
+        $profilegv= LecturersAccounts::where('MaGV', $id)->first();
         // echo $profilegv->password;
         if($data['passold'] == $profilegv->password)
         {
-            $update = LecturersAccounts::find($idgv);
+            $update = LecturersAccounts::find($id);
             $update->password = $data['passnew'];
             $update->save();
             return redirect()->back()->with('status', 'Update Password thành công');

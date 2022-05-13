@@ -122,7 +122,23 @@
                         <div class="row" style = "row-gap :20px" >
                             <div id ="data">
                                 @foreach($chat as $c)
-                                    <p id="{{$c->id}}"><strong>{{$c->name}}: </strong>{{$c->msg}}</p>
+                                    <div class= "row">
+                                        <div class= "col-8">
+                                            <p id="{{$c->id}}"><strong>{{$c->name}}: </strong>{{$c->msg}}
+
+                                            </p>
+                                        </div>
+                                        <div class= "col-4">
+                                            <p>
+                                                 <?php
+                                                    \Carbon\Carbon::setLocale('vi'); // hiển thị ngôn ngữ tiếng việt.
+                                                    $date = \Carbon\Carbon::parse($c->created_at);
+                                                    $elapsed = $date->diffForHumans(\Carbon\Carbon::now());
+                                                    echo $elapsed;
+                                                    ?>
+                                            </p>
+                                        </div>
+                                    </div>
                                     @endforeach
                             </div>
                         </div>

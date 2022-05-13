@@ -21,3 +21,4 @@ class ThongBaoSinhVienController extends Controller
         return view('collegestudentcp.thongbaosv.index')->with(compact('profilesv', 'thongbao'));
     }
 }
+

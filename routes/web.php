@@ -101,14 +101,16 @@ Route::middleware(['CheckAccountLogin'])->prefix('admin')->group(function () {
         Route::resource('/CreateHocPhan', TaoHocPhanController::class);
         Route::resource('/CreateLichHoc', CreateLichHocController::class);
     });
-    Route::any('{query}',
-    function() { return redirect('admin/'); })
-    ->where('query', '.*');
+    // Route::any('{query}',
+    // function() { return redirect('admin/'); })
+    // ->where('query', '.*');
 });
 
 Route::middleware(['CheckAccountSVLogin'])->prefix('collegestudent')->group(function () {
     Route::get('/', [HomeSVController::class, 'index'])->name('index');
-
+    Route::get('/ProFileSV/{id}', [HomeSVController::class, 'profilesv'])->name('profilesv');
+    Route::PUT('/UpdateProFileSV/{id}', [HomeSVController::class, 'updateprofilesv'])->name('updateprofilesv');
+    Route::PUT('/UpdateChangePassSV/{id}', [HomeSVController::class, 'updatechangepasssv'])->name('updatechangepasssv');
     Route::get('/Messenger', [MessengerSVController::class, 'index'])->name('messenger');
     Route::get('/Messenger/datafriend', [MessengerSVController::class, 'datafriend'])->name('datafriend');
     Route::get('/Messenger/getchat/{incoming_id}', [MessengerSVController::class, 'getchat'])->name('getchat');
@@ -134,8 +136,9 @@ Route::middleware(['CheckAccountGVLogin'])->prefix('lecturers')->group(function 
     // function() { return redirect('lecturers/'); })
     // ->where('query', '.*');
     Route::get('/', [HomeGVController::class, 'index'])->name('index');
-    Route::PUT('/UpdateProFile/{id}', [HomeGVController::class, 'updateprofile'])->name('updateprofile');
-    Route::PUT('/UpdateChangePass/{id}', [HomeGVController::class, 'updatechangepass'])->name('updatechangepass');
+    Route::get('/ProFileGV/{id}', [HomeGVController::class, 'profilegv'])->name('profilegv');
+    Route::PUT('/UpdateProFileGV/{id}', [HomeGVController::class, 'updateprofilegv'])->name('updateprofilegv');
+    Route::PUT('/UpdateChangePassGV/{id}', [HomeGVController::class, 'updatechangepassgv'])->name('updatechangepassgv');
     Route::prefix("GroupLop")->group(function(){
         Route::resource('/Lop', GroupLopController::class);
         Route::get('/DiemDanh/{id}', [DiemDanhController::class, 'indexdiemdanh'])->name('indexdiemdanh');
@@ -146,7 +149,7 @@ Route::middleware(['CheckAccountGVLogin'])->prefix('lecturers')->group(function 
         Route::DELETE('/UploadDiem/Lop/delete/{id}', [UploadDiemSVController::class, 'deleteuploaddiem'])->name('deleteuploaddiem');
         Route::PUT('/UploadDiem/Lop/update/{id}', [UploadDiemSVController::class, 'updateuploaddiem'])->name('updateuploaddiem');
         Route::resource('/UploadFileTaiLieu', UploadFileTaiLieuController::class);
-
+        Route::get('/ThongBaoGiangVien', [ThongBaoGiangVienController::class, 'thongbaogv'])->name('thongbaogv');
         Route::GET('/ListFileCuaHocPhan/{id}', [UploadFileToS3AWSController::class, 'listfiletoaws'])->name('listfiletoaws');
         Route::GET('/DownloadFileToAWS/{id}', [UploadFileToS3AWSController::class, 'downloadfiletoaws'])->name('downloadfiletoaws');
         Route::Delete('/DeleteFileToAWS/{id}', [UploadFileToS3AWSController::class, 'deletefiletoaws'])->name('deletefiletoaws');
