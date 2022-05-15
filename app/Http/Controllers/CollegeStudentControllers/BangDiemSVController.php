@@ -28,7 +28,7 @@ class BangDiemSVController extends Controller
         $hocki= DanhSachMonHocCuaLop::join('dsmonhoc', 'dsmonhoc.MaMonHoc', '=', 'monhoccualop.MaMonHoc')
         ->join('mahocphan', 'mahocphan.MaMonHoc', '=', 'dsmonhoc.MaMonHoc')
         ->join('dangkymonhoc', 'dangkymonhoc.idhocphan', '=', 'mahocphan.idhocphan')
-        ->where('dangkymonhoc.MaSV', $profilesv->MaSV)->distinct('monhoccualop.HocKi')->count('HocKi');
+        ->where('dangkymonhoc.MaSV', $profilesv->MaSV)->distinct('monhoccualop.idhocki')->count('idhocki');
         return view('collegestudentcp.marks.index')->with(compact('profilesv', 'diem', 'hocki'));
     }
 

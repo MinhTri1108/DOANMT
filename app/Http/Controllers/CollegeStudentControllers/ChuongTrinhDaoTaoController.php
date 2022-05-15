@@ -18,7 +18,7 @@ class ChuongTrinhDaoTaoController extends Controller
         //
         $idsv = $request->session()->get('id_sv');
         $profilesv = CollegeStudentAccounts::where('MaSV', $idsv)->with('lop')->first();
-        $counthk= DanhSachMonHocCuaLop::distinct('HocKi')->count('HocKi');
+        $counthk= DanhSachMonHocCuaLop::distinct('idhocki')->count('idhocki');
 
         $chuongtrinhdaotao= DanhSachMonHocCuaLop::where('MaLop', $profilesv->MaLop)->with('monhoc')->get();
         return view('collegestudentcp.chuongtrinhdaotao.index')->with(compact('chuongtrinhdaotao', 'profilesv', 'counthk'));

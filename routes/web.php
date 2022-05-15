@@ -26,6 +26,7 @@ use App\Http\Controllers\CollegeStudentControllers\BangDiemSVController;
 use App\Http\Controllers\CollegeStudentControllers\SVDangKyHocPhanController;
 use App\Http\Controllers\CollegeStudentControllers\ThongBaoSinhVienController;
 use App\Http\Controllers\CollegeStudentControllers\BoxChatController;
+use App\Http\Controllers\CollegeStudentControllers\ChiTietHocPhanController;
 // end sinhvien
 // giangvien
 use App\Http\Controllers\LecturersControllers\HomeGVController;
@@ -118,6 +119,12 @@ Route::middleware(['CheckAccountSVLogin'])->prefix('collegestudent')->group(func
     // Route::post('/Messenger/ChatBox/insertchat', [MessengerSVController::class, 'insertchat'])->name('insertchat');
     // Route::get('/Messenger/searchfriend/', [MessengerSVController::class, 'searchfriend'])->name('searchfriend');
     Route::get('/Messenger/ChatBox/{id}', [MessengerSVController::class, 'chatbox'])->name('chatbox');
+    Route::get('/QuanLyChiTietCacHocPhan', [ChiTietHocPhanController::class, 'qlchitiethp'])->name('qlchitiethp');
+    Route::get('/QuanLyChiTietCacHocPhan/NamHoc/{id}', [ChiTietHocPhanController::class, 'qlchitiethpnamhoc'])->name('qlchitiethpnamhoc');
+    Route::get('/QuanLyChiTietCacHocPhan/Hocki/{id}', [ChiTietHocPhanController::class, 'qlchitiethphocki'])->name('qlchitiethphocki');
+    Route::get('/QuanLyChiTietCacHocPhan/QuanLy/{id}', [ChiTietHocPhanController::class, 'qlchitiet'])->name('qlchitiet');
+    Route::get('/QuanLyChiTietCacHocPhan/TaiLieuMonHoc/{id}', [ChiTietHocPhanController::class, 'tailieumonhoc'])->name('tailieumonhoc');
+    Route::get('/QuanLyChiTietCacHocPhan/SoBuoiHoc/{id}', [ChiTietHocPhanController::class, 'sobuoihoc'])->name('sobuoihoc');
     // Route::post('/Messenger/store', [MessengerSVController::class, 'store'])->name('sendmessenger');
     Route::resource('/ChuongTrinhDaoTao', ChuongTrinhDaoTaoController::class);
     Route::resource('/BoxChat', BoxChatController::class);

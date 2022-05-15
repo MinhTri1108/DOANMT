@@ -51,7 +51,7 @@
                         @for($hk=1; $hk<=$counthk; $hk++)
                         <td style="font-weight: bold;" colspan="13">Học kì: {{$hk}}</td>
                         <tbody>
-                            @foreach($hocphis->where('HocKi', '=', $hk) as $hp)
+                            @foreach($hocphis->where('idhocki', '=', $hk) as $hp)
                             <tr>
                                 <td>{{$hp->MaDK}}</td>
                                 <td>{{$hp->MaDK }}</td>

@@ -7,7 +7,7 @@
             <div class="card shadow">
                 <div class="card-header bg-info d-flex justify-content-between align-items-center">
                 <h3 class="text-light">Upload file tài liệu</h3>
-                 <!-- <button class="btn btn-light"><a href="">Danh sách file đã up</a></button> -->
+                <button class="btn btn-light"><a href="">Danh sách file đã up</a></button>
                  @if ($errors->any())
                     <div class="alert alert-danger">
                         <ul>

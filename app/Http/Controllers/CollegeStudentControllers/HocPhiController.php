@@ -28,7 +28,7 @@ class HocPhiController extends Controller
         $counthk= DanhSachMonHocCuaLop::join('dsmonhoc', 'dsmonhoc.MaMonHoc', '=', 'monhoccualop.MaMonHoc')
         ->join('mahocphan', 'mahocphan.MaMonHoc', '=', 'dsmonhoc.MaMonHoc')
         ->join('dangkymonhoc', 'dangkymonhoc.idhocphan', '=', 'mahocphan.idhocphan')
-        ->where('dangkymonhoc.MaSV', $profilesv->MaSV)->distinct('monhoccualop.HocKi')->count('HocKi');
+        ->where('dangkymonhoc.MaSV', $profilesv->MaSV)->distinct('monhoccualop.idhocki')->count('idhocki');
         // $hocphis= DanhSachMonHocCuaLop::join('dsmonhoc', 'dsmonhoc.MaMonHoc', '=', 'monhoccualop.MaMonHoc')
         // ->join('hocphi', 'dsmonhoc.SoTinChi', '=', 'hocphi.SoTinChi')
         // ->where('monhoccualop.MaLop', $profilesv->MaLop)->get();

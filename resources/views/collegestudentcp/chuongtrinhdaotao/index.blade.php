@@ -60,7 +60,7 @@
                         @for($hk=1; $hk<=$counthk; $hk++)
                         <td style="font-weight: bold;" colspan="13">Học kì: {{$hk}}</td>
                         <tbody>
-                            @foreach($chuongtrinhdaotao->where('HocKi', '=', $hk) as $ctdt)
+                            @foreach($chuongtrinhdaotao->where('idhocki', '=', $hk) as $ctdt)
                             <tr>
                                 <td>{{$ctdt->idmonhoccualop}}</td>
                                 <td>

@@ -55,7 +55,7 @@ class ThoiKhoaBieuGVController extends Controller
         ->join('mahocphan', 'mahocphan.idhocphan', '=', 'lichhoc.idhocphan')
         ->join('dsmonhoc', 'mahocphan.MaMonHoc', '=', 'dsmonhoc.MaMonHoc')
         ->join('monhoccualop', 'monhoccualop.MaMonHoc', '=', 'dsmonhoc.MaMonHoc')
-        ->where('mahocphan.MaGV', $idgv)->where('monhoccualop.HocKi', $id)->orderBy('lichhoc.idphong','ASC')->get();
+        ->where('mahocphan.MaGV', $idgv)->where('monhoccualop.idhocki', $id)->orderBy('lichhoc.idphong','ASC')->get();
 
         $check=LichHoc::join('thungay', 'thungay.idthu', '=', 'lichhoc.idthu')
         ->join('dstiethoc', 'dstiethoc.idtiethoc', '=', 'lichhoc.idtiethoc')
@@ -63,7 +63,7 @@ class ThoiKhoaBieuGVController extends Controller
         ->join('mahocphan', 'mahocphan.idhocphan', '=', 'lichhoc.idhocphan')
         ->join('dsmonhoc', 'mahocphan.MaMonHoc', '=', 'dsmonhoc.MaMonHoc')
         ->join('monhoccualop', 'monhoccualop.MaMonHoc', '=', 'dsmonhoc.MaMonHoc')
-        ->where('MaGV', $idgv)->where('monhoccualop.HocKi', $id)->distinct('lichhoc.idphong')->get();
+        ->where('MaGV', $idgv)->where('monhoccualop.idhocki', $id)->distinct('lichhoc.idphong')->get();
         $week_days = array(1,2,3,4,5,6,7);
         $classes = array();
         // dd($phonghoc);
