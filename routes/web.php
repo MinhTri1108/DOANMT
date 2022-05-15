@@ -27,6 +27,7 @@ use App\Http\Controllers\CollegeStudentControllers\SVDangKyHocPhanController;
 use App\Http\Controllers\CollegeStudentControllers\ThongBaoSinhVienController;
 use App\Http\Controllers\CollegeStudentControllers\BoxChatController;
 use App\Http\Controllers\CollegeStudentControllers\ChiTietHocPhanController;
+use App\Http\Controllers\CollegeStudentControllers\ThoiKhoaBieuSVController;
 // end sinhvien
 // giangvien
 use App\Http\Controllers\LecturersControllers\HomeGVController;
@@ -123,7 +124,10 @@ Route::middleware(['CheckAccountSVLogin'])->prefix('collegestudent')->group(func
     Route::get('/QuanLyChiTietCacHocPhan/NamHoc/{id}', [ChiTietHocPhanController::class, 'qlchitiethpnamhoc'])->name('qlchitiethpnamhoc');
     Route::get('/QuanLyChiTietCacHocPhan/Hocki/{id}', [ChiTietHocPhanController::class, 'qlchitiethphocki'])->name('qlchitiethphocki');
     Route::get('/QuanLyChiTietCacHocPhan/QuanLy/{id}', [ChiTietHocPhanController::class, 'qlchitiet'])->name('qlchitiet');
-    Route::get('/QuanLyChiTietCacHocPhan/TaiLieuMonHoc/{id}', [ChiTietHocPhanController::class, 'tailieumonhoc'])->name('tailieumonhoc');
+    // Route::get('/QuanLyChiTietCacHocPhan/TaiLieuMonHoc/{id}', [ChiTietHocPhanController::class, 'tailieumonhoc'])->name('tailieumonhoc');
+    Route::GET('/QuanLyChiTietCacHocPhan/ListFileCuaHocPhan/{id}', [ChiTietHocPhanController::class, 'listfiletoawssv'])->name('listfiletoawssv');
+    Route::GET('/QuanLyChiTietCacHocPhan/DownloadFileToAWS/{id}', [ChiTietHocPhanController::class, 'downloadfiletoawssv'])->name('downloadfiletoawssv');
+    // Route::Delete('/QuanLyChiTietCacHocPhan/DeleteFileToAWS/{id}', [ChiTietHocPhanController::class, 'deletefiletoawssv'])->name('deletefiletoawssv');
     Route::get('/QuanLyChiTietCacHocPhan/SoBuoiHoc/{id}', [ChiTietHocPhanController::class, 'sobuoihoc'])->name('sobuoihoc');
     // Route::post('/Messenger/store', [MessengerSVController::class, 'store'])->name('sendmessenger');
     Route::resource('/ChuongTrinhDaoTao', ChuongTrinhDaoTaoController::class);

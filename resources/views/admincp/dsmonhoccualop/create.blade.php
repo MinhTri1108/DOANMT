@@ -1,6 +1,11 @@
 @extends('layouts.header')
 @section('content')
 @include('layouts/navadmin')
+<style>
+    .bg-info {
+    background-color: #4723d9!important;
+    }
+</style>
 <body class="bg-light">
 <div class="container">
     <nav style="--bs-breadcrumb-divider: '>'; margin-top: 25px; " aria-label="breadcrumb" >

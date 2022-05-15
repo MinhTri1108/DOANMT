@@ -2,7 +2,11 @@
 @section('content')
 @include('layouts/navadmin')
 {{-- add new employee modal start --}}
-
+<style>
+    .bg-info {
+    background-color: #4723d9!important;
+    }
+</style>
 <body class="bg-light">
 <div class="container">
     <nav style="--bs-breadcrumb-divider: '>'; margin-top: 25px; " aria-label="breadcrumb" >
@@ -60,7 +64,7 @@
                         @for($hk=1; $hk<=$counthk; $hk++)
                         <td colspan="9">Học kì: {{$hk}}</td>
                         <tbody>
-                            @foreach($mhoflop->where('HocKi', '=', $hk) as $mh)
+                            @foreach($mhoflop->where('idhocki', '=', $hk) as $mh)
                             <tr>
                                 <td>
                                     <?php

@@ -8,6 +8,7 @@ use App\Models\LichHoc;
 use App\Models\HocPhan;
 use App\Models\DanhSachMonHoc;
 use App\Models\LecturersAccounts;
+use App\Models\HocKi;
 class TaoHocPhanController extends Controller
 {
     /**
@@ -36,7 +37,8 @@ class TaoHocPhanController extends Controller
         //
         $gvs= LecturersAccounts::with('permission')->get();
         $mhs= DanhSachMonHoc::all();
-        return view('admincp.createhp.create')->with(compact('gvs', 'mhs'));
+        $hocki=HocKi::with('namhoc')->get();
+        return view('admincp.createhp.create')->with(compact('gvs', 'mhs','hocki'));
     }
 
     /**

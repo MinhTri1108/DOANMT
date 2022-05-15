@@ -57,6 +57,7 @@
                             @endforeach
                         </table>
                     </div>
+                    @if($demsobuoihoc > 0 && $demsobuoinghi>0)
                     <div class="col-6">
                         <table  class="table table-bordered">
                             <tr>
@@ -69,6 +70,7 @@
                             </tr>
                         </table>
                     </div>
+                    @endif
                 </div>
             </div>
         </div>

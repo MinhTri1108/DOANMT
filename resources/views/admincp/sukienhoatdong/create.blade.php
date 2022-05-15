@@ -1,6 +1,11 @@
 @extends('layouts.header')
 @section('content')
 @include('layouts/navadmin')
+<style>
+    .bg-info {
+    background-color: #4723d9!important;
+    }
+</style>
 <body class="bg-light">
 <div class="container">
     <div class="row my-5">

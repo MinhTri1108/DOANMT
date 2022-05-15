@@ -49,13 +49,13 @@
                                     <tr>
                                         <td>1</td>
                                         <td><a href="{{ url($file['downloadUrl']) }}">{{ $file['name'] }}</a></td>
-                                        <td>
+                                        <!-- <td>
                                             <form action="{{ url($file['removeUrl']) }}" method="POST">
                                                 {{ csrf_field() }}
                                                 {{ method_field('DELETE') }}
                                                 <button onclick = "return confirm('Bạn muốn xóa file này không')" class="btn btn-danger">Remove</button>
                                             </form>
-                                        </td>
+                                        </td> -->
                                     </tr>
                                 @endforeach
                             @else

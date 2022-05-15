@@ -9,6 +9,7 @@ use App\Models\HocKi;
 use App\Models\NamHoc;
 use App\Models\DiemDanhSV;
 use App\Models\DangKyHocPhan;
+use Storage;
 class ChiTietHocPhanController extends Controller
 {
     //
@@ -46,11 +47,57 @@ class ChiTietHocPhanController extends Controller
 
         return view('collegestudentcp.componenthocphan.luachon')->with(compact('tenhocphan'));
     }
-    public function tailieumonhoc($id, Request $request)
+    // public function tailieumonhoc($id, Request $request)
+    // {
+    //     $tenhocphan = HocPhan::with('monhoc')->where('idhocphan', $id)->first();
+    //     return view('collegestudentcp.componenthocphan.tailieu')->with(compact('tenhocphan'));
+    // }
+     public function listfiletoawssv(Request $request, $id)
     {
-        $tenhocphan = HocPhan::with('monhoc')->where('idhocphan', $id)->first();
-        return view('collegestudentcp.componenthocphan.tailieu')->with(compact('tenhocphan'));
+        $lophocphan=HocPhan::where('idhocphan', $id)->with('monhoc')->first();
+        $files = Storage::disk('s3')->files($id);
+
+        $data = [];
+        foreach($files as $file) {
+            $data[] = [
+                'name' => basename($file),
+                'downloadUrl' => url('/collegestudent/QuanLyChiTietCacHocPhan/DownloadFileToAWS/'.base64_encode($file)),
+                // 'removeUrl' => url('/lecturers/GroupLop/DeleteFileToAWS/'.base64_encode($file)),
+            ];
+        }
+        // dd($files);
+        return view('collegestudentcp.componenthocphan.tailieu', ['files' => $data])->with(compact('lophocphan'));
     }
+    public function downloadfiletoawssv($file)
+    {
+        $file = base64_decode($file);
+        $name = basename($file);
+        $header = [
+            'Content-Type' => 'application/zip',
+            'Content-Disposition' => 'inline; filename="'.$name.'"'
+        ];
+        // dd($file);
+        $files =Storage::disk('s3')->download($file, $name);
+        // // dd();
+        // // return response()->download($files,$name);
+        return $files;
+        // return back()->withSuccess('File downloaded successfully');
+        // $filename = 'test.pdf';
+        // $filePath = storage_path($file);
+
+
+
+        // return Response::make(file_get_contents($filePath), 200, $header);
+        // dd(Storage::disk('s3')->download($file, $name, $header));
+    }
+    // public function deletefiletoaws($file)
+    // {
+    //     $file = base64_decode($file);
+    //     Storage::disk('s3')->delete($file);
+
+    //     return back()->withSuccess('File was deleted successfully');
+    // }
+
     public function sobuoihoc($id, Request $request)
     {
         $idsv = $request->session()->get('id_sv');
@@ -59,8 +106,16 @@ class ChiTietHocPhanController extends Controller
         ->join('mahocphan', 'mahocphan.idhocphan', '=', 'dangkymonhoc.idhocphan')
         ->where('dangkymonhoc.idhocphan', $id)->where('dangkymonhoc.MaSV', $idsv)
         ->get();
-        $demsobuoihoc = DiemDanhSV::where('MaDK', $diemdanh->first()->MaDK)->where('DiemDanh', 1)->count();
-        $demsobuoinghi = DiemDanhSV::where('MaDK', $diemdanh->first()->MaDK)->where('DiemDanh', 0)->count();
+        if($diemdanh->count()>0)
+        {
+            $demsobuoihoc = DiemDanhSV::where('MaDK', $diemdanh->first()->MaDK)->where('DiemDanh', 1)->count();
+            $demsobuoinghi = DiemDanhSV::where('MaDK', $diemdanh->first()->MaDK)->where('DiemDanh', 0)->count();
+        }
+        else
+        {
+            $demsobuoihoc=0;
+            $demsobuoinghi=0;
+        }
         // dd($demsobuoihoc);
         return view('collegestudentcp.componenthocphan.diemdanh')->with(compact('tenhocphan','diemdanh', 'demsobuoihoc', 'demsobuoinghi'));
     }

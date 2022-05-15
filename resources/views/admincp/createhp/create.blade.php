@@ -1,6 +1,11 @@
 @extends('layouts.header')
 @section('content')
 @include('layouts/navadmin')
+<style>
+    .bg-info {
+    background-color: #4723d9!important;
+    }
+</style>
 <body class="bg-light">
 <div class="container">
     <nav style="--bs-breadcrumb-divider: '>'; margin-top: 25px;" aria-label="breadcrumb">
@@ -57,6 +62,16 @@
                                     $mhoc = sprintf('%05d',$mh->MaMonHoc);
                                 ?>
                                 <option value="{{$mh->MaMonHoc}}"><?php echo $mhoc; ?>-{{$mh->TenMonHoc}}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <div class="col-md-12">
+                            <label for="MaMonHoc" class="form-label">Năm học- Học kì</label>
+                            <br>
+                            <select name="MaMonHoc" id="MaMonHoc" class="form-select" aria-label="Default select example">
+                                <option value="">--Chọn Năm học- Học kì--</option>
+                                @foreach($hocki as $hk)
+                                <option value="{{$mh->idhocki}}">Năm: {{$hk->namhoc->namhoc}} -- Học kì: {{$hk->HocKi}}</option>
                                 @endforeach
                             </select>
                         </div>

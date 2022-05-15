@@ -9,6 +9,11 @@
         border-radius : 0px;
     }
 </style>
+<style>
+    .bg-info {
+    background-color: #4723d9!important;
+    }
+</style>
 <body class="bg-light">
 <div class="container-fluid w-90 p-3 ">
 <div class="row mt-5">

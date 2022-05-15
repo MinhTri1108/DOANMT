@@ -93,7 +93,7 @@
                         </a>
                     </div>
                     <div class="col" style = "" id = "test">
-                        <a href="{{route('tailieumonhoc', [$tenhocphan->idhocphan])}}">
+                        <a href="{{route('listfiletoawssv', [$tenhocphan->idhocphan])}}">
                             <div class="hplop">
                                 <h3>Tài liệu của học phần: <br> {{$tenhocphan->TenMonHoc}}</h3>
                             </div>
