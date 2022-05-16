@@ -56,7 +56,7 @@
                             <label for="MaMonHoc" class="form-label">Môn Học</label>
                             <br>
                             <select name="MaMonHoc" id="MaMonHoc" class="form-select" aria-label="Default select example">
-                                <option value="">--Chọn giáo viên--</option>
+                                <option value="">--Chọn Môn Học--</option>
                                 @foreach($mhs as $mh)
                                 <?php
                                     $mhoc = sprintf('%05d',$mh->MaMonHoc);
@@ -66,12 +66,12 @@
                             </select>
                         </div>
                         <div class="col-md-12">
-                            <label for="MaMonHoc" class="form-label">Năm học- Học kì</label>
+                            <label for="idhocki" class="form-label">Năm học- Học kì</label>
                             <br>
-                            <select name="MaMonHoc" id="MaMonHoc" class="form-select" aria-label="Default select example">
+                            <select name="idhocki" id="idhocki" class="form-select" aria-label="Default select example">
                                 <option value="">--Chọn Năm học- Học kì--</option>
                                 @foreach($hocki as $hk)
-                                <option value="{{$mh->idhocki}}">Năm: {{$hk->namhoc->namhoc}} -- Học kì: {{$hk->HocKi}}</option>
+                                <option value="{{$hk->idhocki}}">Năm: {{$hk->namhoc->namhoc}} -- Học kì: {{$hk->HocKi}}</option>
                                 @endforeach
                             </select>
                         </div>

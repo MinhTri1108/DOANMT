@@ -140,7 +140,9 @@ Route::middleware(['CheckAccountSVLogin'])->prefix('collegestudent')->group(func
     Route::get('/DangKyHocPhan/dangky/{id}', [SVDangKyHocPhanController::class, 'storedangkyhocphan'])->name('storedangkyhocphan');
     Route::get('/DangKyHocPhan/delete/{id}', [SVDangKyHocPhanController::class, 'deletehocphan'])->name('deletehocphan');
     Route::get('/ThongBaoSinhVien', [ThongBaoSinhVienController::class, 'thongbaosv'])->name('thongbaosv');
-
+    Route::get('/ThoiKhoaBieuSinhVien', [ThoiKhoaBieuSVController::class, 'indextkbsv'])->name('indextkbsv');
+    Route::get('/ThoiKhoaBieuSinhVien/NamHoc/{id}', [ThoiKhoaBieuSVController::class, 'namhoctkbsv'])->name('namhoctkbsv');
+    Route::get('/ThoiKhoaBieuSinhVien/HocKi/{id}', [ThoiKhoaBieuSVController::class, 'viewtkbsv'])->name('viewtkbsv');
 });
 Route::middleware(['CheckAccountGVLogin'])->prefix('lecturers')->group(function () {
     //  Route::any('{query}',

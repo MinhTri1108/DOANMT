@@ -53,15 +53,18 @@ class TaoHocPhanController extends Controller
         $data= $request->validate([
             'MaGV' => 'required|unique:mahocphan|max:255',
             'MaMonHoc' => 'required|max:255',
+            'idhocki' => 'required|max:255',
         ],
         [
             'MaGV.unique' => 'Tên Khoa đã có vui lòng đặt tên khác. Cảm ơn!!!',
             'MaMonHoc.required' => 'Teen khoa trong',
+            'idhocki.required' => 'trong',
         ]
     );
     $dshp = new HocPhan();
     $dshp->MaGV = $data['MaGV'];
     $dshp->MaMonHoc = $data['MaMonHoc'];
+    $dshp->idhocki = $data['idhocki'];
     $dshp->save();
     return redirect()->back()->with('status', 'Thêm học phần thành công');
     }
