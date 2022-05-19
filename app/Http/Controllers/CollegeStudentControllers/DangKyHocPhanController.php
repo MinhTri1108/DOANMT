@@ -31,10 +31,10 @@ class DangKyHocPhanController extends Controller
         ->orderBy('idhocphan')
         ->get();
 
-        $hocki= DanhSachMonHocCuaLop::join('dsmonhoc', 'dsmonhoc.MaMonHoc', '=', 'monhoccualop.MaMonHoc')
-        ->join('mahocphan', 'mahocphan.MaMonHoc', '=', 'dsmonhoc.MaMonHoc')
-        ->join('dangkymonhoc', 'dangkymonhoc.idhocphan', '=', 'mahocphan.idhocphan')
-        ->where('dangkymonhoc.MaSV', $profilesv->MaSV)->distinct('monhoccualop.HocKi')->count('HocKi');
+        // $hocki= DanhSachMonHocCuaLop::join('dsmonhoc', 'dsmonhoc.MaMonHoc', '=', 'monhoccualop.MaMonHoc')
+        // ->join('mahocphan', 'mahocphan.MaMonHoc', '=', 'dsmonhoc.MaMonHoc')
+        // ->join('dangkymonhoc', 'dangkymonhoc.idhocphan', '=', 'mahocphan.idhocphan')
+        // ->where('dangkymonhoc.MaSV', $profilesv->MaSV)->distinct('monhoccualop.idhocki')->count('idhocki');
         // $i=3;
         $lichhoc= LichHoc::join('thungay', 'thungay.idthu', '=', 'lichhoc.idthu')
         ->join('dstiethoc', 'dstiethoc.idtiethoc', '=', 'lichhoc.idtiethoc')
@@ -45,7 +45,7 @@ class DangKyHocPhanController extends Controller
 
         //  Cookie::queue('check','nooo' ,30);
         $checkdangky= DangKyHocPhan::where('MaSV', $profilesv->MaSV)->get();
-        dd($checkdangky);
+        // dd($checkdangky);
         // return view('collegestudentcp.dangkyhocphan.index')->with(compact('profilesv', 'dangkyhocphan', 'hocki', 'lichhoc','dem', 'checkdangky'));
         // echo Cookie::get('check');
         // join('mahocphan', 'lichhoc.idhocphan', '=', 'mahocphan.idhocphan')

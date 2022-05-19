@@ -27,4 +27,8 @@ class WelcomeController extends Controller
         // dd($e);
         return redirect()->back();
     }
+    public function sharefile(Request $request)
+    {
+        return view('forum.sharefile.index');
+    }
 }

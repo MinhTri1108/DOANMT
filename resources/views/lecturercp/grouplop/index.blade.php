@@ -75,7 +75,7 @@
     <div class="col">
     <div class="card shadow">
         <div class="card-header bg-info d-flex justify-content-between align-items-center">
-        <h3 class="text-light">Các lớp học của bạn</h3>
+        <h3 class="text-light">Các học phần hướng dẫn</h3>
         <!-- <button class="btn btn-light" data-bs-toggle="modal" data-bs-target="#addAccountModal"><i
             class="bi-plus-circle me-2"></i>Add Lop</button> -->
             <button class="btn btn-light"><a href="">Add</a></button>

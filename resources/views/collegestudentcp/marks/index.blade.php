@@ -53,7 +53,7 @@
                         <td style="font-weight: bold;" colspan="13">Học kì: {{$hk}}</td>
                         <tbody>
 
-                            @foreach($diem as $d)
+                            @foreach($diem->where('idhocki', $hk) as $d)
                             <tr>
                                 <td>{{$d->iddiem}}</td>
                                 <td>{{$d->idhocphan}}</td>
@@ -119,7 +119,28 @@
                             @endforeach
 
                         </tbody>
+
+                            <tr colspan="13" style="background: #8fa5c5;">
+                            @foreach($diemtbhk->where('idhocki', $hk) as $dtb)
+                                <td colspan="4">
+                                    <p>Tổng số tín chỉ: <b>{{$dtb->SoTC}}</b></p>
+                                    <p>Số tín chỉ đạt: <b></b></p>
+                                    <p>Số tín chỉ không đạt: <b></b></p>
+                                    <p>Điểm trung bình học kì (Hệ 10): <b>{{$dtb->DiemTB}}</b></p>
+                                    <p>Điểm trung bình học kì (Hệ 4): <b>{{$dtb->DiemTB4}}</b></p>
+                                </td>
+                            @endforeach
+                            @foreach($diemtichluy->where('idhocki', $hk) as $dtl)
+                                <td colspan="9">
+                                    <p>Số tín chỉ tích lũy: <b>{{$dtl->SoTC}}</b></p>
+                                    <p>Điểm trung bình tích lũy (Hệ 10): <b>{{$dtl->DiemTichLuy10}}</b></p>
+                                    <p>Điểm trung bình tích lũy (Hệ 4): <b>{{$dtl->DiemTichLuy4}}</b></p>
+                                </td>
+                            </tr>
+                            @endforeach
+
                         @endfor
+
                     </table>
 
                 </div>

@@ -8,6 +8,8 @@ use App\Models\CollegeStudentAccounts;
 use App\Models\DanhSachDiem;
 use App\Models\HocPhan;
 use App\Models\DanhSachMonHocCuaLop;
+use App\Models\DanhSachDiemTBHocKi;
+use App\Models\DanhSachDiemTichLuy;
 class BangDiemSVController extends Controller
 {
     /**
@@ -29,7 +31,14 @@ class BangDiemSVController extends Controller
         ->join('mahocphan', 'mahocphan.MaMonHoc', '=', 'dsmonhoc.MaMonHoc')
         ->join('dangkymonhoc', 'dangkymonhoc.idhocphan', '=', 'mahocphan.idhocphan')
         ->where('dangkymonhoc.MaSV', $profilesv->MaSV)->distinct('monhoccualop.idhocki')->count('idhocki');
-        return view('collegestudentcp.marks.index')->with(compact('profilesv', 'diem', 'hocki'));
+        $diemtbhk= DanhSachDiemTBHocKi::where('MaSV', $idsv)->get();
+        $diemtichluy= DanhSachDiemTichLuy::where('MaSV', $idsv)->get();
+        // dd($diemtbhk);
+        // $stcdat=DanhSachDiem::join('dangkymonhoc', 'dangkymonhoc.MaDK', '=', 'dsdiem.MaDK')
+        // ->join('mahocphan', 'mahocphan.idhocphan', '=', 'dangkymonhoc.idhocphan')
+        // ->join('dsmonhoc', 'dsmonhoc.MaMonHoc', '=', 'mahocphan.MaMonHoc')
+        // ->where('dangkymonhoc.MaSV', $profilesv->MaSV)->get();
+        return view('collegestudentcp.marks.index')->with(compact('profilesv', 'diem', 'hocki', 'diemtbhk', 'diemtichluy'));
     }
 
     /**

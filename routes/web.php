@@ -57,6 +57,7 @@ use App\Http\Controllers\LecturersControllers\ThongBaoGiangVienController;
 //     return view('welcome');
 // });
 Route::GET('/',[WelcomeController::class, 'welcome'])->name('welcome');
+Route::GET('/ShareFile',[WelcomeController::class, 'sharefile'])->name('sharefile');
 Route::POST('/PostChatNoAcc',[WelcomeController::class, 'postchatnoacc'])->name('postchatnoacc');
 Route::get('/login', function () {
     return view('login');
