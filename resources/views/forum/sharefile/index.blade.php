@@ -143,31 +143,69 @@
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <!-- <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-        <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="#">Home</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">Link</a>
-        </li>
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-            Dropdown
-          </a>
-          <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <li><a class="dropdown-item" href="#">Action</a></li>
-            <li><a class="dropdown-item" href="#">Another action</a></li>
-            <li><hr class="dropdown-divider"></li>
-            <li><a class="dropdown-item" href="#">Something else here</a></li>
-          </ul>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
-        </li>
-      </ul> -->
-      <div class="d-flex">
-        <a  class="nav-link" href="{{URL('/login')}}" style="margin-left: 1200px;color: #f8f9fa!important;"><i class='bx bxs-arrow-to-right bx-fade-right' ></i> Login</a>
-    </div>
+        <div class="d-flex" style="color: #f8f9fa!important;">
+
+            @if(session()->has('id_account'))
+            <li class="nav-item dropdown d-flex"  style="margin-left: 1000px;color: #f8f9fa!important;">
+                <div class="header_img" >
+                    <img src="https://bizweb.dktcdn.net/100/409/603/files/bao-gia-in-anh-the-lay-ngay.jpg?v=1631007146881" alt="">
+                </div>
+                <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">
+                @foreach($dataad as $account)
+                <?php
+                    $s = sprintf('%05d',$account->MaAdmin);
+                ?>
+                    {{$account->fname}} {{$account->lname}}-[{{$account->permission->matk}}<?php echo $s ?>]
+
+                @endforeach
+                </a>
+                <ul class="dropdown-menu dropdown-menu-end fade-down">
+                <li><a class="dropdown-item" href="#"> Đổi mật khẩu</a></li>
+                <li><a class="dropdown-item" href="{{route('logout')}}"> Đăng xuất</a></li>
+                </ul>
+            </li>
+            @elseif(session()->has('id_gv'))
+            <li class="nav-item dropdown d-flex"  style="margin-left: 1000px;color: #f8f9fa!important;">
+                <div class="header_img" >
+                    <img src="https://bizweb.dktcdn.net/100/409/603/files/bao-gia-in-anh-the-lay-ngay.jpg?v=1631007146881" alt="">
+                </div>
+                <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">
+                @foreach($data as $account)
+                <?php
+                    $s = sprintf('%05d',$account->MaGV);
+                ?>
+                    {{$account->fname}} {{$account->lname}}-[{{$account->permission->matk}}<?php echo $s ?>]
+
+                @endforeach
+                </a>
+                <ul class="dropdown-menu dropdown-menu-end fade-down">
+                <li><a class="dropdown-item" href="#"> Đổi mật khẩu</a></li>
+                <li><a class="dropdown-item" href="{{route('logout')}}"> Đăng xuất</a></li>
+                </ul>
+            </li>
+            @elseif(session()->has('id_sv'))
+            <li class="nav-item dropdown d-flex"  style="margin-left: 1000px;color: #f8f9fa!important;">
+                <div class="header_img" >
+                    <img src="https://bizweb.dktcdn.net/100/409/603/files/bao-gia-in-anh-the-lay-ngay.jpg?v=1631007146881" alt="">
+                </div>
+                <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">
+                @foreach($datasv as $account)
+                <?php
+                    $s = sprintf('%05d',$account->MaSV);
+                ?>
+                    {{$account->fname}} {{$account->lname}}-[{{$account->permission->matk}}<?php echo $s ?>]
+
+                @endforeach
+                </a>
+                <ul class="dropdown-menu dropdown-menu-end fade-down">
+                <li><a class="dropdown-item" href="#"> Đổi mật khẩu</a></li>
+                <li><a class="dropdown-item" href="{{route('logout')}}"> Đăng xuất</a></li>
+                </ul>
+            </li>
+            @else
+            <a  class="nav-link" href="{{URL('/login')}}" style="margin-left: 1200px;color: #f8f9fa!important;"><i class='bx bxs-arrow-to-right bx-fade-right' ></i> Login</a>
+            @endif
+        </div>
     </div>
   </div>
 </nav>

@@ -12,9 +12,29 @@ class WelcomeController extends Controller
     public function welcome()
     {
         // $thongtin=session()->has('id_admin');
+        if(session()->has('id_account'))
+        {
         $chat = ChatForum::all();
         $lichs=LichLamViec::with('admin')->get();
-        return view('welcome')->with(compact('lichs', 'chat'));
+        return view('admincp.index')->with(compact('lichs', 'chat'));
+        }
+        else if(session()->has('id_sv'))
+        {
+        $chat = ChatForum::all();
+        $lichs=LichLamViec::with('admin')->get();
+        return view('collegestudentcp.index')->with(compact('lichs', 'chat'));
+        }
+        else if(session()->has('id_gv'))
+        {
+        $chat = ChatForum::all();
+        $lichs=LichLamViec::with('admin')->get();
+        return view('lecturercp.index')->with(compact('lichs', 'chat'));
+        }
+        else{
+            $chat = ChatForum::all();
+            $lichs=LichLamViec::with('admin')->get();
+            return view('welcome')->with(compact('lichs', 'chat'));
+        }
     }
     public function postchatnoacc(Request $request)
     {

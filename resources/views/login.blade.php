@@ -18,9 +18,15 @@
 					</div>
 				</div>
                 <div class="input-group  ml-5 mt-2" >
-                    @if ( Session::has('error') )
+                    <!-- @if ( Session::has('error') )
                         <p style="color: red">{{ Session::get('error') }}</p>
-                    @endif
+                    @endif -->
+                    @if(session('status'))
+                        <div class="alert alert-danger" role="alert">
+                            {{session('status')}}
+
+                        </div>
+                     @endif
                 </div>
 				<button class="form-submit" name='dn'>Đăng nhập</button>
 		</form>
