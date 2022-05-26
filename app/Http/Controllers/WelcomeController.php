@@ -6,6 +6,9 @@ use Illuminate\Http\Request;
 use App\Models\LichLamViec;
 use App\Models\ChatForum;
 use App\Events\MessageSent;
+use App\Models\FileTaiLieu;
+use App\Models\CollegeStudentAccounts;
+use App\Models\POSTS;
 class WelcomeController extends Controller
 {
     //
@@ -49,6 +52,115 @@ class WelcomeController extends Controller
     }
     public function sharefile(Request $request)
     {
-        return view('forum.sharefile.index');
+        $showfile= FileTaiLieu::distinct('IdUser', 'idquyen', 'MoTa', 'ThoiGianFile')->select('IdUser', 'idquyen', 'MoTa', 'ThoiGianFile')->get();
+        $getfile = FileTaiLieu::all();
+        // $a = CollegeStudentAccounts::where('idloaitk', 3)->where('MaSV', 21)->first();
+        // dd($a);
+        return view('forum.sharefile.index')->with(compact('showfile', 'getfile'));
+    }
+    public function postsharefile(Request $request)
+    {
+        if($request->hasFile('file'))
+        {
+            $files = $request->file('file');
+            $timestamp = time();
+            $ThoiGianFile = date ("Y-m-d H:i:s", $timestamp);
+
+            switch($request->session()->get('matk'))
+            {
+                case '02021':
+                    $idma=$request->session()->get('id_account');
+                    $idmatk = 1;
+
+                break;
+                case '12021':
+                    $idma=$request->session()->get('id_gv');
+                    $idmatk = 2;
+                break;
+                case '22021':
+                    $idma=$request->session()->get('id_sv');
+                    $idmatk = 3;
+                break;
+                default:
+                    $idma="";
+                    $idmatk = 0;
+                    break;
+            }
+            //
+            // dd($idma, $idmatk, $ThoiGianFile);
+            // $fileName = time().'.'.$request->file->extension();
+            foreach ($files as $file)
+            {
+                $path= $file->move('downloads', $file->getClientOriginalName());
+                $file_name = pathinfo($path, PATHINFO_FILENAME);
+                $extension = pathinfo($path, PATHINFO_EXTENSION);
+                $filename=$file_name.'.'.$extension;
+
+                $uploadfile = new FileTaiLieu();
+                $uploadfile->IdUser = $idma;
+                $uploadfile->idquyen = $idmatk;
+                $uploadfile->MoTa = $request->input('noidung');
+                $uploadfile->File = $filename;
+                $uploadfile->ThoiGianFile = $ThoiGianFile;
+                $uploadfile->save();
+            }
+            return redirect()->back()->with('status', 'Thêm File thành công');
+            // dd($uploadfile);
+            // dd($file->getClientOriginalName());
+        }
+        else{
+            echo "file trong";
+        }
+    }
+    public function QAaboutCode()
+    {
+        $showpost= POSTS::with('masvpost')->distinct('MaSV', 'content', 'time')->select('MaSV', 'content', 'time')
+        ->orderBy('time', 'desc')->get();
+        $getpost = POSTS::with('masvpost')->get();
+        // dd($showpost, $getpost);
+        return view('forum.forumcode.index')->with(compact('showpost', 'getpost'));
+    }
+    public function poststatus(Request $request)
+    {
+        $files = $request->file('file');
+        $timestamp = time();
+        $ThoiGianFile = date ("Y-m-d H:i:s", $timestamp);
+        $content = $request->input('content');
+        // dd($files, $content);
+        $idsvpost=$request->session()->get('id_sv');
+            //
+            // dd($idma, $idmatk, $ThoiGianFile);
+            // $fileName = time().'.'.$request->file->extension();
+        if($request->hasFile('file'))
+        {
+            foreach ($files as $file)
+            {
+                $path= $file->move('filepostscoder', $file->getClientOriginalName());
+                $file_name = pathinfo($path, PATHINFO_FILENAME);
+                $extension = pathinfo($path, PATHINFO_EXTENSION);
+                $filename=$file_name.'.'.$extension;
+
+                $posts = new POSTS();
+                $posts->MaSV = $idsvpost;
+                $posts->content = $content;
+                $posts->attached = $filename;
+                $posts->time = $ThoiGianFile;
+                // dd($posts);
+                // dd($posts);
+                $posts->save();
+            }
+        }
+        else
+        {
+            $posts = new POSTS();
+            $posts->MaSV = $idsvpost;
+            $posts->content = $content;
+            $posts->attached = $files;
+            $posts->time = $ThoiGianFile;
+            // dd($posts);
+            $posts->save();
+
+        }
+        return redirect()->back()->with('status', 'Đăng bài thành công');
     }
 }

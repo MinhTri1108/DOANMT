@@ -93,6 +93,7 @@ class LoginController extends Controller
      $request->session()->forget('id_account');
      $request->session()->forget('id_gv');
      $request->session()->forget('id_sv');
+     $request->session()->forget('matk');
     //  $idgv = $request->session()->get('id_gv');
         // $request->session()->flush();
        return redirect('/');

@@ -12,18 +12,27 @@ class FileTaiLieu extends Model
     protected $fillable = [
         // 'hoten' ,'password','ngaysinh','cccd','gender','diachi','sdt','email'
         // idadmin
+        'idquyen',
         'MoTa',
         'File',
         'ThoiGianFile'
     ];
     protected $primaryKey = 'id';
     protected $table = 'tailieu';
-    public function magv()
+    // public function magv()
+    // {
+    //     return $this->belongsTo('App\Models\LecturersAccounts', 'MaGV', 'MaGV');
+    // }
+    // public function masv()
+    // {
+    //     return $this->belongsTo('App\Models\CollegeStudentAccounts', 'MaSV', 'MaSV');
+    // }
+    // public function maadmin()
+    // {
+    //     return $this->belongsTo('App\Models\AdminAccounts', 'MaAdmin', 'MaAdmin');
+    // }
+        public function quyen()
     {
-        return $this->belongsTo('App\Models\LecturersAccounts', 'MaGV', 'MaGV');
-    }
-    public function hocphan()
-    {
-        return $this->belongsTo('App\Models\HocPhan', 'idhocphan', 'idhocphan');
+        return $this->belongsTo('App\Models\Permission', 'idloaitk', 'idloaitk');
     }
 }

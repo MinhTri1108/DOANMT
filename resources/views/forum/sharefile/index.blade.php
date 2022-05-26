@@ -138,7 +138,7 @@
 </style>
 <nav class="navbar navbar-expand-lg navbar-light bg-info">
   <div class="container-fluid" style="color: #f8f9fa!important">
-    <a  style="color: #f8f9fa!important" class="navbar-brand" href="#">Cổng thông tin QNU</a>
+    <a  style="color: #f8f9fa!important" class="navbar-brand" href="{{URL('/')}}">Cổng thông tin QNU</a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
@@ -167,7 +167,7 @@
             @elseif(session()->has('id_gv'))
             <li class="nav-item dropdown d-flex"  style="margin-left: 1000px;color: #f8f9fa!important;">
                 <div class="header_img" >
-                    <img src="https://bizweb.dktcdn.net/100/409/603/files/bao-gia-in-anh-the-lay-ngay.jpg?v=1631007146881" alt="">
+                    <img src="https://bizweb.dktcdn.net/x100/409/603/files/bao-gia-in-anh-the-lay-ngay.jpg?v=1631007146881" alt="">
                 </div>
                 <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">
                 @foreach($data as $account)
@@ -217,7 +217,48 @@
                 <div class="card shadow ml-3">
                     <div class="card-header bg-info d-flex justify-content-between align-items-center">
                         <h3 class="text-light">Chia sẻ tài liệu</h3>
-                        <button class="btn btn-light">ShareFile</button>
+                        <button class="btn btn-light"  class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#uploadfile">ShareFile</button>
+                    </div>
+                    <!-- Modal -->
+                    <div class="modal fade" id="uploadfile" tabindex="-1" aria-labelledby="uploadfileLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="uploadfileLabel">Share Tài liệu</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        @if(session()->has('id_account') || session()->has('id_gv') ||session()->has('id_sv'))
+                        <form  method="post" id="post_file_form" action="{{route('postsharefile')}}"  enctype="multipart/form-data">
+                            @csrf
+                            <div class="modal-body">
+                                <div class="mb-3">
+                                    <label for="formFileMultiple" class="form-label">File:</label>
+                                    <input class="form-control" type="file" id="formFileMultiple" name="file[]" multiple>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="exampleFormControlTextarea1" class="form-label">Nội dung: </label>
+                                    <textarea name ="noidung"class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                <button type="submit" id="post_file_btn" class="btn btn-primary">Upload file</button>
+                            </div>
+                        </form>
+                        @else
+                            <div class="modal-body">
+                                <div>
+                                    <p><b>Bạn vui lòng login để chia sẻ tài liệu của minh với mọi người!!!</b></p>
+                                    <p><a href="{{URL('/login')}}">Đi đến "LOGIN"</a></p>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                <button type="button" class="btn btn-primary">Save changes</button>
+                            </div>
+                        @endif
+                        </div>
+                    </div>
                     </div>
                     <div class="card-body">
                         <div class="row">
@@ -241,16 +282,37 @@
                         </div>
                     </div>
                         <div class="card-body" id="list">
-
+                            @foreach($showfile as $show)
                             <div style="margin-left: 3%;margin-right: 3%;border-style: solid;border-width: 5px; margin-top: 10px;">
                                 <div style="margin-left: 3%;margin-right: 3%;margin-top: 2%;margin-bottom: 2%;">
-                                    <p><b>Người gửi:</b> </p>
-                                    <p><b>Nội dung:</b> </p>
-                                    <p><b>Tài liệu:</b> </p>
-                                    <p><b>Thời gian:</b></p>
+                                    <p><b>Người gửi: </b>
+                                    @switch($show->idquyen)
+                                        @case('1')
+                                        @php($name = \App\Models\AdminAccounts::where('idloaitk', $show->idquyen)->where('MaAdmin',$show->IdUser)->first())
+                                        ADM: {{$name->fname}} {{$name->lname}}
+                                            @break
+                                        @case('2')
+                                        @php($name = \App\Models\LecturersAccounts::where('idloaitk', $show->idquyen)->where('MaGV',$show->IdUser)->first())
+                                        GV: {{$name->fname}} {{$name->lname}}
+                                            @break
+                                        @case('3')
+                                        @php($name = \App\Models\CollegeStudentAccounts::where('idloaitk', $show->idquyen)->where('MaSV',$show->IdUser)->first())
+                                        SV: {{$name->fname}} {{$name->lname}}
+                                            @break
+                                        @default
+                                            @break
+                                    @endswitch
+                                    </p>
+                                    <p><b>Nội dung:</b> {{$show->MoTa}}</p>
+                                    <p><b>Tài liệu:</b>
+                                    @foreach($getfile->where('IdUser', $show->IdUser)->where('idquyen', $show->idquyen)->where('MoTa', $show->MoTa)->where('ThoiGianFile',$show->ThoiGianFile) as $file)
+                                    <a href="{{asset('./downloads/'.$file->File)}}">{{$file->File}},</a>
+                                    @endforeach
+                                    </p>
+                                    <p><b>Thời gian:</b>{{$show->ThoiGianFile}}</p>
                                 </div>
                             </div>
-
+                            @endforeach
                         </div>
                     </div>
                 </div>
@@ -262,7 +324,48 @@
 </div>
 </div>
 </body>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js'></script>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.0.2/js/bootstrap.bundle.min.js'></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<!-- <script type="text/javascript">
+$(function() {
+    $("#post_file_form").on('submit', function(e) {
+    e.preventDefault();
+    // console.log('hi');
+    const formdata = new FormData(this);
+    $("#post_file_btn").text('Loadinggg...');
+    console.log(formdata);
+        $.ajax({
+        url: "{{route('postsharefile')}}",
+        type: "method",
+        method: 'post',
+        data: formdata,
+        cache: false,
+        contentType: false,
+        processData: false,
+        dataType: 'json',
+        // success: function(response) {
+        // if (response.status == 200) {
+        //     console.log(response);
+        //     Swal.fire(
+        //     'Added!',
+        //     'Account Added Successfully!',
+        //     'success'
+        //     )
+        //     // ajax.reload();
+        //     //  $('#example').DataTable().ajax.reload(null, false);
+        // }
 
+        // // $("#add_account_btn").text('Add account');
+        // // $("#add_account_form")[0].reset();
+        // // $("#addAccountModal").modal('hide');
+        // }
+    });
+    });
+});
+
+
+</script> -->
 <!-- Footer -->
 <footer class="text-center text-lg-start bg-light text-muted" style = "margin-top: 100px">
   <!-- Section: Social media -->

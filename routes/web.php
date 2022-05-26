@@ -58,6 +58,10 @@ use App\Http\Controllers\LecturersControllers\ThongBaoGiangVienController;
 // });
 Route::GET('/',[WelcomeController::class, 'welcome'])->name('welcome');
 Route::GET('/ShareFile',[WelcomeController::class, 'sharefile'])->name('sharefile');
+Route::POST('/POSTShareFile',[WelcomeController::class, 'postsharefile'])->name('postsharefile');
+
+Route::GET('/Q&A-about-Coder',[WelcomeController::class, 'QAaboutCode'])->name('QAaboutCode');
+Route::POST('/Q&A-about-Coder/store',[WelcomeController::class, 'poststatus'])->name('poststatus');
 Route::POST('/PostChatNoAcc',[WelcomeController::class, 'postchatnoacc'])->name('postchatnoacc');
 Route::get('/login', function () {
     return view('login');

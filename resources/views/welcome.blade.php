@@ -138,7 +138,7 @@
 </style>
 <nav class="navbar navbar-expand-lg navbar-light bg-info">
   <div class="container-fluid" style="color: #f8f9fa!important">
-    <a  style="color: #f8f9fa!important" class="navbar-brand" href="#">Cổng thông tin QNU</a>
+    <a  style="color: #f8f9fa!important" class="navbar-brand" href="{{URL('/')}}">Cổng thông tin QNU</a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
@@ -166,7 +166,7 @@
         </li>
       </ul> -->
       <div class="d-flex">
-        <a  class="nav-link" href="{{URL('/login')}}" style="margin-left: 1200px;color: #f8f9fa!important;"><i class='bx bxs-arrow-to-right bx-fade-right' ></i> Login</a>
+        <a style="text-decoration: none" class="nav-link" href="{{URL('/login')}}" style="margin-left: 1200px;color: #f8f9fa!important;"><i class='bx bxs-arrow-to-right bx-fade-right' ></i> Login</a>
     </div>
     </div>
   </div>
@@ -181,35 +181,35 @@
                         <h3 class="text-light">Diễn đàn</h3>
                     </div>
                     <div class="card-body">
-                        <div class="row" style = "row-gap :20px">
+                        <div class="row" style = "row-gap :20px;">
                             <div class="col-4" style = "" id = "test">
-                                <a href="{{route('sharefile')}}">
+                                <a href="{{route('sharefile')}}"style="text-decoration: none">
                                     <div class="dssv">
-
                                         <h3>Chia sẻ tài liệu</h3>
                                     </div>
                                 </a>
                             </div>
                             <div class="col-4" style = "" id = "test">
-                                <a href="">
+                                <a href="{{route('QAaboutCode')}}"style="text-decoration: none">
                                     <div class="hplop">
                                         <h3>Diễn đàn lập trình</h3>
                                     </div>
                                 </a>
                             </div>
                             <div class="col-4" style = "" id = "test">
-                                <a href="">
+                                <a href="" style="text-decoration: none">
                                     <div class="ghichu">
                                         <h3>Diễn đàn Tiếng Anh</h3>
+                                        <small  style="color:red">Đang phát triển</small>
 
                                     </div>
                                 </a>
                             </div>
                             <div class="col-4" style = "" id = "test">
-                                <a href="">
-                                    <div class="nghiencuu">
+                                <a href=""style="text-decoration: none">
+                                    <div class="nghiencuu" >
                                         <h3>Diễn đàn Nghiên cứu khoa học</h3>
-
+                                        <small style="color:red">Đang phát triển</small>
                                     </div>
                                 </a>
                             </div>

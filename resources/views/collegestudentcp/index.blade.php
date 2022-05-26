@@ -120,7 +120,7 @@
                                 </a>
                             </div>
                             <div class="col-4" style = "" id = "test">
-                                <a href="">
+                                <a href="{{route('QAaboutCode')}}">
                                     <div class="hplop">
                                         <h3>Diễn đàn lập trình</h3>
                                     </div>
@@ -184,7 +184,7 @@
                                 <label for="name" class="col-sm-3 col-form-label">Name: </label>
                                 <div class="col-sm-9">
                                     @foreach($datasv as $account)
-                                    <input type="text" name="name" class="form-control" id="" readonly value="ADMIN: {{$account->fname}} {{$account->lname}}" required>
+                                    <input type="text" name="name" class="form-control" id="" readonly value="SV: {{$account->fname}} {{$account->lname}}" required>
 
                                     @endforeach
                                 </div>
