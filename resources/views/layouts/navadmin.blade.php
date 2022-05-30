@@ -24,7 +24,7 @@
 		    <ul class="dropdown-menu fade-up">
 			  <li><a class="dropdown-item" href="{{route('AdminAccounts.index')}}">Danh sách tài khoản ADMIN</a></li>
 			  <li><a class="dropdown-item" href="{{route('LecturersAccounts.index')}}">Danh sách tài khoản GIẢNG VIÊN</a></li>
-              <li><a class="dropdown-item" href="">Danh sách tài khoản SINH VIÊN</a></li>
+              <li><a class="dropdown-item" href="{{route('CollegeStudentAccounts.index')}}">Danh sách tài khoản SINH VIÊN</a></li>
 		    </ul>
 		</li>
         <li class="nav-item dropdown">

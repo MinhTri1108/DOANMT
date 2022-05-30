@@ -118,15 +118,16 @@
                                         </div>
                                     </div>
                                     </div>
+                                @foreach($data as $account)
                                 </li>
                                     <li>
                                     <div class="header_img" >
-                                        <img src="https://scontent.fdad3-1.fna.fbcdn.net/v/t1.6435-9/118675616_451215635838425_7444536993265624310_n.jpg?_nc_cat=103&ccb=1-5&_nc_sid=174925&_nc_ohc=OdL2TjHE1vYAX-sFMzh&_nc_ht=scontent.fdad3-1.fna&oh=00_AT9S-ErDYBTVtOJRSkOQDYuIHKPkJtFBpArewqDLZEIz_Q&oe=62875687" alt="">
+                                        <img src="{{asset('./avatar/'.$account->avatar)}}" alt="">
                                     </div>
                                     </li>
                                 <li>
                                 <div class = "username">
-                                    @foreach($data as $account)
+
                                    <a style= "text-decoration:none;"href="{{route('profilegv', [$account->MaGV])}}">
                                         <p id="ten">
                                             <?php

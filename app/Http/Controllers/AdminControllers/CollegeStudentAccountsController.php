@@ -17,6 +17,9 @@ class CollegeStudentAccountsController extends Controller
     public function index()
     {
         //
+        $listcollegestudentaccounts = CollegeStudentAccounts::with('permission', 'lop')->get();
+        $lops = DanhSachLop::all();
+        return view('admincp.collegestudentaccounts.index')->with(compact('listcollegestudentaccounts', 'lops'));
     }
 
     /**
@@ -38,6 +41,31 @@ class CollegeStudentAccountsController extends Controller
     public function store(Request $request)
     {
         //
+        $file = $request->file('avatar');
+        $path= $file->move('avatar', $file->getClientOriginalName());
+        $file_name = pathinfo($path, PATHINFO_FILENAME);
+        $extension = pathinfo($path, PATHINFO_EXTENSION);
+        $filename=$file_name.'.'.$extension;
+
+        $status = 'Offline now';
+
+        $collegestudentaccounts = new CollegeStudentAccounts();
+        $collegestudentaccounts->fname = $request->input('fname');
+        $collegestudentaccounts->lname = $request->input('lname');
+        $collegestudentaccounts->password = $request->input('password');
+        $collegestudentaccounts->NgaySinh = $request->input('date');
+        $collegestudentaccounts->cccd = $request->input('cccd');
+        $collegestudentaccounts->GioiTinh = $request->input('sex');
+        $collegestudentaccounts->DiaChi =$request->input('address');
+        $collegestudentaccounts->SDT = $request->input('phone');
+        $collegestudentaccounts->Email = $request->input('email');
+        $collegestudentaccounts->Status = $status;
+        $collegestudentaccounts->avatar = $filename;
+        $collegestudentaccounts->idloaitk = 3;
+        $collegestudentaccounts->MaLop = $request->input('malop');
+        // dd($request->all());
+        $collegestudentaccounts->save();
+        return redirect()->back()->with('status', 'Thêm Account Sinh Viên thành công');
     }
 
     /**
@@ -59,7 +87,11 @@ class CollegeStudentAccountsController extends Controller
      */
     public function edit($id)
     {
-        //
+        //a
+        $acc = CollegeStudentAccounts::where('MaSV', $id)->with('lop')->first();
+        $lops = DanhSachLop::all();
+        return view('admincp.collegestudentaccounts.edit')->with(compact('acc', 'lops'));
+
     }
 
     /**
@@ -72,6 +104,22 @@ class CollegeStudentAccountsController extends Controller
     public function update(Request $request, $id)
     {
         //
+        $collegestudentaccounts = CollegeStudentAccounts::find($id);
+        $collegestudentaccounts->fname = $request->input('fname');
+        $collegestudentaccounts->lname = $request->input('lname');
+        $collegestudentaccounts->password = $request->input('password');
+        $collegestudentaccounts->NgaySinh = $request->input('ngaysinh');
+        $collegestudentaccounts->cccd = $request->input('cccd');
+        $collegestudentaccounts->GioiTinh = $request->input('gioitinh');
+        $collegestudentaccounts->DiaChi =$request->input('diachi');
+        $collegestudentaccounts->SDT = $request->input('sdt');
+        $collegestudentaccounts->Email = $request->input('email');
+        $collegestudentaccounts->MaLop = $request->input('malop');
+        // $adminaccounts->Status = $status;
+        // $adminaccounts->avatar = $filename;
+        // $adminaccounts->idloaitk = 1;
+        $collegestudentaccounts->save();
+        return redirect()->back()->with('status', 'Sửa Tài khoản thành công');
     }
 
     /**

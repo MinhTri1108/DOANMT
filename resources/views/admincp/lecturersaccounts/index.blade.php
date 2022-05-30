@@ -145,9 +145,7 @@ data-bs-backdrop="static" aria-hidden="true">
                                     {{$listlecturersaccount->DiaChi}}
                                 </td>
                                 <td>
-
-                                @csrf
-                                    <a href="#" id="{{$listlecturersaccount->MaSV }}" class="text-success mx-1 editIcon" data-bs-toggle="modal" data-bs-target="#editEmployeeModal"><i class="bi-pencil-square h4"></i></a>
+                                    <a href="{{route('LecturersAccounts.edit',$listlecturersaccount->MaGV)}}" class="btn btn-success"><i class="bi-pencil-square h4"></i></a>
                                 </td>
                                 <td>
                                     <form action="{{route('LecturersAccounts.destroy',$listlecturersaccount->MaGV)}}" method="POST">

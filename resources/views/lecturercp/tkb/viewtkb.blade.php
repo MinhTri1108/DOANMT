@@ -14,7 +14,7 @@
                 </select>
                 </div>
                 <div class="col-md-6">
-                    <select id="mySelect1" class="form-control" name = "hocki" onchange="location = this.value;">
+                    <select id="mySelect1" class="form-control" name = "hocki" onchange="location = this.value;" disabled>
                     <option class="text-center" value="" disabled selected>Học kì: {{$hockiht->HocKi}}</option>
                     @foreach($hocki as $hk)
                     <option class="text-center" value=""><a href="{{route('viewtkb', $hk->idhocki)}}">Học kì: {{$hk->HocKi}}</a></option>

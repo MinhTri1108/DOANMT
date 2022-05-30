@@ -30,7 +30,7 @@
 
                         </div>
                      @endif
-                    <form class="row g-3" method="POST" action="{{route('AdminAccounts.update',$acc->MaAdmin)}}" required>
+                    <form class="row g-3" method="POST" action="{{route('LecturersAccounts.update',$acc->MaGV)}}" required>
                         @method("PUT")
                         @csrf
                         <div class="col-md-6">
@@ -69,6 +69,8 @@
                             <label for="convert_slug" class="form-label">Số điện thoại</label>
                             <input type="text" name="sdt" class="form-control" value = "{{$acc->SDT}}" required>
                         </div>
+                        <!-- <div class="col-md-6">
+                        </div> -->
                         <div class="col-md-6">
                             <label for="slug" class="form-label">Địa chỉ</label>
                             <input type="text" name="diachi" class="form-control" value = "{{$acc->DiaChi}}" required>

@@ -102,6 +102,8 @@ class AdminAccountsController extends Controller
     public function edit($id)
     {
         //
+        $acc = AdminAccounts::find($id);
+        return view('admincp.adminaccounts.edit')->with(compact('acc'));
     }
 
     /**
@@ -114,6 +116,30 @@ class AdminAccountsController extends Controller
     public function update(Request $request, $id)
     {
         //
+        // $file = $request->file('avatar');
+        // $path= $file->move('avatar', $file->getClientOriginalName());
+        // $file_name = pathinfo($path, PATHINFO_FILENAME);
+        // $extension = pathinfo($path, PATHINFO_EXTENSION);
+        // $filename=$file_name.'.'.$extension;
+
+        $status = 'Offline now';
+
+        $adminaccounts = AdminAccounts::find($id);
+        $adminaccounts->fname = $request->input('fname');
+        $adminaccounts->lname = $request->input('lname');
+        $adminaccounts->password = $request->input('password');
+        $adminaccounts->NgaySinh = $request->input('ngaysinh');
+        $adminaccounts->cccd = $request->input('cccd');
+        $adminaccounts->GioiTinh = $request->input('gioitinh');
+        $adminaccounts->DiaChi =$request->input('diachi');
+        $adminaccounts->SDT = $request->input('sdt');
+        $adminaccounts->Email = $request->input('email');
+        // $adminaccounts->Status = $status;
+        // $adminaccounts->avatar = $filename;
+        // $adminaccounts->idloaitk = 1;
+        $adminaccounts->save();
+        return redirect()->back()->with('status', 'Sửa Tài khoản thành công');
+
     }
 
     /**

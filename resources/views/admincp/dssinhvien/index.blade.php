@@ -1,6 +1,11 @@
 @extends('layouts.header')
 @section('content')
 @include('layouts/navadmin')
+<style>
+    .bg-info {
+    background-color: #4723d9!important;
+    }
+</style>
 {{-- add new employee modal start --}}
 
 <body class="bg-light">
@@ -61,7 +66,7 @@
                              @foreach($listsvs as $listsv)
                             <tr id="row{{ $listsv->MaLop }}" >
                                 <td>
-                                    {{$listsv->avatar}}
+                                    <img src="{{asset('./avatar/'.$listsv->avatar)}}" alt="" width="50" class="img-thumbnail rounded-circle">
                                 </td>
                                 <td>
                                     <?php

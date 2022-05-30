@@ -47,20 +47,20 @@ class LecturersAccountsController extends Controller
 
     $status = 'Offline now';
 
-    $adminaccounts = new LecturersAccounts();
-    $adminaccounts->fname = $request->input('fname');
-    $adminaccounts->lname = $request->input('lname');
-    $adminaccounts->password = $request->input('password');
-    $adminaccounts->NgaySinh = $request->input('NgaySinh');
-    $adminaccounts->cccd = $request->input('cccd');
-    $adminaccounts->GioiTinh = $request->input('GioiTinh');
-    $adminaccounts->DiaChi =$request->input('DiaChi');
-    $adminaccounts->SDT = $request->input('SDT');
-    $adminaccounts->Email = $request->input('Email');
-    $adminaccounts->Status = $status;
-    $adminaccounts->avatar = $filename;
-    $adminaccounts->idloaitk = 2;
-    $adminaccounts->save();
+    $lecturersaccounts = new LecturersAccounts();
+    $lecturersaccounts->fname = $request->input('fname');
+    $lecturersaccounts->lname = $request->input('lname');
+    $lecturersaccounts->password = $request->input('password');
+    $lecturersaccounts->NgaySinh = $request->input('NgaySinh');
+    $lecturersaccounts->cccd = $request->input('cccd');
+    $lecturersaccounts->GioiTinh = $request->input('GioiTinh');
+    $lecturersaccounts->DiaChi =$request->input('DiaChi');
+    $lecturersaccounts->SDT = $request->input('SDT');
+    $lecturersaccounts->Email = $request->input('Email');
+    $lecturersaccounts->Status = $status;
+    $lecturersaccounts->avatar = $filename;
+    $lecturersaccounts->idloaitk = 2;
+    $lecturersaccounts->save();
     return redirect()->back()->with('status', 'Thêm LecturersAccount thành công');
     }
 
@@ -84,6 +84,8 @@ class LecturersAccountsController extends Controller
     public function edit($id)
     {
         //
+        $acc = LecturersAccounts::find($id);
+        return view('admincp.lecturersaccounts.edit')->with(compact('acc'));
     }
 
     /**
@@ -96,6 +98,21 @@ class LecturersAccountsController extends Controller
     public function update(Request $request, $id)
     {
         //
+        $lecturersaccounts = Lecturersaccounts::find($id);
+        $lecturersaccounts->fname = $request->input('fname');
+        $lecturersaccounts->lname = $request->input('lname');
+        $lecturersaccounts->password = $request->input('password');
+        $lecturersaccounts->NgaySinh = $request->input('ngaysinh');
+        $lecturersaccounts->cccd = $request->input('cccd');
+        $lecturersaccounts->GioiTinh = $request->input('gioitinh');
+        $lecturersaccounts->DiaChi =$request->input('diachi');
+        $lecturersaccounts->SDT = $request->input('sdt');
+        $lecturersaccounts->Email = $request->input('email');
+        // $lecturersaccounts->Status = $status;
+        // $lecturersaccounts->avatar = $filename;
+        // $lecturersaccounts->idloaitk = 1;
+        $lecturersaccounts->save();
+        return redirect()->back()->with('status', 'Sửa Tài khoản thành công');
     }
 
     /**

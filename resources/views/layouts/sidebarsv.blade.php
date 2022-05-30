@@ -122,15 +122,16 @@
                                         </div>
                                     </div>
                                     </div>
+                                @foreach($datasv as $account)
                                 </li>
                                     <li>
                                     <div class="header_img" >
-                                        <img src="https://img.thuthuat123.com/uploads/2019/07/19/avatar-facebook-ngau_013950286.jpg" alt="">
+                                        <img src="{{asset('./avatar/'.$account->avatar)}}" alt="">
                                     </div>
                                     </li>
                                 <li>
                                 <div class = "username">
-                                    @foreach($datasv as $account)
+
                                     <a style= "text-decoration:none;"href="{{route('profilesv', [$account->MaSV])}}">
                                         <p id="ten">
                                             <?php

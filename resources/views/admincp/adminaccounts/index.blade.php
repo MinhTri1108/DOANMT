@@ -145,7 +145,7 @@ data-bs-backdrop="static" aria-hidden="true">
                                     {{$listadminaccount->DiaChi}}
                                 </td>
                                 <td>
-                                    <a href="{{route('AdminAccounts.edit',$listadminaccount->MaAdmin)}}" id="{{$listadminaccount->MaSV }}" class="text-success mx-1 editIcon" data-bs-toggle="modal" data-bs-target="#editEmployeeModal"><i class="bi-pencil-square h4"></i></a>
+                                    <a href="{{route('AdminAccounts.edit',$listadminaccount->MaAdmin)}}" class="btn btn-success"><i class="bi-pencil-square h4"></i></a>
                                 </td>
                                 <td>
                                     <form action="{{route('AdminAccounts.destroy',$listadminaccount->MaAdmin)}}" method="POST">

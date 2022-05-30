@@ -82,17 +82,16 @@ Route::middleware(['CheckAccountLogin'])->prefix('admin')->group(function () {
     Route::get('/', [HomeController::class, 'index'])->name('index');
     Route::resource('/AdminAccounts', AdminAccountsController::class);
     Route::resource('/LecturersAccounts', LecturersAccountsController::class);
+    Route::resource('/CollegeStudentAccounts', CollegeStudentAccountsController::class);
     Route::prefix("EducationProgram")->group(function(){
         Route::resource('/DanhSachKhoa', DanhSachKhoaController::class);
         Route::resource('/DanhSachLop', DanhSachLopController::class);
         Route::GET('/Khoa/{id}', [DanhSachKhoaController::class, 'khoa'])->name('khoa');
         Route::GET('/Lop/{id}', [DanhSachLopController::class, 'lop'])->name('lop');
-        Route::resource('/DanhSachSinhVien', CollegeStudentAccountsController::class);
+
         Route::resource('/SuKien-HoatDong', SukienHoatDongController::class);
         Route::resource('/SendNotification', SendNotificationController::class);
-
         Route::GET('/DanhSachSinhVien-Lop/{id}', [ComponentSVandLopController::class, 'sinhviencualop'])->name('sinhviencualop');
-
         Route::GET('/DanhSachMonHoc-Lop/{id}', [ComponentSVandLopController::class, 'monhoccualop'])->name('monhoccualop');
         Route::GET('/DanhSachMonHoc-Lop/create/{id}', [ComponentSVandLopController::class, 'createmonhoccualop'])->name('createmonhoccualop');
         // Route::GET('/DanhSachMonHoc-Lop/edit/{id}', [ComponentSVandLopController::class, 'editmonhoccualop'])->name('editmonhoccualop');

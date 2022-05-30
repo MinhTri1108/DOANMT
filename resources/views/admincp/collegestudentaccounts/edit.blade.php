@@ -30,7 +30,7 @@
 
                         </div>
                      @endif
-                    <form class="row g-3" method="POST" action="{{route('AdminAccounts.update',$acc->MaAdmin)}}" required>
+                    <form class="row g-3" method="POST" action="{{route('CollegeStudentAccounts.update',$acc->MaSV)}}" required>
                         @method("PUT")
                         @csrf
                         <div class="col-md-6">
@@ -72,6 +72,15 @@
                         <div class="col-md-6">
                             <label for="slug" class="form-label">Địa chỉ</label>
                             <input type="text" name="diachi" class="form-control" value = "{{$acc->DiaChi}}" required>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="slug" class="form-label">Tên lớp</label>
+                            <select id="lop" class="form-control" name = "malop">
+                                <option value="{{$acc->MaLop}}" selected>{{$acc->lop->TenLop}}</option>
+                                @foreach($lops as $lop)
+                                <option value="{{$lop->MaLop}}">{{$lop->TenLop}}</option>
+                                @endforeach
+                            </select>
                         </div>
                         <!-- <div class="col-md-6">
                             <label for="convert_slug" class="form-label">Avatar</label>
