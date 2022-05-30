@@ -35,12 +35,12 @@
                         @csrf
                         <div class="col-md-6">
                             <label for="MaAdmin" class="form-label">Mã người post</label>
-                            <input type="text" name="MaAdmin" class="form-control"  placeholder="MaAdmin" value = "{{$lichlv->MaAdmin}}">
+                            <input type="text" name="MaAdmin" class="form-control"  placeholder="MaAdmin" value = "{{$lichlv->MaAdmin}}" readonly   >
 
                         </div>
                         <div class="col-md-6">
                             <label for="images" class="form-label">Link hình ảnh </label>
-                            <input type="text" name="images" class="form-control"  placeholder="Link hình ảnh" value = "{{$lichlv->admin->MaAdmin}}">
+                            <input type="text" name="images" class="form-control"  placeholder="Link hình ảnh" value = "{{$lichlv->images}}">
 
                         </div>
                         <div class="col-md-6">
