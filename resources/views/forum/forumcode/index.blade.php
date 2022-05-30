@@ -345,18 +345,18 @@
                                                             @switch($cmt->matk)
                                                                 @case('02021')
                                                                     @php($name = \App\Models\AdminAccounts::where('idloaitk', $quyen->idloaitk)->where('MaAdmin',$cmt->iduser)->first())
-                                                                    <div class="d-flex flex-row mb-2"> <img src="{{asset('./avatar/'.$account->avatar)}}" width="40" class="rounded-image">
+                                                                    <div class="d-flex flex-row mb-2"> <img src="{{asset('./avatar/'.$name->avatar)}}" width="40" class="rounded-image">
                                                                         <div class="d-flex flex-column ml-2"> <span class="name">ADM: {{$name->fname}} {{$name->lname}}</span> <small class="comment-text"> {{$cmt->content}}</small>
                                                                     @break
                                                                 @case('12021')
                                                                     @php($name = \App\Models\LecturersAccounts::where('idloaitk', $quyen->idloaitk)->where('MaGV',$cmt->iduser)->first())
-                                                                    <div class="d-flex flex-row mb-2"> <img src="{{asset('./avatar/'.$account->avatar)}}" width="40" class="rounded-image">
+                                                                    <div class="d-flex flex-row mb-2"> <img src="{{asset('./avatar/'.$name->avatar)}}" width="40" class="rounded-image">
                                                                         <div class="d-flex flex-column ml-2"> <span class="name">GV: {{$name->fname}} {{$name->lname}}</span> <small class="comment-text"> {{$cmt->content}}</small>
 
                                                                     @break
                                                                 @case('22021')
                                                                     @php($name = \App\Models\CollegeStudentAccounts::where('idloaitk', $quyen->idloaitk)->where('MaSV',$cmt->iduser)->first())
-                                                                    <div class="d-flex flex-row mb-2"> <img src="{{asset('./avatar/'.$account->avatar)}}" width="40" class="rounded-image">
+                                                                    <div class="d-flex flex-row mb-2"> <img src="{{asset('./avatar/'.$name->avatar)}}" width="40" class="rounded-image">
                                                                         <div class="d-flex flex-column ml-2"> <span class="name">SV: {{$name->fname}} {{$name->lname}}</span> <small class="comment-text"> {{$cmt->content}}</small>
 
                                                                     @break
