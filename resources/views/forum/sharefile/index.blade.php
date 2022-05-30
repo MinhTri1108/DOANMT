@@ -283,7 +283,7 @@
                     </div>
                         <div class="card-body" id="list">
                             @foreach($showfile as $show)
-                            <div style="margin-left: 3%;margin-right: 3%;border-style: solid;border-width: 5px; margin-top: 10px;">
+                            <div style="margin-left: 3%;margin-right: 3%;border-style: solid;border-width: 5px; margin-top: 10px; background: #dee6ef">
                                 <div style="margin-left: 3%;margin-right: 3%;margin-top: 2%;margin-bottom: 2%;">
                                     <p><b>Người gửi: </b>
                                     @switch($show->idquyen)

@@ -9,6 +9,7 @@ use App\Events\MessageSent;
 use App\Models\FileTaiLieu;
 use App\Models\CollegeStudentAccounts;
 use App\Models\POSTS;
+use App\Models\Comment;
 class WelcomeController extends Controller
 {
     //
@@ -56,6 +57,7 @@ class WelcomeController extends Controller
         $getfile = FileTaiLieu::all();
         // $a = CollegeStudentAccounts::where('idloaitk', 3)->where('MaSV', 21)->first();
         // dd($a);
+
         return view('forum.sharefile.index')->with(compact('showfile', 'getfile'));
     }
     public function postsharefile(Request $request)
@@ -118,8 +120,12 @@ class WelcomeController extends Controller
         ->orderBy('time', 'desc')->get();
         $getpost = POSTS::with('masvpost')->get();
         // dd($showpost, $getpost);
-        return view('forum.forumcode.index')->with(compact('showpost', 'getpost'));
+        $getcmt = Comment::all();
+        $countcmt= Comment::all();
+        return view('forum.forumcode.index')->with(compact('showpost', 'getpost', 'getcmt', 'countcmt'));
     }
+
+
     public function poststatus(Request $request)
     {
         $files = $request->file('file');
@@ -162,5 +168,49 @@ class WelcomeController extends Controller
 
         }
         return redirect()->back()->with('status', 'Đăng bài thành công');
+    }
+    public function repcmt(Request $request)
+    {
+        // return view('welcome')
+        // dd($request->all());
+        if($request->session()->get('matk') != null)
+        {
+        $timestamp = time();
+        $timee = date ("Y-m-d H:i:s", $timestamp);
+        $content = $request->input('content');
+        $idpost =  $request->input('idposts');
+        switch($idmatk = $request->session()->get('matk'))
+            {
+                case '02021':
+                    $idma=$request->session()->get('id_account');
+                    // $idmatk = 1;
+
+                break;
+                case '12021':
+                    $idma=$request->session()->get('id_gv');
+                    // $idmatk = 2;
+                break;
+                case '22021':
+                    $idma=$request->session()->get('id_sv');
+                    // $idmatk = 3;
+                break;
+                default:
+                    $idma="";
+                    // $idmatk = 0;
+                    break;
+            }
+        $cmt = new Comment();
+        $cmt->idposts = $idpost;
+        $cmt->matk = $idmatk;
+        $cmt->iduser = $idma;
+        $cmt->content = $content;
+        $cmt->time = $timee;
+        $cmt->save();
+        return redirect()->back();
+
+        }
+        else{
+            return redirect()->back()->with('status', 'Vui lòng login để bình luận');
+        }
     }
 }

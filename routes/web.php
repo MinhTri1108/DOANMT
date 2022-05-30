@@ -62,6 +62,7 @@ Route::POST('/POSTShareFile',[WelcomeController::class, 'postsharefile'])->name(
 
 Route::GET('/Q&A-about-Coder',[WelcomeController::class, 'QAaboutCode'])->name('QAaboutCode');
 Route::POST('/Q&A-about-Coder/store',[WelcomeController::class, 'poststatus'])->name('poststatus');
+Route::POST('/Q&A-about-Coder/storecmt',[WelcomeController::class, 'repcmt'])->name('repcmt');
 Route::POST('/PostChatNoAcc',[WelcomeController::class, 'postchatnoacc'])->name('postchatnoacc');
 Route::get('/login', function () {
     return view('login');

@@ -34,9 +34,10 @@
                     <form class="row g-3" method="POST" action="{{route('SendNotification.store')}}">
                         @csrf
                         <div class="col-md-6">
-                            <label for="MaAdmin" class="form-label">Người gửi</label>
-                             @foreach($dataad as $account)
-                            <input type="text" name="MaAdmin" class="form-control"  placeholder="MaAdmin" value = "{{$account->MaAdmin}}">
+                            <label for="MaAdmin" class="form-label">Người gửi:</label><br>
+                            @foreach($dataad as $account)
+                            <b>{{$account->fname}} {{$account->lname}}</b>
+                            <input style="display: none" type="text" name="MaAdmin" class="form-control" placeholder="MaAdmin" value = "{{$account->MaAdmin}}" readonly>
                             @endforeach
                         </div>
                         <div class="col-md-6">

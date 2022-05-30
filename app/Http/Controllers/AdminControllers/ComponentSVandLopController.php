@@ -24,7 +24,7 @@ class ComponentSVandLopController extends Controller
     {
         $lop_id= DanhSachLop::where('slug_lop', $slug)->with('khoa')->first();
         $mhoflop= DanhSachMonHocCuaLop::with('lop','monhoc')->where('MaLop', $lop_id->MaLop)->orderBy('idmonhoccualop', 'ASC')->get();
-        $counthk= DanhSachMonHocCuaLop::distinct('idhocki')->count('idhocki');
+        $counthk= DanhSachMonHocCuaLop::distinct('idhocki')->where('MaLop', $lop_id->MaLop)->count('idhocki');
         // dd($mhoflop);
         // dd($lop_id);
         return view('admincp.dsmonhoccualop.index')->with(compact('lop_id', 'mhoflop', 'counthk'));

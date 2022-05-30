@@ -33,10 +33,10 @@
                     <form class="row g-3" method="POST" action="{{route('SuKien-HoatDong.store')}}">
                         @csrf
                         <div class="col-md-6">
-                            <label for="MaAdmin" class="form-label">Mã người post</label>
-                            @foreach($data as $account)
-
-                            <input type="text" name="MaAdmin" class="form-control"  placeholder="MaAdmin" value = "{{$account->MaAdmin}}">
+                            <label for="MaAdmin" class="form-label">Người Post:</label><br>
+                            @foreach($dataad as $account)
+                            <b>{{$account->fname}} {{$account->lname}}</b>
+                            <input style="display: none" type="text" name="MaAdmin" class="form-control" placeholder="MaAdmin" value = "{{$account->MaAdmin}}" readonly>
                             @endforeach
 
                         </div>

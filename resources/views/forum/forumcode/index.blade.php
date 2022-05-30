@@ -284,7 +284,7 @@
                             <div class="container">
                                 <div class="row d-flex align-items-center justify-content-center">
                                     <div class="col">
-                                        <div class="card shadow ml-3">
+                                        <div class="card shadow ml-3" style="background: #dee6ef">
                                             <div class="d-flex justify-content-between p-2 px-3">
                                                 <div class="d-flex flex-row align-items-center">
                                                     <img src="https://iweb247.com/uploads/images/1(31).jpg" width="50" class="rounded-circle">
@@ -293,15 +293,23 @@
                                                         <small class="text-primary">Sinh viên {{$show->idposts}}</small>
                                                      </div>
                                                 </div>
-                                                <div class="d-flex flex-row mt-1 ellipsis"> <small class="mr-2">{{$show->time}}</small>&emsp;<i class="fa fa-ellipsis-h"></i> </div>
+                                                <div class="d-flex flex-row mt-1 ellipsis"> <small class="mr-2" style="color: black;">
+
+                                                <?php
+                                                    \Carbon\Carbon::setLocale('vi'); // hiển thị ngôn ngữ tiếng việt.
+                                                    $date = \Carbon\Carbon::parse($show->time);
+                                                    $elapsed = $date->diffForHumans(\Carbon\Carbon::now());
+                                                    echo $elapsed;
+                                                ?>
+                                                </small>&emsp;<i class="fa fa-ellipsis-h"></i> </div>
                                             </div>
                                             <div class="row" style="row-gap :20px">
                                                 @foreach($getpost->where('MaSV', $show->MaSV)->where('content', $show->content)->where('time', $show->time) as $get)
-                                                    {{$get->idposts}}
+                                                <!-- {{$get}} -->
                                                     @switch(pathinfo($get->attached, PATHINFO_EXTENSION))
                                                         @case('png')
                                                         <div class="col-6 col-md-4">
-                                                            <a href=""><img src="{{asset('./filepostscoder/'.$get->attached)}}" class="img-fluid"></a>
+                                                            <a href="{{asset('./filepostscoder/'.$get->attached)}}"><img src="{{asset('./filepostscoder/'.$get->attached)}}" class="img-fluid"></a>
                                                         </div>
                                                             @break
                                                         @case('jpg')
@@ -327,23 +335,63 @@
                                                 <hr>
                                                   <div class="d-flex justify-content-between align-items-center">
                                                     <div class="d-flex flex-row icons d-flex align-items-center"> <i class="fa fa-heart"></i> <i class="fa fa-smile-o ml-2"></i> </div>
-                                                    <div class="d-flex flex-row muted-color"> <span>2 comments</span>&emsp;<span class="ml-2">Share</span> </div>
+                                                    <div class="d-flex flex-row muted-color" style="color: black;"> <span>{{$getcmt->where('idposts', $get->idposts)->count()}} comments</span>&emsp;<span class="ml-2">Share</span> </div>
                                                 </div>
                                                 <hr>
                                                 <div class="comments">
-                                                    <div class="d-flex flex-row mb-2"> <img src="https://i.imgur.com/9AZ2QX1.jpg" width="40" class="rounded-image">
-                                                        <div class="d-flex flex-column ml-2"> <span class="name">Daniel Frozer</span> <small class="comment-text">I like this alot! thanks alot</small>
-                                                            <div class="d-flex flex-row align-items-center status"> <small>Like</small> <small>Reply</small> <small>Translate</small> <small>18 mins</small> </div>
+                                            @foreach($getpost->where('MaSV', $show->MaSV)->where('content', $show->content)->where('time', $show->time) as $getpt)
+                                                @foreach($getcmt->where('idposts', $getpt->idposts) as $cmt)
+                                                @php($quyen = \App\Models\Permission::where('matk', $cmt->matk)->first())
+                                                    @switch($cmt->matk)
+                                                        @case('02021')
+                                                            @php($name = \App\Models\AdminAccounts::where('idloaitk', $quyen->idloaitk)->where('MaAdmin',$cmt->iduser)->first())
+                                                            <div class="d-flex flex-row mb-2"> <img src="https://i.imgur.com/9AZ2QX1.jpg" width="40" class="rounded-image">
+                                                                <div class="d-flex flex-column ml-2"> <span class="name">ADM: {{$name->fname}} {{$name->lname}}</span> <small class="comment-text"> {{$cmt->content}}</small>
+                                                            @break
+                                                        @case('12021')
+                                                            @php($name = \App\Models\LecturersAccounts::where('idloaitk', $quyen->idloaitk)->where('MaGV',$cmt->iduser)->first())
+                                                            <div class="d-flex flex-row mb-2"> <img src="https://i.imgur.com/9AZ2QX1.jpg" width="40" class="rounded-image">
+                                                                <div class="d-flex flex-column ml-2"> <span class="name">GV: {{$name->fname}} {{$name->lname}}</span> <small class="comment-text"> {{$cmt->content}}</small>
+
+                                                            @break
+                                                        @case('22021')
+                                                            @php($name = \App\Models\CollegeStudentAccounts::where('idloaitk', $quyen->idloaitk)->where('MaSV',$cmt->iduser)->first())
+                                                            <div class="d-flex flex-row mb-2"> <img src="https://i.imgur.com/9AZ2QX1.jpg" width="40" class="rounded-image">
+                                                                <div class="d-flex flex-column ml-2"> <span class="name">SV: {{$name->fname}} {{$name->lname}}</span> <small class="comment-text"> {{$cmt->content}}</small>
+
+                                                            @break
+                                                        @default
+                                                            @break
+                                                    @endswitch
+                                                        <div class="d-flex flex-row align-items-center status">
+                                                            <small><i class='bx bxs-like'></i>Like</small>
+                                                            <small>Reply</small>
+                                                            <small><?php
+                                                                \Carbon\Carbon::setLocale('vi'); // hiển thị ngôn ngữ tiếng việt.
+                                                                $date = \Carbon\Carbon::parse($cmt->time);
+                                                                $elapsed = $date->diffForHumans(\Carbon\Carbon::now());
+                                                                echo $elapsed;
+                                                            ?></small>
                                                         </div>
                                                     </div>
-                                                    <div class="d-flex flex-row mb-2"> <img src="https://i.imgur.com/1YrCKa1.jpg" width="40" class="rounded-image">
-                                                        <div class="d-flex flex-column ml-2"> <span class="name">Elizabeth goodmen</span> <small class="comment-text">Thanks for sharing!</small>
-                                                            <div class="d-flex flex-row align-items-center status"> <small>Like</small> <small>Reply</small> <small>Translate</small> <small>8 mins</small> </div>
-                                                        </div>
+                                                </div>
+                                            @endforeach
+                                                 @endforeach
+                                                    <div class="comment-input">
+                                                        <form action="{{route('repcmt')}}" method="post">
+                                                            @csrf
+                                                            <div style="display: none;">
+                                                                <input type="text" name="idposts" id="" value="{{$getpt->idposts}}">
+                                                            </div>
+                                                            <input type="text" name="content" class="form-control" placeholder="Viết bình luận..." required>
+                                                            <div class="fonts">
+                                                                <button type="submit"  class="btn btn-primary"><i class='bx bx-send' ></i></button>
+                                                            </div>
+                                                        </form>
+
                                                     </div>
-                                                    <div class="comment-input"> <input type="text" class="form-control">
-                                                        <div class="fonts"> <i class="fa fa-camera"></i> </div>
-                                                    </div>
+
+
                                                 </div>
                                             </div>
                                         </div>

@@ -45,7 +45,7 @@ hr {
     font-weight: 600;
 }
 .comment-text {
-    font-size: 12px;
+    font-size: 15px;
 }
 .status small {
     margin-right: 10px;
@@ -59,8 +59,8 @@ hr {
 }
 .fonts {
     position: absolute;
-    right: 13px;
-    top: 8px;
+    right: 1px;
+    top: 0px;
     color: #a09c9c;
 }
 .form-control:focus {
