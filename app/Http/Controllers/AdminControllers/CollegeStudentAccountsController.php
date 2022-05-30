@@ -83,5 +83,7 @@ class CollegeStudentAccountsController extends Controller
     public function destroy($id)
     {
         //
+         CollegeStudentAccounts::find($id)->delete();
+        return redirect()->back()->with('status', 'Bạn xóa tài khoản thành công thành công');
     }
 }

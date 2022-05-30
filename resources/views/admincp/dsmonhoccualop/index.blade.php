@@ -50,7 +50,7 @@
 
                     <table class="table table-bordered">
                         <thead>
-                        <tr style="background-color: #3b89d6;">
+                        <tr style="background-color: #4723d9; color: white;">
                             <th>Mã Môn Học</th>
                             <th>Tên Môn Học</th>
                             <th>Số tín chỉ</th>

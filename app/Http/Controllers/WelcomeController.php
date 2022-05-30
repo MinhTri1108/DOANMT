@@ -7,9 +7,11 @@ use App\Models\LichLamViec;
 use App\Models\ChatForum;
 use App\Events\MessageSent;
 use App\Models\FileTaiLieu;
+use App\Events\CommentRep;
 use App\Models\CollegeStudentAccounts;
 use App\Models\POSTS;
 use App\Models\Comment;
+
 class WelcomeController extends Controller
 {
     //
@@ -175,8 +177,6 @@ class WelcomeController extends Controller
         // dd($request->all());
         if($request->session()->get('matk') != null)
         {
-        $timestamp = time();
-        $timee = date ("Y-m-d H:i:s", $timestamp);
         $content = $request->input('content');
         $idpost =  $request->input('idposts');
         switch($idmatk = $request->session()->get('matk'))
@@ -199,15 +199,21 @@ class WelcomeController extends Controller
                     // $idmatk = 0;
                     break;
             }
-        $cmt = new Comment();
-        $cmt->idposts = $idpost;
-        $cmt->matk = $idmatk;
-        $cmt->iduser = $idma;
-        $cmt->content = $content;
-        $cmt->time = $timee;
-        $cmt->save();
-        return redirect()->back();
-
+        // $cmt = new Comment();
+        // $cmt->idposts = $idpost;
+        // $cmt->matk = $idmatk;
+        // $cmt->iduser = $idma;
+        // $cmt->content = $content;
+        // $cmt->time = $timee;
+        // $cmt->save();
+        // return redirect()->back();
+            $data2 = $request->all();
+            $data = array_merge($data2, ['iduser' => $idma], ['matk' => $idmatk]);
+            $comment= Comment::create($data);
+            event(
+                $e = new CommentRep($comment)
+            );
+            return redirect()->back();
         }
         else{
             return redirect()->back()->with('status', 'Vui lòng login để bình luận');

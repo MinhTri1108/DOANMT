@@ -15,42 +15,13 @@ class AdminAccountsController extends Controller
 
     public function index()
     {
-        //
-        // $listadminaccounts = AdminAccounts::all();
-        // return view('admincp.adminaccounts.index')->with(compact('listadminaccounts'));
-
-        // if ($request->ajax()) {
-        //     $adminaccounts = AdminAccounts::all()->get();
-        //     return Datatables::of($adminaccounts)
-        //             ->addIndexColumn()
-        //             ->addColumn('action', function($row){
-
-        //                    $btn = '<a href="javascript:void(0)" data-toggle="tooltip"  data-id="'.$row->idadmin.'" data-original-title="Edit" class="edit btn btn-primary btn-sm editProduct">Edit</a>';
-
-        //                    $btn = $btn.' <a href="javascript:void(0)" data-toggle="tooltip"  data-id="'.$row->idadmin.'" data-original-title="Delete" class="btn btn-danger btn-sm deleteProduct">Delete</a>';
-
-        //                     return $btn;
-        //             })
-        //             ->rawColumns(['action'])
-        //             ->make(true);
-        // }
-        // return view('admincp.adminaccounts.index');
 
         $listadminaccounts = AdminAccounts::all();
 
         return view('admincp.adminaccounts.index')->with(compact('listadminaccounts'));
-            // return Datatables::of(AdminAccounts::query())->make(true);
 
     }
-    public function fetchAll()
-    {
-        // $listadminaccounts = AdminAccounts::all();
-        // return response()->json([
-        //     'listadminaccounts' => $listadminaccounts,
-        // ]);
 
-        return Datatables::of(AdminAccounts::query())->make(true);
-    }
     /**
      * Show the form for creating a new resource.
      *
@@ -70,35 +41,44 @@ class AdminAccountsController extends Controller
      */
     public function store(Request $request)
     {
-        //
-        // print_r($_POST);
-        // print_r($_FILES);
-        $a = 3;
-        $status = 'offline';
-        $lop = 1;
-        $file = $request -> file('avatar');
-        $fileName = time() . '.' . $file ->getClientOriginalExtension();
-        $file->storeAs('public/images', $fileName);
-        $accData =[
 
-            'fname' => $request->fname ?? 'default',
-            'lname' => $request->lname,
-            'password' => $request->password,
-            'NgaySinh' => $request->date,
-            'cccd' => $request->cccd,
-            'GioiTinh' => $request->sex,
-            'DiaChi' => $request->address,
-            'SDT' => $request->phone,
-            'Email' => $request->email,
-            'Status' => $status,
-            'avatar' => $fileName,
-            'MaLop' => $lop,
-            'idloaitk' =>$a
-        ];
-        AdminAccounts::create($accData);
-        return response()->json([
-            'status' => 200
-        ]);
+    //     $data= $request->validate([
+    //         'fname' => 'required|max:255',
+    //         'lname' => 'required|max:255',
+    //         'password' => 'required|max:255',
+    //         'NgaySinh' => 'required|max:255',
+    //         'cccd' => 'required|max:255',
+    //         'GioiTinh' => 'required|max:255',
+    //         'DiaChi' => 'required|max:255',
+    //         'SDT' => 'required|max:255',
+    //         'Email' => 'required|max:255',
+    //         'avatar' => 'required|max:255',
+    //     ]
+    // );
+    $file = $request->file('avatar');
+    $path= $file->move('avatar', $file->getClientOriginalName());
+    $file_name = pathinfo($path, PATHINFO_FILENAME);
+    $extension = pathinfo($path, PATHINFO_EXTENSION);
+    $filename=$file_name.'.'.$extension;
+
+    $status = 'Offline now';
+
+    $adminaccounts = new AdminAccounts();
+    $adminaccounts->fname = $request->input('fname');
+    $adminaccounts->lname = $request->input('lname');
+    $adminaccounts->password = $request->input('password');
+    $adminaccounts->NgaySinh = $request->input('NgaySinh');
+    $adminaccounts->cccd = $request->input('cccd');
+    $adminaccounts->GioiTinh = $request->input('GioiTinh');
+    $adminaccounts->DiaChi =$request->input('DiaChi');
+    $adminaccounts->SDT = $request->input('SDT');
+    $adminaccounts->Email = $request->input('Email');
+    $adminaccounts->Status = $status;
+    $adminaccounts->avatar = $filename;
+    $adminaccounts->idloaitk = 1;
+    $adminaccounts->save();
+    return redirect()->back()->with('status', 'Thêm AccountAdmin thành công');
+    // dd($adminaccounts);
     }
 
     /**
@@ -144,14 +124,7 @@ class AdminAccountsController extends Controller
      */
     public function destroy($id)
     {
-    //     AdminAccounts::where('idadmin',$id)->delete();
-    //     AdminAccounts::destroy($id);
-    //     return response()->json([
-    //     'success' => 'Record deleted successfully!'
-    // ]);
-    $list = AdminAccounts::where('MaSV','=',$id)->get();
-    $list->delete();
-
-    return response()->json(['success' => true],200);
+        AdminAccounts::find($id)->delete();
+        return redirect()->back()->with('status', 'Bạn xóa tài khoản thành công thành công');
     }
 }

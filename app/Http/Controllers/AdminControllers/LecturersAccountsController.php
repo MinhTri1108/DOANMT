@@ -39,6 +39,29 @@ class LecturersAccountsController extends Controller
     public function store(Request $request)
     {
         //
+        $file = $request->file('avatar');
+    $path= $file->move('avatar', $file->getClientOriginalName());
+    $file_name = pathinfo($path, PATHINFO_FILENAME);
+    $extension = pathinfo($path, PATHINFO_EXTENSION);
+    $filename=$file_name.'.'.$extension;
+
+    $status = 'Offline now';
+
+    $adminaccounts = new LecturersAccounts();
+    $adminaccounts->fname = $request->input('fname');
+    $adminaccounts->lname = $request->input('lname');
+    $adminaccounts->password = $request->input('password');
+    $adminaccounts->NgaySinh = $request->input('NgaySinh');
+    $adminaccounts->cccd = $request->input('cccd');
+    $adminaccounts->GioiTinh = $request->input('GioiTinh');
+    $adminaccounts->DiaChi =$request->input('DiaChi');
+    $adminaccounts->SDT = $request->input('SDT');
+    $adminaccounts->Email = $request->input('Email');
+    $adminaccounts->Status = $status;
+    $adminaccounts->avatar = $filename;
+    $adminaccounts->idloaitk = 2;
+    $adminaccounts->save();
+    return redirect()->back()->with('status', 'Thêm LecturersAccount thành công');
     }
 
     /**
@@ -84,5 +107,7 @@ class LecturersAccountsController extends Controller
     public function destroy($id)
     {
         //
+         LecturersAccounts::find($id)->delete();
+        return redirect()->back()->with('status', 'Bạn xóa tài khoản thành công thành công');
     }
 }

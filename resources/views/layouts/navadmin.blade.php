@@ -24,6 +24,7 @@
 		    <ul class="dropdown-menu fade-up">
 			  <li><a class="dropdown-item" href="{{route('AdminAccounts.index')}}">Danh sách tài khoản ADMIN</a></li>
 			  <li><a class="dropdown-item" href="{{route('LecturersAccounts.index')}}">Danh sách tài khoản GIẢNG VIÊN</a></li>
+              <li><a class="dropdown-item" href="">Danh sách tài khoản SINH VIÊN</a></li>
 		    </ul>
 		</li>
         <li class="nav-item dropdown">
@@ -38,8 +39,8 @@
 			<a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">  Quản lý chung  </a>
 		    <ul class="dropdown-menu fade-up">
 			  <li><a class="dropdown-item" href="{{route('SuKien-HoatDong.index')}}"> Sự kiện-Hoạt động </a></li>
-			  <li><a class="dropdown-item" href="#"> Abc </a></li>
-			  <li><a class="dropdown-item" href="#"> Submenu item 3 </a></li>
+			  <!-- <li><a class="dropdown-item" href="#"> Abc </a></li>
+			  <li><a class="dropdown-item" href="#"> Submenu item 3 </a></li> -->
 		    </ul>
 		</li>
         <li class="nav-item"><a class="nav-link" href="{{route('SendNotification.create')}}"> Gửi thông báo </a></li>
@@ -50,11 +51,12 @@
 		<!-- <li class="nav-item"><a class="nav-link" href="#"> Menu item </a></li>
 		<li class="nav-item"><a class="nav-link" href="#"> Menu item </a></li> -->
 		<li class="nav-item dropdown d-flex">
+            @foreach($dataad as $account)
              <div class="header_img" >
-                <img src="https://bizweb.dktcdn.net/100/409/603/files/bao-gia-in-anh-the-lay-ngay.jpg?v=1631007146881" alt="">
+                <img src="{{asset('./avatar/'.$account->avatar)}}" alt="">
             </div>
 			<a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">
-            @foreach($dataad as $account)
+
             <?php
                 $s = sprintf('%05d',$account->MaAdmin);
             ?>

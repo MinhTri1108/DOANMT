@@ -338,44 +338,44 @@
                                                     <div class="d-flex flex-row muted-color" style="color: black;"> <span>{{$getcmt->where('idposts', $get->idposts)->count()}} comments</span>&emsp;<span class="ml-2">Share</span> </div>
                                                 </div>
                                                 <hr>
-                                                <div class="comments">
-                                            @foreach($getpost->where('MaSV', $show->MaSV)->where('content', $show->content)->where('time', $show->time) as $getpt)
-                                                @foreach($getcmt->where('idposts', $getpt->idposts) as $cmt)
-                                                @php($quyen = \App\Models\Permission::where('matk', $cmt->matk)->first())
-                                                    @switch($cmt->matk)
-                                                        @case('02021')
-                                                            @php($name = \App\Models\AdminAccounts::where('idloaitk', $quyen->idloaitk)->where('MaAdmin',$cmt->iduser)->first())
-                                                            <div class="d-flex flex-row mb-2"> <img src="https://i.imgur.com/9AZ2QX1.jpg" width="40" class="rounded-image">
-                                                                <div class="d-flex flex-column ml-2"> <span class="name">ADM: {{$name->fname}} {{$name->lname}}</span> <small class="comment-text"> {{$cmt->content}}</small>
-                                                            @break
-                                                        @case('12021')
-                                                            @php($name = \App\Models\LecturersAccounts::where('idloaitk', $quyen->idloaitk)->where('MaGV',$cmt->iduser)->first())
-                                                            <div class="d-flex flex-row mb-2"> <img src="https://i.imgur.com/9AZ2QX1.jpg" width="40" class="rounded-image">
-                                                                <div class="d-flex flex-column ml-2"> <span class="name">GV: {{$name->fname}} {{$name->lname}}</span> <small class="comment-text"> {{$cmt->content}}</small>
+                                                <div class="comments" id= "comments">
+                                                    @foreach($getpost->where('MaSV', $show->MaSV)->where('content', $show->content)->where('time', $show->time) as $getpt)
+                                                        @foreach($getcmt->where('idposts', $getpt->idposts) as $cmt)
+                                                        @php($quyen = \App\Models\Permission::where('matk', $cmt->matk)->first())
+                                                            @switch($cmt->matk)
+                                                                @case('02021')
+                                                                    @php($name = \App\Models\AdminAccounts::where('idloaitk', $quyen->idloaitk)->where('MaAdmin',$cmt->iduser)->first())
+                                                                    <div class="d-flex flex-row mb-2"> <img src="https://i.imgur.com/9AZ2QX1.jpg" width="40" class="rounded-image">
+                                                                        <div class="d-flex flex-column ml-2"> <span class="name">ADM: {{$name->fname}} {{$name->lname}}</span> <small class="comment-text"> {{$cmt->content}}</small>
+                                                                    @break
+                                                                @case('12021')
+                                                                    @php($name = \App\Models\LecturersAccounts::where('idloaitk', $quyen->idloaitk)->where('MaGV',$cmt->iduser)->first())
+                                                                    <div class="d-flex flex-row mb-2"> <img src="https://i.imgur.com/9AZ2QX1.jpg" width="40" class="rounded-image">
+                                                                        <div class="d-flex flex-column ml-2"> <span class="name">GV: {{$name->fname}} {{$name->lname}}</span> <small class="comment-text"> {{$cmt->content}}</small>
 
-                                                            @break
-                                                        @case('22021')
-                                                            @php($name = \App\Models\CollegeStudentAccounts::where('idloaitk', $quyen->idloaitk)->where('MaSV',$cmt->iduser)->first())
-                                                            <div class="d-flex flex-row mb-2"> <img src="https://i.imgur.com/9AZ2QX1.jpg" width="40" class="rounded-image">
-                                                                <div class="d-flex flex-column ml-2"> <span class="name">SV: {{$name->fname}} {{$name->lname}}</span> <small class="comment-text"> {{$cmt->content}}</small>
+                                                                    @break
+                                                                @case('22021')
+                                                                    @php($name = \App\Models\CollegeStudentAccounts::where('idloaitk', $quyen->idloaitk)->where('MaSV',$cmt->iduser)->first())
+                                                                    <div class="d-flex flex-row mb-2"> <img src="https://i.imgur.com/9AZ2QX1.jpg" width="40" class="rounded-image">
+                                                                        <div class="d-flex flex-column ml-2"> <span class="name">SV: {{$name->fname}} {{$name->lname}}</span> <small class="comment-text"> {{$cmt->content}}</small>
 
-                                                            @break
-                                                        @default
-                                                            @break
-                                                    @endswitch
-                                                        <div class="d-flex flex-row align-items-center status">
-                                                            <small><i class='bx bxs-like'></i>Like</small>
-                                                            <small>Reply</small>
-                                                            <small><?php
-                                                                \Carbon\Carbon::setLocale('vi'); // hiển thị ngôn ngữ tiếng việt.
-                                                                $date = \Carbon\Carbon::parse($cmt->time);
-                                                                $elapsed = $date->diffForHumans(\Carbon\Carbon::now());
-                                                                echo $elapsed;
-                                                            ?></small>
+                                                                    @break
+                                                                @default
+                                                                    @break
+                                                            @endswitch
+                                                                <div class="d-flex flex-row align-items-center status">
+                                                                    <small><i class='bx bxs-like'></i>Like</small>
+                                                                    <small>Reply</small>
+                                                                    <small><?php
+                                                                        \Carbon\Carbon::setLocale('vi'); // hiển thị ngôn ngữ tiếng việt.
+                                                                        $date = \Carbon\Carbon::parse($cmt->time);
+                                                                        $elapsed = $date->diffForHumans(\Carbon\Carbon::now());
+                                                                        echo $elapsed;
+                                                                    ?></small>
+                                                                </div>
+                                                            </div>
                                                         </div>
-                                                    </div>
-                                                </div>
-                                            @endforeach
+                                                    @endforeach
                                                  @endforeach
                                                     <div class="comment-input">
                                                         <form action="{{route('repcmt')}}" method="post">
@@ -413,6 +413,27 @@
 <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js'></script>
 <script src='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.0.2/js/bootstrap.bundle.min.js'></script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js'></script>>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.5.0/socket.io.js" integrity="sha512-/xb5+PNOA079FJkngKI2jvID5lyiqdHXaUUcfmzE0X0BdpkgzIWHC59LOG90a2jDcOyRsd1luOr24UCCAG8NNw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+<script>
+     var element = document.getElementById("comments");
+    element.scrollTop = element.scrollHeight ;
+    var socket = io('http://127.0.0.1:6001', { transports: ['websocket'] })
+
+    socket.on('laravel_database_chat:message', function(data){
+        // console.log(data)
+        if($('#'+data.id).length == 0){
+         $('#comments').append(
+             '<p><strong>'+data.name+'</strong>: '+data.msg+'</p>'
+             )
+        return false;
+        }else
+        {
+            console.log('Da co tin nhan');
+        }
+    })
+</script>
 <!-- Footer -->
 <footer class="text-center text-lg-start bg-light text-muted" style = "margin-top: 100px">
   <!-- Section: Social media -->

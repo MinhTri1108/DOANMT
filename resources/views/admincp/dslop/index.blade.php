@@ -47,7 +47,7 @@
                         </div>
                      @endif
                     <table id="example" class="table table-striped table-bordered data-table" width="100%" data-page-length="25" data-order="[[ 1, &quot;asc&quot; ]]">
-                        <thead style="background-color: #3b89d6;">
+                        <thead style="background-color: #4723d9; color: white;">
                             <th>Tên khoa</th>
                             <th>Tên Lớp</th>
                             <th>Khóa học</th>

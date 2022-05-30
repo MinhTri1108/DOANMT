@@ -73,7 +73,7 @@ class MessengerSVController extends Controller
                 ($idsv == '$listsinhvien->MaSV') ? $hid_me = "hide" : $hid_me = "";
                 $output .= '<a href="http://127.0.0.1:8000/collegestudent/Messenger/ChatBox/'.$listsinhvien->MaSV.'">
                             <div class="content">
-                            <img src="php/images/'. $listsinhvien->MaSV .'" alt="">
+                            <img src="http://127.0.0.1:8000/./avatar/'. $listsinhvien->avatar .'" alt="">
                             <div class="details">
                                 <span>'. $listsinhvien->fname. " " . $listsinhvien->lname .'</span>
                                 <p>'. $you . $msg .'</p>
@@ -142,7 +142,7 @@ class MessengerSVController extends Controller
                 }
                 else{
                     $output .= '<div class="chat incoming">
-                                <img src="php/images/'.$get->avatar.'" alt="">
+                                <img src="http://127.0.0.1:8000/./avatar/'.$get->avatar.'" alt="">
                                 <div class="details">
                                     <p>'.  $get->msg .'</p>
                                 </div>

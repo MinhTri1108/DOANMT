@@ -40,7 +40,7 @@
                         </div>
                     @endif
                     <table id="example" class="display" style="width:100%">
-                        <thead style="background-color: #4723d9;">
+                        <thead style="background-color: #4723d9; color: white;">
                             <tr style="color: white">
                                 <th>Người gửi</th>
                                 <th>Người nhận</th>

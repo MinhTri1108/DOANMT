@@ -16,7 +16,7 @@
         @foreach($profile as $pf)
         <div>
         <a href="{{URL('/collegestudent/Messenger/')}}" class="back-icon"><i class="fas fa-arrow-left"></i></a>
-                <img src="" alt="">
+                <img src="{{asset('./avatar/'.$pf->avatar)}}" alt="">
         </div>
         <div class="details">
           <span>{{$pf->fname}} {{$pf->lname}}</span>

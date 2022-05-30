@@ -81,9 +81,6 @@ Route::GET('logout',[LoginController::class, 'logout'])->name('logout');
 Route::middleware(['CheckAccountLogin'])->prefix('admin')->group(function () {
     Route::get('/', [HomeController::class, 'index'])->name('index');
     Route::resource('/AdminAccounts', AdminAccountsController::class);
-    // Route::get('/AdminAccounts', [AdminAccountsController::class, 'index'])->name('index');
-    // Route::post('/AdminAccounts/store',[ AdminAccountsController::class, 'store'])->name('store');
-    Route::get('/AdminAccounts/fetchall', [AdminAccountsController::class, 'fetchAll'])->name('fetchAll');
     Route::resource('/LecturersAccounts', LecturersAccountsController::class);
     Route::prefix("EducationProgram")->group(function(){
         Route::resource('/DanhSachKhoa', DanhSachKhoaController::class);

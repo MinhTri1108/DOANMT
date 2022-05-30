@@ -43,7 +43,7 @@
                      @endif
                 <div class="col">
                     <table id="example" class="display" style="width:100%">
-                        <thead style="background-color: #3b89d6;">
+                        <thead style="background-color: #4723d9;">
                             <th>Mã HP</th>
                             <th>Thứ ngày</th>
                             <th>Tiết học</th>
@@ -87,7 +87,7 @@
                 </div>
                 <div class="col">
                     <table id="example" class="display" style="width:100%">
-                        <thead style="background-color: #3b89d6;">
+                        <thead style="background-color: #4723d9; color: white;">
                             <th>Mã HP</th>
                             <th>Mã GV</th>
                             <th>Mã MH</th>

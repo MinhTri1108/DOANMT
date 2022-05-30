@@ -10,12 +10,11 @@ class Comment extends Model
     use HasFactory;
     public $timestamps = true;
     protected $fillable = [
+        'idposts',
         'matk',
         'iduser',
         'content',
     ];
-    protected $primaryKey = 'idcmt';
-    protected $table = 'comment';
     public function repcmt()
     {
         return $this->belongsTo('App\Models\POSTS', 'idposts', 'idposts');
