@@ -120,7 +120,10 @@ data-bs-backdrop="static" aria-hidden="true">
 
                                 </td>
                                 <td>
-                                    {{$listlecturersaccount->MaGV}}
+                                    <?php
+                                        $s = sprintf('%05d',$listlecturersaccount->MaGV);
+                                    ?>
+                                    {{$listlecturersaccount->permission->matk}}<?php echo $s ?>
                                 </td>
 
                                 <td>

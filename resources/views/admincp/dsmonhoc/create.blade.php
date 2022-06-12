@@ -36,7 +36,7 @@
                             <label for="slug" class="form-label">Tên Môn Học</label>
                             <input type="text" name="TenMonHoc" class="form-control"  placeholder="Tên Môn học" value = "{{old('TenMonHoc')}}">
                         </div>
-                        <div class="col-md-3">
+                        <!-- <div class="col-md-3">
                             <label for="HocKi" class="form-label">Học kì</label>
                                 <select  onchange="validateSelectBox(this)" id="HocKi" name= "HocKi">
                                     <?php
@@ -70,7 +70,7 @@
                                     document.getElementById('result').innerHTML = html;
                                 }
                             </script>
-                        </div>
+                        </div> -->
                         <div class="col-md-3">
                             <label for="SoTinChi" class="form-label">Số tín chỉ</label>
                             <select id="SoTinChi" name = "SoTinChi">
@@ -93,7 +93,7 @@
                             </datalist>
                         </div>
                         <div class="col-md-6">
-                            <label for="th" class="form-label">LT</label>
+                            <label for="th" class="form-label">TH</label>
                             <input list="ths" name="TH" id="th">
                             <datalist id="ths">
                                 <option value="0">
@@ -105,7 +105,7 @@
                             </datalist>
                         </div>
                         <div class="col-md-6">
-                            <label for="tl" class="form-label">LT</label>
+                            <label for="tl" class="form-label">TL</label>
                             <input list="tls" name="TL" id="tl">
                             <datalist id="tls">
                                 <option value="0">
@@ -117,7 +117,7 @@
                             </datalist>
                         </div>
                         <div class="col-md-6">
-                            <label for="tt" class="form-label">LT</label>
+                            <label for="tt" class="form-label">TT</label>
                             <input list="tts" name="TT" id="tt">
                             <datalist id="tts">
                                 <option value="0">

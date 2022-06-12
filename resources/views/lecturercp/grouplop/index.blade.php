@@ -78,7 +78,7 @@
         <h3 class="text-light">Các học phần hướng dẫn</h3>
         <!-- <button class="btn btn-light" data-bs-toggle="modal" data-bs-target="#addAccountModal"><i
             class="bi-plus-circle me-2"></i>Add Lop</button> -->
-            <button class="btn btn-light"><a href="">Add</a></button>
+            <!-- <button class="btn btn-light"><a href="">Add</a></button> -->
         </div>
         <div class="card-body" id="show_all_adminaccounts">
         <!-- <h1 class="text-center text-secondary my-5">Loading...</h1> -->

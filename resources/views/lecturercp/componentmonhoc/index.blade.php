@@ -77,11 +77,11 @@
 <div class="row my-5">
     <div class="col">
     <div class="card shadow">
-        <div class="card-header bg-primary d-flex justify-content-between align-items-center">
+        <div class="card-header bg-info d-flex justify-content-between align-items-center">
         <h3 class="text-light">Lựa chọn</h3>
         <!-- <button class="btn btn-light" data-bs-toggle="modal" data-bs-target="#addAccountModal"><i
             class="bi-plus-circle me-2"></i>Add Lop</button> -->
-            <button class="btn btn-light"><a href="">Add</a></button>
+            <!-- <button class="btn btn-light"><a href="">Add</a></button> -->
         </div>
         <div class="card-body" id="show_all_adminaccounts">
         <!-- <h1 class="text-center text-secondary my-5">Loading...</h1> -->

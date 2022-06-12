@@ -38,7 +38,7 @@
                     <table id="example" class="table table-striped table-bordered data-table" width="100%" data-page-length="25" data-order="[[ 1, &quot;asc&quot; ]]" style="border: 3px solid black;">
                         <thead style="background-color: #3b89d6;">
                             <tr style="background-color: #4723d9; color: white;">
-                            <th>ID</th>
+                            <!-- <th>ID</th> -->
                             <th>Tên tài liệu</th>
                             <th>Delete</th>
                         </tr>
@@ -47,15 +47,15 @@
                             @if (count($files) > 0)
                                 @foreach ($files as $file)
                                     <tr>
-                                        <td>1</td>
+                                        <!-- <td>1</td> -->
                                         <td><a href="{{ url($file['downloadUrl']) }}">{{ $file['name'] }}</a></td>
-                                        <!-- <td>
+                                        <td>
                                             <form action="{{ url($file['removeUrl']) }}" method="POST">
                                                 {{ csrf_field() }}
                                                 {{ method_field('DELETE') }}
                                                 <button onclick = "return confirm('Bạn muốn xóa file này không')" class="btn btn-danger">Remove</button>
                                             </form>
-                                        </td> -->
+                                        </td>
                                     </tr>
                                 @endforeach
                             @else

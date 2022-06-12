@@ -44,9 +44,10 @@
                         </thead>
                         <tbody>
                             @if (count($files) > 0)
+                            @php($i=1)
                                 @foreach ($files as $file)
                                     <tr>
-                                        <td>1</td>
+                                        <td>{{$i++}}</td>
                                         <td><a href="{{ url($file['downloadUrl']) }}">{{ $file['name'] }}</a></td>
                                     </tr>
                                 @endforeach

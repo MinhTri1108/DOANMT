@@ -118,7 +118,11 @@ data-bs-backdrop="static" aria-hidden="true">
 
                                 </td>
                                 <td>
-                                    {{$listadminaccount->MaAdmin}}
+                                    <?php
+                                        $s = sprintf('%05d',$listadminaccount->MaAdmin);
+                                    ?>
+                                    {{$listadminaccount->permission->matk}}<?php echo $s ?>
+
                                 </td>
                                 <!-- <td>
                                     {{$listadminaccount->password}}

@@ -49,7 +49,7 @@
                         <thead style="background-color: #4723d9; color: white;">
                             <th>Mã môn học</th>
                             <th>Tên môn học</th>
-                            <th>Học kì</th>
+                            <!-- <th>Học kì</th> -->
                             <th>Số tín chỉ</th>
                             <th>LT</th>
                             <th>TH</th>
@@ -67,9 +67,6 @@
                                 </td>
                                 <td>
                                     {{$listmh->TenMonHoc}}
-                                </td>
-                                <td>
-                                    {{$listmh->HocKi}}
                                 </td>
                                 <td>
                                     {{$listmh->stc->SoTinChi}}

@@ -2,11 +2,15 @@
 @section('content')
 @include('layouts/navadmin')
 {{-- add new employee modal start --}}
+
 <style>
     /* #test{
     border-radius: 15px; text-align: center;
 
     } */
+        .bg-info {
+    background-color: #4723d9!important;
+    }
     .dssv{
         width: 80%;
         height: 180px;
@@ -70,7 +74,7 @@
 </style>
 <body class="bg-light">
 <div class="container">
-    <div style = "background-color: #A9A9A9; height: 35px; ">
+    <div style = " height: 35px; ">
     <nav style="--bs-breadcrumb-divider: '>'; margin-top: 25px; " aria-label="breadcrumb" >
         <ol class="breadcrumb">
         <li class="breadcrumb-item"><a href="{{URL('admin/')}}">Trang chủ</a></li>
@@ -85,11 +89,10 @@
 <div class="row my-5">
     <div class="col">
     <div class="card shadow">
-        <div class="card-header bg-primary d-flex justify-content-between align-items-center">
+        <div class="card-header bg-info d-flex justify-content-between align-items-center">
         <h3 class="text-light">Lựa chọn</h3>
         <!-- <button class="btn btn-light" data-bs-toggle="modal" data-bs-target="#addAccountModal"><i
             class="bi-plus-circle me-2"></i>Add Lop</button> -->
-            <button class="btn btn-light"><a href="">Add</a></button>
         </div>
         <div class="card-body" id="show_all_adminaccounts">
         <!-- <h1 class="text-center text-secondary my-5">Loading...</h1> -->
@@ -126,14 +129,14 @@
                                     </div>
                                 </a>
                             </div>
-                            <div class="col" style = "" id = "test">
+                            <!-- <div class="col" style = "" id = "test">
                                 <a href="{{route('khenthuongkyluatcualop', $lop_id->slug_lop)}}">
                                     <div class="ghichu">
                                         <h3>Khen thưởng - Kỷ luật</h3>
 
                                     </div>
                                 </a>
-                            </div>
+                            </div> -->
 
                         </div>
 

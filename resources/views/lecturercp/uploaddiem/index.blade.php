@@ -335,7 +335,7 @@
                             @foreach($diemsinhvien as $sv)
                             <tr>
                                 <td>
-                                    {{$sv->avatar}}
+                                    <img src="{{asset('./avatar/'.$sv->avatar)}}" width="50" class="img-thumbnail rounded-circle">
                                 </td>
                                 <td>
                                     {{$sv->MaSV}}
